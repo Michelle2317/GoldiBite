@@ -1,5 +1,6 @@
-import { Stack } from "expo-router";
+import { Stack, useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
+import { useEffect, useState } from 'react';
 import {
   MD3DarkTheme,
   MD3LightTheme,
@@ -29,6 +30,20 @@ const CombinedDarkTheme = merge(DarkTheme, customDarkTheme);
 import { useTheme } from "../hooks/useTheme";
 
 export default function RootLayout() {
+  const [initializing, setInitializing] = useState(true);
+	const router = useRouter();
+
+	useEffect(() => {
+
+		if (initializing) {
+			//router.replace('/(onBoarding)/language');
+			router.replace('/(nonauth)/login');
+			
+		} else {
+			router.replace('/(onBoarding)/language');
+		}
+	}, [initializing]);
+
   // const colorScheme = useColorScheme();
   const { colorScheme } = useTheme();
 
@@ -39,12 +54,9 @@ export default function RootLayout() {
     <PaperProvider theme={paperTheme}>
       <ThemeProvider value={paperTheme}>
         <Stack>
-          <Stack.Screen
-            name="(tabs)"
-            options={{
-              headerShown: false,
-            }}
-          />
+          <Stack.Screen name="(tabs)"  options={{headerShown: false, }} />
+          <Stack.Screen name="(onBoarding)" options={{headerShown: false }} />
+          <Stack.Screen name="(nonauthor)"  options={{headerShown: false, }} />
         </Stack>
       </ThemeProvider>
       <StatusBar style={colorScheme === "dark" ? "light" : "dark"} />

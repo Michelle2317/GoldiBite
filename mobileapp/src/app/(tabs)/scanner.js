@@ -23,19 +23,16 @@ export default function Scanner() {
         console.log('handleSheetChanges', index);
     }, [])
 
-    const handleOnChangeInpuptBarcode = (event) => {
-        setInputBarcode(event.target.value);
-    }
 
     const handleOnBlur = () => {
-        setBarcode(inputBarcode)
+        router.push({ pathname: "/barcodeResult", params: { barcode: inputBarcode } })
     }
 
-
     const handleBarCodeScanned = ({ type, data }) => {
-        setScanned(true);
-        //alert(`Bar code with type ${type} and data ${data} has been scanned!`);
-        setBarcode(data)
+        if (data !== null || data !== "") {
+            setScanned(true);
+            alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+        }
     };
 
     if (hasPermission === null) {
@@ -57,10 +54,16 @@ export default function Scanner() {
 
 
     useEffect(() => {
+        setTimeout(() => {
+            setScanned(true);
+        }, 2000);
+    }, [scanned])
+
+    useEffect(() => {
         if (barcode !== null && barcode !== "") {
-          router.push({ pathname: "/barcodeResult", params: { barcode: barcode } })
+            router.push({ pathname: "/barcodeResult", params: { barcode: barcode } })
         }
-      }, [barcode])
+    }, [barcode])
 
     // usetState
     const [barcode, setBarcode] = useState("");
@@ -82,6 +85,8 @@ export default function Scanner() {
                 source={require('@/assets/images/elements/scanner_view.png')}
                 style={styles.reactLogo}
             />
+            <Text>{scanned}</Text>
+            <Text>{barcode}</Text>
             <BottomSheet
                 ref={bottomSheetRef}
                 onChange={handleSheetChanges}
@@ -95,7 +100,7 @@ export default function Scanner() {
                         value={inputBarcode}
                         style={{ backgroundColor: '#FCE4B6', height: 40, width: '90%', padding: '10px', borderColor: '#747474', borderWidth: 1 }}
                         placeholder='Please enter barcode manually'
-                        onChange={handleOnChangeInpuptBarcode}
+                        onChangeText={setInputBarcode}
                         onBlur={handleOnBlur}
                     />
                 </BottomSheetView>

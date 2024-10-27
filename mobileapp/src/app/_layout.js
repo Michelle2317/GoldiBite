@@ -56,7 +56,7 @@ export default function RootLayout() {
         <Stack>
           <Stack.Screen name="(tabs)"  options={{headerShown: false, }} />
           <Stack.Screen name="(onBoarding)" options={{headerShown: false }} />
-          <Stack.Screen name="(nonauthor)"  options={{headerShown: false, }} />
+          <Stack.Screen name="(nonauth)"  options={{headerShown: false, }} />
         </Stack>
       </ThemeProvider>
       <StatusBar style={colorScheme === "dark" ? "light" : "dark"} />

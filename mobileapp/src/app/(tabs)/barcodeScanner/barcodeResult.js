@@ -2,24 +2,17 @@ import { Stack, useNavigation } from 'expo-router';
 import react, { useState, useEffect } from 'react'
 import { StyleSheet, View, ScrollView, Image } from 'react-native';
 import { Avatar, Button, Card, Text, Chip } from 'react-native-paper';
-import ScanButton from '../../components/ScanButton';
+import ScanButton from '../../../components/ScanButton';
 
 
 
 export default function barcodeResult() {
 
-    const navigation = useNavigation();
-
-    useEffect(() => {
-        navigation.setOptions({ headerShown: false });
-    }, [navigation]);
 
     return (<>
         <View style={styles.container}>
             <ScanButton />
             <Text variant="displayMedium">Doritos</Text>
-
-
             <Image
                 source={require('@/assets/images/products/Dorites.png')}
                 style={{ width: 200, height: 200 }}
@@ -62,8 +55,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
         gap: 20,
-        marginTop: 100,
-        paddingBottom: 300,
+        paddingBottom: 320,
     },
     header: {
         fontSize: 25,

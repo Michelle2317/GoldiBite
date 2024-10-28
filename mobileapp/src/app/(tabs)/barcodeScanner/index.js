@@ -5,11 +5,13 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import BottomSheet, { BottomSheetView, BottomSheetTextInput } from '@gorhom/bottom-sheet';
-import { useRouter } from 'expo-router';
+import { useRouter, useNavigation  } from 'expo-router';
 
 
-export default function Scanner() {
+export default function Scanner(props) {
+    const parent = props.navigation;
 
+console.log(props);
     const router = useRouter();
     // variables
     const snapPoints = useMemo(() => ["20%"], []);
@@ -25,7 +27,7 @@ export default function Scanner() {
 
 
     const handleOnBlur = () => {
-        router.push({ pathname: "/barcodeResult", params: { barcode: inputBarcode } })
+        router.push({ pathname: "barcodeScanner/barcodeResult", params: { barcode: inputBarcode } })
     }
 
     const handleBarCodeScanned = ({ type, data }) => {
@@ -44,6 +46,7 @@ export default function Scanner() {
 
     // call barcode scanner
     useEffect(() => {
+        setScanned(false);
         const getBarCodeScannerPermissions = async () => {
             const { status } = await BarCodeScanner.requestPermissionsAsync();
             setHasPermission(status === 'granted');
@@ -55,15 +58,19 @@ export default function Scanner() {
 
     useEffect(() => {
         setTimeout(() => {
-            setScanned(true);
+            setScanned(false);
         }, 2000);
     }, [scanned])
 
     useEffect(() => {
         if (barcode !== null && barcode !== "") {
-            router.push({ pathname: "/barcodeResult", params: { barcode: barcode } })
+            router.push({ pathname: "barcodeScanner/barcodeResult", params: { barcode: barcode } })
         }
     }, [barcode])
+
+    // hidden the bottom navigation bar
+    
+
 
     // usetState
     const [barcode, setBarcode] = useState("");
@@ -74,7 +81,9 @@ export default function Scanner() {
     const [scanned, setScanned] = useState(false);
 
     return (
-        <GestureHandlerRootView style={styles.container}>
+        <GestureHandlerRootView style={styles.container} options={{
+            tabBarStyle: { display: "none" },
+         }}>
             <BarCodeScanner
                 onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
                 style={StyleSheet.absoluteFillObject}
@@ -90,9 +99,7 @@ export default function Scanner() {
             <BottomSheet
                 ref={bottomSheetRef}
                 onChange={handleSheetChanges}
-                styles={{
-                    backgroundColor: "#FAF1E4"
-                }}
+               
                 snapPoints={snapPoints}>
 
                 <BottomSheetView style={styles.contentContainer}>

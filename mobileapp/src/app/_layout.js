@@ -53,10 +53,10 @@ export default function RootLayout() {
   return (
     <PaperProvider theme={paperTheme}>
       <ThemeProvider value={paperTheme}>
-        <Stack screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="(tabs)" />
-          <Stack.Screen name="(onBoarding)" />
-          <Stack.Screen name="(nonauth)" />
+        <Stack>
+          <Stack.Screen name="(tabs)"  options={{headerShown: false, }} />
+          <Stack.Screen name="(onBoarding)" options={{headerShown: false }} />
+          <Stack.Screen name="(nonauth)"  options={{headerShown: false, }} />
         </Stack>
       </ThemeProvider>
       <StatusBar style={colorScheme === "dark" ? "light" : "dark"} />

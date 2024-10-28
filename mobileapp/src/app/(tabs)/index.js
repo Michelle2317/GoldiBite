@@ -51,6 +51,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     margin: 16,
+    alignItems: 'center',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   cardRow: {
     flexDirection: 'row',

@@ -1,5 +1,6 @@
 import { Tabs } from "expo-router";
 import { Feather } from "@expo/vector-icons";
+import { Icon, MD3Colors } from 'react-native-paper';
 
 export default function TabLayout() {
   //#FFC858 1C1B1F
@@ -9,8 +10,9 @@ export default function TabLayout() {
         name="index"
         options={{
           title: "Home",
+          headerShown: false,
           tabBarIcon: ({ color }) => (
-            <Feather name="home" size={24} color={color} />
+            <Icon source="home" size={24} color={color} />
           ),
         }}
       />
@@ -20,10 +22,8 @@ export default function TabLayout() {
           title: "Barcode Scanner",
           headerShown: false ,
           tabBarIcon: ({ color }) => (
-            <Feather name="camera" size={24} color={color} /> 
+            <Icon source="barcode-scan" size={24} color={color} /> 
           ),
-          // tabBarVisible: false,
-          // tabBarStyle:{display:'none'}
         }}
       />
       <Tabs.Screen
@@ -31,7 +31,7 @@ export default function TabLayout() {
         options={{
           title: "Setting",
           tabBarIcon: ({ color }) => (
-            <Feather name="settings" size={24} color={color} />
+            <Icon source="cog" size={24} color={color} />
           ),
         }}
       />

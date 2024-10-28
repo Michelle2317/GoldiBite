@@ -1,5 +1,5 @@
 import { View, StyleSheet } from 'react-native';
-import { Button, Text } from 'react-native-paper';
+import { Button, Text, IconButton, MD3Colors } from 'react-native-paper';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 
@@ -10,15 +10,21 @@ export default function UserToolBar({ name }) {
 				Hello {name},
 			</Text>
 			<View style={styles.buttonContainer}>
-				<Button
-					icon={() => <FontAwesome name="user" size={20} color="black" />}
-					style={styles.profileButton}
-					contentStyle={styles.buttonContent}
+				<IconButton
+					icon="account"
+					mode='contained'
+					size={20}
+					onPress={() => console.log('Pressed')}
+					theme={{ colors: {onPrimary:'red', primary: '#000000', surfaceVariant:'#BFEDDD' } }} 
+					style={{width:60}}
 				/>
-				<Button
-					icon={() => <MaterialIcons name="notifications" size={20} color="black" />}
-					style={styles.bellButton}
-					contentStyle={styles.buttonContent}
+				<IconButton
+					icon="bell"
+					mode='contained'
+					size={20}
+					onPress={() => console.log('Pressed')}
+					theme={{ colors: {onPrimary:'blue', primary: '#000000', surfaceVariant:'rgba(210, 84, 9, 0.6)' } }} 
+					style={{width:60}}
 				/>
 			</View>
 		</View>

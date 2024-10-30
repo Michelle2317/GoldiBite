@@ -27,6 +27,16 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="guides"
+        options={{
+          title: "Guides",
+          headerShown: false ,
+          tabBarIcon: ({ color }) => (
+            <Icon source="book-open-blank-variant" size={24} color={color} /> 
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="settings"
         options={{
           title: "Setting",

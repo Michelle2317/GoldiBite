@@ -1,45 +1,47 @@
 import { useState } from "react";
-import { View } from "react-native";
-import { TextInput,Avatar, Button, Card, Text } from "react-native-paper";
-import {  useRouter } from "expo-router";
+import { Image, View, StyleSheet } from "react-native";
+import SignUp from '../../components/login/SinginUp';
+import LoginForm from '../../components/login/LoginForm';
 
 export default function Login() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-	const router = useRouter(); 
+    const [inProcess, setProcess] = useState('login');
 
-    const handleOnSubmit = (event) => {
-
-router.replace('/(onBoarding)/language');
+    const handleOnPress = (processing) => {
+        setProcess(processing)
     }
+
     return (<>
-        <View
-            style={{
-                flex: 1,
-                margin: 16,
-            }}
-        >
-
-            <TextInput
-                label="Email"
-                value={email}
-                onChangeText={text => setEmail(text)}
+        <View style={styles.container}>
+            <Image
+                source={require('@/assets/images/elements/text-logo.png')}
+                style={{ width: 277, height: 47.45, alignSelf: "center", marginBottom: 50 }}
             />
-
-            <TextInput
-                label="Password"
-                value={password}
-                secureTextEntry={true}
-                onChangeText={text => setPassword(text)}
-            /> 
-            <Button   mode="contained" onPress={handleOnSubmit}>
-                Login
-              </Button>
-
-              
-<Button  mode="contained" onPress={() => console.log('Pressed')}>
-    Sign up
-  </Button>
+            {inProcess == "login" ? <LoginForm callback={()=>handleOnPress('signup')} /> : <SignUp callback={()=>handleOnPress('login')}/>}
+     
         </View>
     </>)
 }
+
+
+
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        padding: 20,
+        gap: 10
+    },
+    contentContainer: {
+        flex: 1,
+        padding: 36,
+        alignItems: 'center',
+        backgroundColor: "#FAF1E4"
+    },
+    socialMediaLoginContainer: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        gap: 10
+    }
+});

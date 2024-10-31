@@ -11,7 +11,10 @@ const StackLayout = () => {
 
             />
             <Stack.Screen name="barcodeResult" options={{
-                headerTitle: 'Result'
+                 headerShown: false, 
+            }} />
+            <Stack.Screen name="menuScannerResult" options={{
+                headerShown: false, 
             }} />
         </Stack>
 

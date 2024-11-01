@@ -25,11 +25,13 @@ const OnBoardingContent = ({ content, totalStep, language = "eng", back, next, s
                 <PrimaryButton buttonText={"Next"} callback={next} styles={{ alignSelf: "flex-end" }} />
             </View>
             <View style={styles.skipButtonContainer}>
-                <Button mode="text" theme={{colors:{primary:'#000000'}}} onPress={skip} style={{marginRight:11}} labelStyle={{textDecorationLine:"underline"}}>Skip</Button>
+                <Button mode="text" theme={skipTheme} onPress={skip} style={styles.skipButtonStyle} labelStyle={styles.skipButtonLabelStyle}>Skip</Button>
             </View>
         </View>
     </>)
 }
+
+const skipTheme = {colors:{primary:'#000000'}}
 
 const styles = StyleSheet.create({
     processBarContainer: {
@@ -46,6 +48,12 @@ const styles = StyleSheet.create({
         width: 280,
         flexDirection: 'row',
         justifyContent: 'flex-end',
+    },
+    skipButtonStyle:{
+        marginRight:11
+    },
+    skipButtonLabelStyle:{
+        textDecorationLine:"underline"
     }
 
 });

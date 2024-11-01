@@ -17,9 +17,12 @@ const onBoarding = () => {
             setCurrentStep(currentStep + 1);
         }
     }
+    const handleSkipButton = () => {
+        router.replace('/(nonauth)/login');
+    }
     return (<>
         <View style={styles.container}>
-            <OnBoardingContent content={onboardingList[currentStep]} totalStep={onboardingList.length} language="eng" next={handleNextButton} back={handleBackButton} />
+            <OnBoardingContent content={onboardingList[currentStep]} totalStep={onboardingList.length} language="eng" next={handleNextButton} back={handleBackButton} skip={handleSkipButton} />
         </View>
     </>)
 }

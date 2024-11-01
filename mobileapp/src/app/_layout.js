@@ -36,8 +36,8 @@ export default function RootLayout() {
 	useEffect(() => {
 
 		if (initializing) {
-			//router.replace('/(onBoarding)/language');
-			router.replace('/(nonauth)/login');
+			router.replace('/(onBoarding)/onBoarding');
+			//router.replace('/(nonauth)/login');
 			
 		} else {
 			router.replace('/(onBoarding)/language');

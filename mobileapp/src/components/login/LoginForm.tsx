@@ -12,7 +12,8 @@ const LoginForm = ({ callback }) => {
     const [password, setPassword] = useState('');
     const handleOnSubmit = (event) => {
 
-        router.replace('/(onBoarding)/language');
+        //router.replace('/(onBoarding)/language');
+        router.replace('/(setup)/setupAccount');
     }
     return (<>
         <PrimaryInputText label="Email" value={email} onChangeText={setEmail} />

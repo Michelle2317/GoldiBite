@@ -36,11 +36,14 @@ export default function RootLayout() {
 	useEffect(() => {
 
 		if (initializing) {
-			router.replace('/(onBoarding)/onBoarding');
+      //router.replace('/(setup)/welcome');
+			//router.replace('/(setup)/setupAccount');
 			//router.replace('/(nonauth)/login');
+      router.replace('(onBoarding)/onBoarding')
 			
 		} else {
-			router.replace('/(onBoarding)/language');
+			//router.replace('/(setup)/setupAccount');
+      router.replace('(tabs)')
 		}
 	}, [initializing]);
 
@@ -57,6 +60,7 @@ export default function RootLayout() {
           <Stack.Screen name="(tabs)"  options={{headerShown: false, }} />
           <Stack.Screen name="(onBoarding)" options={{headerShown: false }} />
           <Stack.Screen name="(nonauth)"  options={{headerShown: false, }} />
+          <Stack.Screen name="(setup)" options={{headerShown:false}} />
         </Stack>
       </ThemeProvider>
       <StatusBar style={colorScheme === "dark" ? "light" : "dark"} />

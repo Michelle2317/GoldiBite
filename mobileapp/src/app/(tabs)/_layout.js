@@ -2,6 +2,7 @@ import { Tabs } from "expo-router";
 import { Feather } from "@expo/vector-icons";
 import { Icon, MD3Colors } from 'react-native-paper';
 
+
 export default function TabLayout() {
   //#FFC858 1C1B1F
   return (
@@ -27,9 +28,11 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="settings"
+        name="setting"
         options={{
           title: "Setting",
+          href:'setting',
+          headerShown: false ,
           tabBarIcon: ({ color }) => (
             <Icon source="cog" size={24} color={color} />
           ),

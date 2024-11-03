@@ -39,11 +39,13 @@ export default function RootLayout() {
       //router.replace('/(setup)/welcome');
 			//router.replace('/(setup)/setupAccount');
 			//router.replace('/(nonauth)/login');
-      router.replace('(onBoarding)/onBoarding')
+      router.replace('(onBoarding)/onBoarding') 
+      //router.replace('/(tabs)/setting/profileView') 
 			
 		} else {
 			//router.replace('/(setup)/setupAccount');
-      router.replace('(tabs)')
+      //router.replace('(tabs)')
+      router.replace('(onBoarding)/onBoarding') 
 		}
 	}, [initializing]);
 
@@ -57,10 +59,10 @@ export default function RootLayout() {
     <PaperProvider theme={paperTheme}>
       <ThemeProvider value={paperTheme}>
         <Stack>
+        <Stack.Screen name="(nonauth)"  options={{headerShown: false, }} />
+        <Stack.Screen name="(onBoarding)" options={{headerShown: false }} />
+        <Stack.Screen name="(setup)" options={{headerShown:false}} />
           <Stack.Screen name="(tabs)"  options={{headerShown: false, }} />
-          <Stack.Screen name="(onBoarding)" options={{headerShown: false }} />
-          <Stack.Screen name="(nonauth)"  options={{headerShown: false, }} />
-          <Stack.Screen name="(setup)" options={{headerShown:false}} />
         </Stack>
       </ThemeProvider>
       <StatusBar style={colorScheme === "dark" ? "light" : "dark"} />

@@ -103,27 +103,16 @@ const ProfileSection = () => {
             <PrimaryInputText label="Nickname" value={nickname} onChangeText={setNickname} />
             <PrimaryInputText label="Age" value={age} onChangeText={setAge} />
 
-            <PaperProvider style={{ width: 100 }} theme={{
-                colors: {
-                    surface: "#FCE4B6", surfaceVariant: "#FCE4B6", "elevation": {
-                        "level0": "transparent",
-                        "level1": "rgb(249, 243, 242)",
-                        "level2": "rgb(245, 238, 235)",
-                        "level3": "rgb(241, 233, 227)",
-                        "level4": "rgb(240, 231, 224)",
-                        "level5": "rgb(237, 228, 219)"
-                    },
-                }
-            }}>
+           
                 <Dropdown
                     label="Gender"
                     placeholder="Select Gender"
                     options={OPTIONS}
                     value={gender}
                     onSelect={setGender}
+                    hideMenuHeader={true}
                     menuContentStyle={{ backgroundColor: "#FCE4B6" }}
                 />
-            </PaperProvider>
         </View>
     </>)
 }

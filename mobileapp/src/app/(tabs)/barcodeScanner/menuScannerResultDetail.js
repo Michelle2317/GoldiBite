@@ -1,30 +1,20 @@
-import { Stack, useNavigation } from 'expo-router';
-import react, { useState, useEffect } from 'react'
 import { StyleSheet, View, ScrollView, Image } from 'react-native';
-import { Avatar, Button, Card, Text, Chip } from 'react-native-paper';
-import ScanButton from '../../../components/ScanButton';
+import { Card, Text, Chip } from 'react-native-paper';
+import AddCartButton from '../../../components/barcodeScanner/AddCartButton';
 
-
-
-export default function barcodeResult() {
-
+export default function menuScannerResultDetail() {
 
     return (<>
         <View style={styles.container}>
-            <ScanButton />
-            <Text variant="displayMedium">Doritos</Text>
-            <Image
-                source={require('@/assets/images/products/Dorites.png')}
-                style={{ width: 200, height: 200 }}
-            />
-            {/* background #FCE4B6 */}
-            <Card  >
-                <Card.Content style={{ gap: 10, backgroundColor:'#FCE4B6' }} >
+            <AddCartButton />
+            <Text variant="displayMedium">Krabmeat Alfredo</Text>
+            <Card mode='contained' theme={{colors:{surfaceVariant:'#FCE4B6'}}} >
+                <Card.Content style={{ gap: 10 }} >
                     <ScrollView>
                         <View>
                             <Text variant="titleMedium" style={{color: '#000'}}>Product Name</Text>
                             <Text variant="bodyMedium" style={{color: '#000'}}>
-                                Doritos
+                            Krabmeat Alfredo
                             </Text>
                         </View>
                         <View>

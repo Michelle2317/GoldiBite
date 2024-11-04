@@ -5,35 +5,18 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import BottomSheet, { BottomSheetView, BottomSheetTextInput } from '@gorhom/bottom-sheet';
-import { useRouter, useNavigation  } from 'expo-router';
+import { useRouter, useNavigation } from 'expo-router';
 
 
 export default function Scanner(props) {
     const parent = props.navigation;
-
-console.log(props);
     const router = useRouter();
-    // variables
-    const snapPoints = useMemo(() => ["20%"], []);
-
-
-    //ref
-    const bottomSheetRef = useRef(null);
-
-    // callbacks 
-    const handleSheetChanges = useCallback(index => {
-        console.log('handleSheetChanges', index);
-    }, [])
-
-
-    const handleOnBlur = () => {
-        router.push({ pathname: "barcodeScanner/barcodeResult", params: { barcode: inputBarcode } })
-    }
 
     const handleBarCodeScanned = ({ type, data }) => {
         if (data !== null || data !== "") {
             setScanned(true);
-            alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+            router.push({ pathname: "barcodeScanner/barcodeResult", params: { barcode: data } })
+            //alert(`Bar code with type ${type} and data ${data} has been scanned!`);
         }
     };
 
@@ -69,43 +52,67 @@ console.log(props);
     }, [barcode])
 
     // hidden the bottom navigation bar
-    
-
 
     // usetState
     const [barcode, setBarcode] = useState("");
-    const [inputBarcode, setInputBarcode] = useState("");
 
     //barcode scanner 
     const [hasPermission, setHasPermission] = useState(null);
     const [scanned, setScanned] = useState(false);
 
     return (
-        <GestureHandlerRootView style={styles.container} options={{
-            tabBarStyle: { display: "none" },
-         }}>
-            <BarCodeScanner
-                onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-                style={StyleSheet.absoluteFillObject}
-            />
-            {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
+        //options={{        tabBarStyle: { display: "none" },    }}
+        <View style={styles.container}  >
+            <View style={styles.barcodeContainer}>
+                <BarCodeScanner
+                    onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+                    style={StyleSheet.absoluteFillObject}
+                />
+                {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
 
-            <Image
-                source={require('@/assets/images/elements/scanner_view.png')}
-                style={styles.reactLogo}
-            />
-            <Text>{scanned}</Text>
-            <Text>{barcode}</Text>
+                <Image
+                    source={require('@/assets/images/elements/scanner_view.png')}
+                    style={styles.reactLogo}
+                />
+
+            </View>
+            <BarcodeBottomSheet />
+        </View>
+
+    );
+}
+
+const BarcodeBottomSheet = () => {
+    const router = useRouter();
+    const [inputBarcode, setInputBarcode] = useState("");
+    // variables
+    const snapPoints = useMemo(() => ["100%"], []);
+    //ref
+    const bottomSheetRef = useRef(null);
+    // callbacks 
+    const handleSheetChanges = useCallback(index => {
+        console.log('handleSheetChanges', index);
+    }, [])
+    const handleOnBlur = () => {
+        router.push({ pathname: "barcodeScanner/barcodeResult", params: { barcode: inputBarcode } })
+    }
+
+    return (<>
+        <GestureHandlerRootView style={styles.bottomSheetContainer}>
             <BottomSheet
                 ref={bottomSheetRef}
                 onChange={handleSheetChanges}
-               
-                snapPoints={snapPoints}>
+                enableDynamicSizing={false}
+                enableOverDrag={false}
+                snapPoints={snapPoints}
+                handleStyle={{ backgroundColor: "#FCE4B6", borderTopLeftRadius: 15, borderTopRightRadius: 15 }}
+                handleIndicatorStyle={{ backgroundColor: "unset" }}>
 
-                <BottomSheetView style={styles.contentContainer}>
+                <BottomSheetView style={styles.bottomSheetStyle}>
+
                     <BottomSheetTextInput
                         value={inputBarcode}
-                        style={{ backgroundColor: '#FCE4B6', height: 40, width: '90%', padding: '10px', borderColor: '#747474', borderWidth: 1 }}
+                        style={{ alignSelf: "center", backgroundColor: '#FCE4B6', height: 40, width: '90%', padding: '10px', borderColor: '#747474', borderWidth: 1 }}
                         placeholder='Please enter barcode manually'
                         onChangeText={setInputBarcode}
                         onBlur={handleOnBlur}
@@ -113,22 +120,38 @@ console.log(props);
                 </BottomSheetView>
             </BottomSheet>
         </GestureHandlerRootView>
-
-    );
+    </>)
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'grey',
+        padding: 0,
+        gap: 0,
         flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
+        alignContent: 'center',
+        justifyContent: "flex-start"
     },
-    contentContainer: {
+    barcodeContainer: {
+        flex: 6,
+        padding: 0,
+        margin: 0,
+    },
+    reactLogo: {
+        margin: "auto"
+    },
+
+    bottomSheetContainer: {
         flex: 1,
-        padding: 36,
-        alignItems: 'center',
-        backgroundColor: "#FAF1E4"
+        padding: 0,
+        flexDirection: "column",
+        backgroundColor: "#FAF1E4",
+    },
+    bottomSheetStyle: {
+        flex: 1,
+        padding: 0,
+        flexDirection: 'column',
+        alignContent: 'center',
+        backgroundColor: '#FCE4B6'
     },
 });

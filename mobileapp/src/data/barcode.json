@@ -1,0 +1,31 @@
+[
+    {
+      "id": 1,
+      "barcode":"4710126021013",
+      "name": "I MEI - Strawberry Puff",
+      "ingredient": "Vegetable oil (palm oil, rapeseed oil, emulsifier (fatty acid glycerol, fatty acid malonyl ester), antioxidant (mixed concentrated tocopherol)), eggs, sucrose, flour, whey powder, milk powder, lactose, strawberry powder, Soy Lecithin, Flavor, Citric Acid, Antioxidant (Vitamin C)",
+      "image": "https://images.barcodelookup.com/4188/41888677-1.jpg"
+    },
+    {
+      "id": 2,
+      "barcode":"0064042003498",
+      "name": "Celebration Mint Truffle Dark Chocolate 45% Cocoa Butter Cookies",
+      "ingredient": "Dark Chocolate (sugar, Chocolate Liquor, Cocoa Butter, Milk Ingredients, Soya Lecithin, Vanillin), Enriched Wheat Flour, Mint Creme Flavoured Filling (glucose, Sugar, Coconut Oil, Water, Modified Milk Ingredients, Monoglycerides, Titanium Dioxide, Salt, Soya Lecithin, Natural Flavour), Sugar, Butter (milk), Sodium Bicarbonate, Salt, Soya Lecithin, Artificial Flavour. May Contain Peanuts And Tree Nuts.",
+      "image": "@/assets/images/products/064042003498.jpg"
+    },
+    {
+      "id": 3,
+      "barcode":"0073390011277",
+      "name": "Mentos Pure Fresh Gum",
+      "ingredient": "Xylitol, Chewing Gum Base , Sorbitol, Mannitol, Glycerol, Maltitol Ayrup, Natural And Artifical Flavors; Contains Less Than 2 Percent Of: Gum Arabic, Color (Titanium Dioxide), Gelatine, Soya Lecithin, Aspartame, Acesulfame K, Green Tea Extract, Carnuba Wax, Sucralose, Sodium Carbosymethylcellose, Bht To Maintain Freshness, Sucrose Esters Of Fatty Acids, Blue 1",
+      "image": "https://images.barcodelookup.com/81657/816570551-1.jpg"
+    },
+    {
+      "id": 4,
+      "barcode":"071464302514",
+      "name": "item D",
+      "ingredient": "Pear Juice From Concentrate (water, Pear Juice Concentrate), Mango Puree From Concentrate (water, Mango Puree Concentrate), Acerola Puree From Concentrate (water, Acerola Puree Concentrate), Lemon Juice From Concentrate (water, Lemon Juice Concentrate), Cherry Juice From Concentrate (water, Cherry Juice Concentrate), Kiwi Puree, Natural Flavor, Pectin, Vitamin C (ascorbic Acid), Vitamin A (beta Carotene), Zinc, Vitamin E (d-alpha Tocopheryl), Maitake Mushroom Powder, Echinacea, Astragalus, Camu Camu Powder.",
+      "image": "@/assets/images/products/064042003498.jpg"
+    }
+  ]
+ 

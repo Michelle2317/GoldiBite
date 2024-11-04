@@ -13,9 +13,9 @@ const StackLayout = () => {
                 headerTitle: () => <SegmentedButton />,
                 headerShown: true,
                 headerStyle: {
-                    backgroundColor: 'unset',
+                    backgroundColor: '#FFC858',
                   },
-                  headerTintColor: '#fff',
+                  headerTintColor: 'unset',
                   headerTitleStyle: {
                     fontWeight: 'bold',
                   },

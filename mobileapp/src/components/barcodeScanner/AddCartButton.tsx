@@ -3,7 +3,7 @@ import { View } from 'react-native';
 
 export default function AddCartButton() {
     return (<>
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 0, zIndex:2}}>
             <View style={{ borderWidth: 0, position: 'absolute', top: 200, left: 90, alignSelf: 'flex-end', zIndex: 999, width: 100 }}>
                 <View style={{
                     flex: 1,

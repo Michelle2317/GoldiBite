@@ -1,7 +1,7 @@
 # GoldiBite
 
 ## Description
-GoldiBite is an AI-powered app designed to eliminate the inconvenience and potential safety risks of travelling for people with food allergies and sensitivities. Ingredient information and regulations vary worldwide, and even minor confusion and negligence can lead to ruined days or medical emergencies.
+GoldiBite is an AI-powered app designed to assist individuals with food allergies and sensitivities by providing a comprehensive database to manage food safety concerns while traveling. It aims to eliminate the inconvenience and potential safety risks associated with varying ingredient information and regulations worldwide.
 
 ## Created By
 - Michelle Ao

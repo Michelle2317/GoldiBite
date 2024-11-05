@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import { Chip } from 'react-native-paper';
-import UserToolBar from '../../../components/UserToolBar'
+import UserToolBar from '@/src/components/homePage/UserToolBar';
 import MenuItem from '../../../components/scanner/MenuItem';
 
 const menuScannerResult = () => {

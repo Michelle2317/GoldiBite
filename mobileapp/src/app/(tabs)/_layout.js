@@ -18,6 +18,16 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="emergency"
+        options={{
+          title: "Emergency",
+          headerShown: false ,
+          tabBarIcon: ({ color }) => (
+            <Icon source="alarm-light-outline" size={24} color={color} /> 
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="barcodeScanner"
         options={{
           title: "Barcode Scanner",
@@ -28,9 +38,19 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="guides"
+        options={{
+          title: "Guides",
+          headerShown: false ,
+          tabBarIcon: ({ color }) => (
+            <Icon source="book-open-blank-variant" size={24} color={color} /> 
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="setting"
         options={{
-          title: "Setting",
+          title: "Settings",
           href:'setting',
           headerShown: false ,
           tabBarIcon: ({ color }) => (

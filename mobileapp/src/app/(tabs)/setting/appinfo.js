@@ -5,7 +5,7 @@ import { Text, Switch } from 'react-native-paper';
 import PrimaryButton from '../../../components/paperUiElement/PrimaryButton';
 import { useRouter } from "expo-router";
 
-const notification = () => {
+const appinfo = () => {
     const router = useRouter();
     const handleBackBtn = () => {
         router.back();
@@ -68,4 +68,4 @@ const styles = StyleSheet.create({
 
 
 });
-export default notification;
+export default appinfo;

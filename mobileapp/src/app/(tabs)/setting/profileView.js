@@ -6,7 +6,7 @@ import PrimaryInputText from '../../../components/paperUiElement/PrimaryInputTex
 import { Dropdown } from 'react-native-paper-dropdown';
 import PrimaryButton from '../../../components/paperUiElement/PrimaryButton';
 import { useRouter } from "expo-router";
-const ProfileView = () => {
+const profileView = () => {
     const router = useRouter();
 
     const [nickname, setNickname] = useState('Kaylic Sanchez');
@@ -74,4 +74,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default ProfileView;
+export default profileView;

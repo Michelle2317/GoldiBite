@@ -1,5 +1,7 @@
 import { Tabs, Stack } from 'expo-router'
 import { IconButton } from 'react-native-paper';
+import Header from '@/src/components/navigation/Header';
+import HeaderRightButton from '@/src/components/navigation/HeaderRightButton'
 
 
 export const unstable_settings = {
@@ -17,34 +19,46 @@ const StackLayout = () => {
                 headerTitleStyle: {
                     fontWeight: 'bold',
                 },
-                headerShadowVisible:false,
+                headerShadowVisible:false
             }}
         >
-            <Stack.Screen name="index" options={{
-                headerShown: true,
-                headerTitle: 'Setting'
-            }}></Stack.Screen>
             <Stack.Screen name="profileView" options={{
                 headerShown: true,
-                headerTitle: 'Profile'
+                title: 'Personal Information',
+                headerTitle: props => <Header {...props} />,
+                HeaderRightButton: props => <HeaderRightButton {...props} />
             }}></Stack.Screen>
             <Stack.Screen name="allergy" options={{
                 headerShown: true,
-                headerTitle: 'Allergy'
+                title: 'Allergy',
+                headerTitle: props => <Header {...props} />,
+                HeaderRightButton: props => <HeaderRightButton {...props} />
             }}></Stack.Screen>
             <Stack.Screen name="location" options={{
                 headerShown: true,
-                headerTitle: 'Location'
+                title: 'Location',
+                headerTitle: props => <Header {...props} />,
+                HeaderRightButton: props => <HeaderRightButton {...props} />
             }}></Stack.Screen>
             <Stack.Screen name="notification" options={{
                 headerShown: true,
-                headerTitle: 'Notification'
+                title: 'Notification',
+                headerTitle: props => <Header {...props} />,
+                HeaderRightButton: props => <HeaderRightButton {...props} />
             }}></Stack.Screen>
-            <Stack.Screen name="toggleTheme" options={{
-                headerTitle: 'Setting'
+            <Stack.Screen name="appinfo" options={{
+                headerShown: true,
+                title: 'App Info',
+                headerTitle: props => <Header {...props} />,
+                HeaderRightButton: props => <HeaderRightButton {...props} />
+            }}></Stack.Screen>
+            <Stack.Screen name="index" options={{
+                headerShown: true,
+                title: 'Profile',
+                headerTitle: props => <Header {...props} />,
+                HeaderRightButton: props => <HeaderRightButton {...props} />
             }}></Stack.Screen>
         </Stack>
-
     )
 }
 

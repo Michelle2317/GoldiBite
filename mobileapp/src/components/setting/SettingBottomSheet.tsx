@@ -25,11 +25,11 @@ const SettingBottomSheet = () => {
                 handleStyle={{ backgroundColor: "#FCE4B6", borderTopLeftRadius: 15, borderTopRightRadius: 15 }}
                 handleIndicatorStyle={{ backgroundColor: "unset" }} >
                 <BottomSheetView style={styles.bottomSheetStyle}>
-                    <TouchableButton name="Profile" target="(tabs)/setting/profileView" />
-                    <TouchableButton name="Allergy" target="(tabs)/setting/allergy" />
-                    <TouchableButton name="Location" target="(tabs)/setting/location" />
-                    <TouchableButton name="Notification" target="(tabs)/setting/notification" />
-                    <TouchableButton name="App Info" target="(tabs)/setting/appinfo" />
+                    <TouchableButton name="Profile" target="profileView" />
+                    <TouchableButton name="Allergy" target="allergy" />
+                    <TouchableButton name="Location" target="location" />
+                    <TouchableButton name="Notification" target="notification" />
+                    <TouchableButton name="App Info" target="appinfo" />
                 </BottomSheetView>
             </BottomSheet>
         </GestureHandlerRootView>

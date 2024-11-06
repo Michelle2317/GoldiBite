@@ -1,6 +1,6 @@
 import { StyleSheet, View } from "react-native";
 import { Button, Text } from "react-native-paper";
-import { useTheme } from "../../hooks/useTheme";
+import { useTheme } from "../../../hooks/useTheme";
 
 const Settings = () => {
   const { toggleTheme } = useTheme();

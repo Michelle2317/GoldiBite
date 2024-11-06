@@ -2,7 +2,7 @@ import { StyleSheet, View } from "react-native";
 import { Button, Text } from "react-native-paper";
 import { useTheme } from "../../../hooks/useTheme";
 
-const Settings = () => {
+const toggleTheme = () => {
   const { toggleTheme } = useTheme();
 
   return (
@@ -18,4 +18,4 @@ const Settings = () => {
 };
 
 const styles = StyleSheet.create({});
-export default Settings;
+export default toggleTheme;

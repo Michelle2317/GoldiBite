@@ -6,7 +6,7 @@ import PrimaryButton from '../../../components/paperUiElement/PrimaryButton';
 import { Chip } from 'react-native-paper';
 import { useRouter } from "expo-router";
 
-const ProfileView = () => {
+const allergy = () => {
     const router = useRouter();
 
     const [nickname, setNickname] = useState('Kaylic Sanchez');
@@ -74,4 +74,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default ProfileView;
+export default allergy;

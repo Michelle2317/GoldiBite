@@ -12,7 +12,7 @@ const StackLayout = () => {
             <Stack.Screen name="anaphylaxis" options={{
                 headerTitle: 'Anaphylaxis'
             }} />
-            <Stack.Screen name="Epipen" options={{
+            <Stack.Screen name="epipen" options={{
                 headerTitle: 'How to Use an Epipen'
             }} />
             <Stack.Screen name="travelTips" options={{

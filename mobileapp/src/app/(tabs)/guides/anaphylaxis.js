@@ -7,7 +7,6 @@ const steps = [
 	{
 		title: 'What is Anaphylaxis?',
 		image: require('@/assets/images/guides/whatIs.jpeg'),
-		heading: 'Make a Research on Local Restaurants',
 		description:
 			'Anaphylaxis is a severe, life-threatening allergic reaction that requires immediate treatment with an epinephrine shot and a call to 911.\n\nEpinephrine can reverse symptoms within minutes; if not, a second dose may be needed within 30 minutes.\n\nAntihistamines are ineffective for Anaphylaxis. Although rare, some people are more prone to it, and most recover with prompt care.\n\nInform your doctor of any allergies, and consider wearing a medical alert bracelet or carrying a card with allergy details.',
 	},

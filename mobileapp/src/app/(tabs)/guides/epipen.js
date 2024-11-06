@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, Image } from 'react-native';
 
-export default function EpipenInstructions() {
+export default function Epipen() {
 	return (
 		<View style={styles.container}>
 			<Text style={styles.title}>How to use an Epipen?</Text>

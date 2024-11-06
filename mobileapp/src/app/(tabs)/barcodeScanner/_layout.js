@@ -1,15 +1,24 @@
 import { Tabs, Stack } from 'expo-router'
 import SegmentedButton from '../../../components/barcodeScanner/SegmentedButton'
+import Header from '@/src/components/navigation/Header';
+import HeaderRightButton from '@/src/components/navigation/HeaderRightButton'
 
 const StackLayout = () => {
     return (
-        <Stack>
+        <Stack 
+        screenOptions={{
+            headerStyle: {
+                backgroundColor: '#FAF1E4',
+            },
+            headerTintColor: '#000',
+            headerTitleStyle: {
+                fontWeight: 'bold',
+            },
+            headerShadowVisible:false
+        }}>
             <Stack.Screen name="index" options={{
-                //headerTitle: 'Scanner',
                 headerBackTitle: 'Back',
                 headerBackTitleStyle: { fontSize: 20 },
-                // tabBarStyle: { display: 'none' },
-                // tabBar: { visible: false },
                 headerTitle: () => <SegmentedButton />,
                 headerShown: true,
                 headerStyle: {
@@ -25,7 +34,8 @@ const StackLayout = () => {
             <Stack.Screen name="barcodeResult" options={{
                 headerBackTitle: 'Back',
                 headerBackTitleStyle: { fontSize: 18 },
-                headerTitle: '',
+                headerTitle: props => <Header {...props} />,
+                HeaderRightButton: props => <HeaderRightButton {...props} />,
                 headerShown: true,
             }} />
             <Stack.Screen name="menuScannerResult" options={{

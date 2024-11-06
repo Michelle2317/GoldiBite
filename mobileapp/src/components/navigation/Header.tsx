@@ -1,7 +1,7 @@
 import { View, StyleSheet } from 'react-native';
 import { Text, IconButton } from 'react-native-paper';
 
-const Header = ({ name = '12345678'}) => {
+const Header = ({ name = 'Kaylie'}) => {
 	return (
 		<View style={styles.container}>
 			<Text variant='titleMedium' style={styles.text}>

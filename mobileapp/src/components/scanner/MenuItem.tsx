@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, StyleSheet } from "react-native"
-import { Checkbox, Button, Card, Text, IconButton } from 'react-native-paper';
+import { Checkbox, Button, Card, Text, IconButton, Icon } from 'react-native-paper';
 import { Avatar } from 'react-native-paper';
 import { useRouter } from 'expo-router';
 
@@ -11,10 +11,10 @@ const MenuItem = ({ checked = false, name1, isDetected, bgColor = "red" }) => {
     const [content, setContent] = useState("");
 
 
-    
+
     const router = useRouter();
     const handleOnPress = () => {
-        router.push({ pathname: "barcodeScanner/menuScannerResultDetail"});
+        router.push({ pathname: "barcodeScanner/menuScannerResultDetail" });
     }
 
     const AllergenWarning = ({ isDetected }) => {
@@ -22,13 +22,13 @@ const MenuItem = ({ checked = false, name1, isDetected, bgColor = "red" }) => {
             return (<>
                 <Text> Allergen detected </Text>
 
-                <Avatar.Icon size={24} icon="close" color="#FFF" theme={{colors:{primary:"#D25409"}}} />
+                <Avatar.Icon size={24} icon="close" color="#FFF" theme={{ colors: { primary: "#D25409" } }} />
             </>);
         } else {
             return (
                 <>
                     <Text>Allergen not detected </Text>
-                    <Avatar.Icon size={24} icon="check" color="#FFF"  theme={{colors:{primary:"#284722"}}} />
+                    <Avatar.Icon size={24} icon="check" color="#FFF" theme={{ colors: { primary: "#284722" } }} />
 
                 </>);
         }
@@ -39,26 +39,20 @@ const MenuItem = ({ checked = false, name1, isDetected, bgColor = "red" }) => {
             <Card.Content>
                 <View style={styles.viewContainer}>
                     <View>
-                        <Checkbox
-                            status={checked ? 'checked' : 'unchecked'}
-                            onPress={() => {
-                                setChecked(!checked);
-                            }}
-                        />
-                    </View>
-                    <View>
-                        <Text variant="titleLarge">{name1}</Text>
-                        <Text>{isDetected}</Text>
+
+                        <Text variant="labelMedium" style={{ fontWeight: "bold" }}>Name</Text>
+                        <Text variant="bodyMedium">{name1} (中文名稱)</Text>
+                        <Text variant="labelMedium" style={{ fontWeight: "bold" }}>Possible Ingredient: </Text>
+                        <Text variant="bodyMedium">Chicken, panko bread crumbs, soy sauce, salt, peeper, rice</Text>
+                        <Text variant="labelMedium" style={{ fontWeight: "bold" }}>{AllergenWarning(isDetected)}</Text>
                         <Text variant="bodyMedium">
-                            <AllergenWarning isDetected={isDetected} />
+                        <Icon source="egg" size={20} />
+                        <Icon source="egg" size={20} />
+                        <Icon source="egg" size={20} />
+                        <Icon source="egg" size={20} />
                         </Text>
-                    </View>
-                    <View>
-                        <IconButton
-                            icon="arrow-right-bold"
-                            size={32}
-                            onPress={handleOnPress}
-                        />
+
+
                     </View>
                 </View>
             </Card.Content>

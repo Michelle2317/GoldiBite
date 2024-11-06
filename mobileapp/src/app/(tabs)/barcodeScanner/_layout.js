@@ -39,7 +39,10 @@ const StackLayout = () => {
                 headerShown: true,
             }} />
             <Stack.Screen name="menuScannerResult" options={{
-                headerShown: false,
+                headerBackTitle: 'Back',
+                headerBackTitleStyle: { fontSize: 18 },
+                headerTitle: props => <Header {...props} />,
+                HeaderRightButton: props => <HeaderRightButton {...props} />,
             }} />
         </Stack>
 

@@ -1,7 +1,10 @@
 import { View, StyleSheet } from 'react-native';
 import { Text, IconButton } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
 
 export default function UserToolBar({ name }) {
+	const navigation = useNavigation();
+
 	return (
 		<View style={styles.container}>
 			<Text variant='headlineSmall' style={styles.text}>
@@ -13,12 +16,14 @@ export default function UserToolBar({ name }) {
 					size={28}
 					style={styles.profileButton}
 					iconColor='#000'
+					onPress={() => navigation.navigate('setting')}
 				/>
 				<IconButton
 					icon='bell'
 					size={25}
 					style={styles.bellButton}
 					iconColor='#000'
+					onPress={() => navigation.navigate('notification')}
 				/>
 			</View>
 		</View>

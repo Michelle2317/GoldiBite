@@ -1,9 +1,11 @@
 import { View, StyleSheet } from 'react-native';
 import UserToolBar from '@/src/components/homePage/UserToolBar';
 import HomePageCards from '@/src/components/homePage/HomePageCards';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Index() {
 	const name = 'Kaylie';
+	const navigation = useNavigation();
 
 	return (
 		<View style={styles.container}>
@@ -17,6 +19,7 @@ export default function Index() {
 				height={270}
 				iconSize={110}
 				iconColor='#cf7334'
+				onPress={() => navigation.navigate('barcodeScanner')}
 			/>
 			<View style={styles.cardRow}>
 				<HomePageCards
@@ -28,6 +31,7 @@ export default function Index() {
 					height={308}
 					iconSize={93}
 					iconColor='#cf7334'
+					onPress={() => navigation.navigate('emergency')}
 				/>
 				<HomePageCards
 					title='Guides'
@@ -38,6 +42,7 @@ export default function Index() {
 					height={308}
 					iconSize={93}
 					iconColor='#00c8a1'
+					onPress={() => navigation.navigate('guides')}
 				/>
 			</View>
 		</View>

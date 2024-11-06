@@ -10,13 +10,15 @@ export default function HomePageCards({
 	height,
 	iconSize,
 	iconColor,
+	onPress,
 }) {
 	return (
 		<Card
 			style={[
 				styles.card,
 				{ backgroundColor: cardColor, width, height },
-			]}
+			]} 
+			onPress={onPress} 
 		>
 			<Card.Content>
 				<Text

@@ -1,11 +1,13 @@
 import { View, StyleSheet } from 'react-native';
 import { Text, IconButton } from 'react-native-paper';
+import { Role, useAuth } from '../../context/AuthContext';
 
 const Header = ({ name = 'Kaylie'}) => {
+	const { authState } = useAuth();
 	return (
 		<View style={styles.container}>
 			<Text variant='titleMedium' style={styles.text}>
-				Hello {name},
+				Hello {authState?.role},
 			</Text>
 			<View style={styles.buttonContainer}>
 				<IconButton

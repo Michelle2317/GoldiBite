@@ -12,7 +12,7 @@ const SignUp = ({ callback }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const handleOnSubmit = (event) => {
-        router.replace('/(onBoarding)/language');
+        //router.replace('/(onBoarding)/language');
     }
 
 

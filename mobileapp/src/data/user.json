@@ -1,0 +1,83 @@
+[
+    {
+        "id": 1,
+        "email": "goldibite@my.bcit.ca",
+        "password": "123123",
+        "icon": "a",
+        "isSetupProfile": false,
+        "profile": {
+            "name": "",
+            "gender": "",
+            "age": null
+        },
+        "allergy": [
+            "dairy",
+            "Nuts"
+        ],
+        "emergencyContact": {
+            "name": "",
+            "relationship": "",
+            "phoneNumber": ""
+        },
+        "setting": {
+            "language": "eng",
+            "location": "",
+            "isAllowNotifications": true,
+            "timeSensitiveNotifications": true
+        }
+    },
+    {
+        "id": 2,
+        "email": "admin",
+        "password": "123123",
+        "icon": "a",
+        "isSetupProfile": false,
+        "profile": {
+            "name": "",
+            "gender": "",
+            "age": null
+        },
+        "allergy": [
+            "dairy",
+            "Nuts"
+        ],
+        "emergencyContact": {
+            "name": "",
+            "relationship": "",
+            "phoneNumber": ""
+        },
+        "setting": {
+            "language": "eng",
+            "location": "",
+            "isAllowNotifications": true,
+            "timeSensitiveNotifications": true
+        }
+    },
+    {
+        "id": 3,
+        "email": "a",
+        "password": "a",
+        "icon": "a",
+        "isSetupProfile": false,
+        "profile": {
+            "name": "",
+            "gender": "",
+            "age": null
+        },
+        "allergy": [
+            "dairy",
+            "Nuts"
+        ],
+        "emergencyContact": {
+            "name": "",
+            "relationship": "",
+            "phoneNumber": ""
+        },
+        "setting": {
+            "language": "eng",
+            "location": "",
+            "isAllowNotifications": true,
+            "timeSensitiveNotifications": true
+        }
+    }
+]

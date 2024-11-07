@@ -131,7 +131,7 @@ console.log(barcode);
                             </Text>
                         </View>
                         <View>
-                            <Text variant="titleMedium" style={{ color: '#000' }}>Many Contain Allergy</Text>
+                            <Text variant="titleMedium" style={{ color: '#000' }}>May Contain Allergy</Text>
                             <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: '8', color: '#000' }}>
                                 {allergyList && allergyList.map((allergy, index) => {
                                     return (<>

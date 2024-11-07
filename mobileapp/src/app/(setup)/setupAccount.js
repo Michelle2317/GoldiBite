@@ -125,7 +125,7 @@ const AllergiesSection = () => {
     ]);
     return (<>
         <Text variant="headlineMedium" style={{ textAlign: "center", marginBottom: 30 }}>Select Allergy</Text>
-        <View style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", gap: 20, width: 280 }}>
+        <View style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", gap: 10, width: 280 }}>
             {allergies && allergies.map((item, index) => {
                 return (<>
                     <Chip key={index} theme={{ colors: { secondaryContainer: '#FFC858' } }}

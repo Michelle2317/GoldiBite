@@ -6,7 +6,7 @@ import { Icon, MD3Colors } from 'react-native-paper';
 export default function TabLayout() {
   //#FFC858 1C1B1F
   return (
-    <Tabs screenOptions={{ tabBarActiveTintColor: 'blue', tabBarInactiveTintColor: '#1C1B1F',tabBarStyle:{backgroundColor:'#FFC858'} }}>
+    <Tabs screenOptions={{ tabBarActiveTintColor: '#fff', tabBarInactiveTintColor: '#1C1B1F',tabBarStyle:{backgroundColor:'#FFC858'} }}>
       <Tabs.Screen
         name="index"
         options={{

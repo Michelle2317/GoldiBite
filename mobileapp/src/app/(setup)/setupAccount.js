@@ -9,7 +9,7 @@ import { Chip } from 'react-native-paper';
 
 import { useRouter } from "expo-router";
 
-const setupAccount = () => {
+const SetupAccount = () => {
     const router = useRouter();
     
     const [step, setStep] = useState(1);
@@ -206,4 +206,4 @@ const styles = StyleSheet.create({
         flexWrap: "wrap",
     }
 });
-export default setupAccount;
+export default SetupAccount;

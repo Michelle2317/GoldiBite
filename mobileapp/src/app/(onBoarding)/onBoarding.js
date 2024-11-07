@@ -3,7 +3,7 @@ import {View, StyleSheet } from "react-native";
 import { onboardingList } from "../../data/onboarding";
 import OnBoardingContent from "../../components/onBoarding/OnBoardingContent";
 import { useRouter } from "expo-router";
-const onBoarding = () => {
+const OnBoarding = () => {
     const [currentStep, setCurrentStep] = useState(0);
     const router = useRouter();
 
@@ -38,4 +38,4 @@ const styles = StyleSheet.create({
         justifyContent: "space-evenly"
     }
 });
-export default onBoarding
+export default OnBoarding

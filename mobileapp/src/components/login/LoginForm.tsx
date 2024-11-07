@@ -4,22 +4,24 @@ import { Button, Text, IconButton, MD3Colors } from "react-native-paper";
 import { useRouter } from "expo-router";
 import InTextButton from "../paperUiElement/InTextButton"
 import PrimaryInputText from "../paperUiElement/PrimaryInputText"
-import { Link } from 'expo-router';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useAuth } from "@/src/context/AuthContext";
 
 const LoginForm = ({ callback }) => {
     const router = useRouter();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const handleOnSubmit = (event) => {
 
-        //router.replace('/(onBoarding)/language');
-        router.replace('/(setup)/setupAccount');
-    }
+	const { onLogin } = useAuth();
+    
+	const onSignInPress = async () => {
+		await onLogin!(email, password);
+	};
     return (<>
         <PrimaryInputText label="Email" value={email} onChangeText={setEmail} />
         <PrimaryInputText label="Password" value={password} onChangeText={setPassword} secureTextEntry={true} />
         <InTextButton butonText=" Forget Password?" callback={() => console.log('Pressed')} style={{ alignSelf: 'self-start' }} />
-        <Button mode="contained" onPress={handleOnSubmit} theme={{ colors: { onPrimary: '#000000', primary: 'rgba(213,203,68, 0.7)' } }} >
+        <Button mode="contained" onPress={onSignInPress} theme={{ colors: { onPrimary: '#000000', primary: 'rgba(213,203,68, 0.7)' } }} >
             Login
         </Button>
         <Text variant="labelMedium" style={{ alignSelf: 'center', marginBottom: 50 }}>

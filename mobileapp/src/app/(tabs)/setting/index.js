@@ -38,21 +38,7 @@ const styles = StyleSheet.create({
         padding: 20,
         paddingTop: 50,
         gap: 10,
-    },  
-    bottomSheetContainer: {
-        flex: 2,
-        padding: 0,
-        flexDirection: "column",
-        backgroundColor: "#FAF1E4",
-    },
-    bottomSheetStyle: {
-        flex: 1,
-        padding: 0,
-        gap: 10,
-        flexDirection: 'column',
-        alignContent: 'center',
-        backgroundColor: '#FCE4B6'
-    },
+    }
 });
 
 export default App;

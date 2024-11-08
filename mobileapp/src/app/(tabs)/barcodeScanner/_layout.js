@@ -8,7 +8,7 @@ const StackLayout = () => {
         <Stack 
         screenOptions={{
             headerStyle: {
-                backgroundColor: '#FAF1E4',
+                backgroundColor: '#F4EADA',
             },
             headerTintColor: '#000',
             headerTitleStyle: {

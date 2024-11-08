@@ -6,7 +6,7 @@ import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 import TouchableButton from "./TouchableButton"
 const SettingBottomSheet = () => {
     // variables
-    const snapPoints = useMemo(() => ["67%"], []);
+    const snapPoints = useMemo(() => ["80%"], []);
     //ref
     const bottomSheetRef = useRef(null);
     // callbacks 
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
         flex: 2,
         padding: 0,
         flexDirection: "column",
-        backgroundColor: "#FAF1E4",
+        backgroundColor: "#F4EADA",
     },
     bottomSheetStyle: {
         flex: 1,

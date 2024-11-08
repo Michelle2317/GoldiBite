@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { ScorllView, View, Text, StyleSheet, Image } from 'react-native';
 
 export default function Epipen() {
 	return (
@@ -75,7 +75,7 @@ export default function Epipen() {
 const styles = StyleSheet.create({
 	container: {
 		padding: 20,
-		backgroundColor: '#f9f9f9',
+		// backgroundColor: '#f9f9f9',
 		alignItems: 'center',
 	},
 	title: {

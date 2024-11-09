@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { TextInput, Button, Text } from "react-native-paper";
+import { Text } from "react-native-paper";
 import { useRouter } from "expo-router";
+import { View } from "react-native";
 import InTextButton from "../paperUiElement/InTextButton";
 import PrimaryButton from "../paperUiElement/PrimaryButton";
 import PrivacyPolicyDialog from "./PrivacyPolicyDialog";
@@ -23,15 +24,18 @@ const SignUp = ({ callback }) => {
     const hideDialog = () => setVisible(false);
     return (<>
 
-        
-<PrimaryInputText label="Email" value={email} onChangeText={setEmail} />
+
+        <PrimaryInputText label="Email" value={email} onChangeText={setEmail} />
         <PrimaryInputText label="Password" value={password} onChangeText={setPassword} secureTextEntry={true} />
 
+        <View style={{ height: 28 }}>
+
+        </View>
         <PrimaryButton buttonText="Sign Up" callback={handleOnSubmit} />
 
         <Text variant="labelMedium" style={{ alignSelf: 'center', marginBottom: 50 }}>
-           Have an account?
-            <InTextButton butonText="Sign in" callback={callback} style={{ alignSelf: 'left' }}  />
+            Have an account?
+            <InTextButton butonText="Sign in" callback={callback} style={{ alignSelf: 'left' }} />
         </Text>
 
 

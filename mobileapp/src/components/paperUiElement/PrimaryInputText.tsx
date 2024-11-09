@@ -13,7 +13,7 @@ const PrimaryInputText = ({ label, value, onChangeText, secureTextEntry = false,
         console.log(isShowText)
         setShowText(!isShowText)
     }
-    
+
     const onPressEditIcon = () => {
         setStatus('label')
     }
@@ -21,7 +21,7 @@ const PrimaryInputText = ({ label, value, onChangeText, secureTextEntry = false,
         setStatus('edit')
     }
     if (!secureTextEntry) {
-        if(initialState !== 'label'){
+        if (initialState !== 'label') {
             return (<>
                 <TextInput
                     label={label}
@@ -30,6 +30,8 @@ const PrimaryInputText = ({ label, value, onChangeText, secureTextEntry = false,
                     mode="flat"
                     theme={{ colors: { surfaceVariant: '#FCE4B6' } }}
                     underlineStyle={{ borderColor: "#F3A405" }}
+                    autoCapitalize='none'
+                    autoCorrect={false}
                 />
             </>)
         } else { // can change status
@@ -38,12 +40,13 @@ const PrimaryInputText = ({ label, value, onChangeText, secureTextEntry = false,
                     label={label}
                     value={value}
                     onChangeText={onChangeHandle}
-                    
-                    disabled={status !='edit'}
+                    autoCapitalize='none'
+                    autoCorrect={false}
+                    disabled={status != 'edit'}
                     mode="flat"
                     theme={{ colors: { surfaceVariant: '#FCE4B6' } }}
                     underlineStyle={{ borderColor: "#F3A405" }}
-                    right={status =='edit' ? <TextInput.Icon icon="content-save" onPress={onPressEditIcon} /> : <TextInput.Icon icon="pencil" onPress={onPressSaveIcon} />}
+                    right={status == 'edit' ? <TextInput.Icon icon="content-save" onPress={onPressEditIcon} /> : <TextInput.Icon icon="pencil" onPress={onPressSaveIcon} />}
                 />
             </>)
         }

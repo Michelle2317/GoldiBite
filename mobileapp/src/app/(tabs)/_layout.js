@@ -1,13 +1,25 @@
 import { Tabs } from 'expo-router';
 import { Icon } from 'react-native-paper';
+import { useTheme } from '../../hooks/useTheme';
 
 export default function TabLayout() {
+	const { colorScheme } = useTheme();
+
+	const tabBarStyle =
+		colorScheme === 'light'
+			? { backgroundColor: '#FFC858' }
+			: { backgroundColor: '#000' };
+	const tabBarActiveTintColor =
+		colorScheme === 'light' ? '#fff' : '#FFC858';
+	const tabBarInactiveTintColor =
+		colorScheme === 'light' ? '#1C1B1F' : '#FFC858';
+
 	return (
 		<Tabs
 			screenOptions={{
-				tabBarActiveTintColor: '#fff',
-				tabBarInactiveTintColor: '#1C1B1F',
-				tabBarStyle: { backgroundColor: '#FFC858' },
+				tabBarActiveTintColor,
+				tabBarInactiveTintColor,
+				tabBarStyle,
 			}}
 		>
 			<Tabs.Screen
@@ -86,7 +98,7 @@ export default function TabLayout() {
 				name='setting'
 				options={{
 					title: 'Settings',
-          href:'setting',
+					href: 'setting',
 					headerShown: false,
 					tabBarIcon: ({ color, focused }) => (
 						<Icon

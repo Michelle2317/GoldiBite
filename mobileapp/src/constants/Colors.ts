@@ -8,6 +8,11 @@ const tintColorDark = "#fff";
 
 export const Colors = {
   light: {
+    navBar: {
+      backgroundColor: '#FFC858',
+      activeTintColor: '#FFFFFF',
+      inactiveTintColor: '#1C1B1F',
+    },
     "primary": "rgb(129, 85, 0)",
     "onPrimary": "rgb(255, 255, 255)",
     "primaryContainer": "rgb(255, 221, 178)",
@@ -69,6 +74,11 @@ export const Colors = {
   },
   
   dark: {
+    navBar: {
+      backgroundColor: '#000',
+      activeTintColor: '#FFC858',
+      inactiveTintColor: '#FFC858',
+    },
     "primary": "rgb(255, 185, 78)",
     "onPrimary": "rgb(69, 43, 0)",
     "primaryContainer": "rgb(98, 64, 0)",
@@ -85,7 +95,7 @@ export const Colors = {
     "onError": "rgb(105, 0, 5)",
     "errorContainer": "rgb(147, 0, 10)",
     "onErrorContainer": "rgb(255, 180, 171)",
-    "background": "rgb(31, 27, 22)",
+    "background": "#343434",
     "onBackground": "rgb(234, 225, 217)",
     "surface": "rgb(31, 27, 22)",
     "onSurface": "rgb(234, 225, 217)",

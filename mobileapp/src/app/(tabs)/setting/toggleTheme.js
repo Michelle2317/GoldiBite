@@ -7,9 +7,6 @@ const toggleTheme = () => {
 
   return (
     <View style={{ margin: 16 }}>
-      <Text variant="headlineSmall" style={{ marginVertical: 16 }}>
-        Settings
-      </Text>
       <Button icon="repeat" mode="outlined" onPress={toggleTheme}>
         Toggle Theme
       </Button>

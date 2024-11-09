@@ -86,6 +86,7 @@ export default function TabLayout() {
 				name='setting'
 				options={{
 					title: 'Settings',
+          href:'setting',
 					headerShown: false,
 					tabBarIcon: ({ color, focused }) => (
 						<Icon

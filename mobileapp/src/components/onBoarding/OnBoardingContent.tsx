@@ -10,14 +10,14 @@ const OnBoardingContent = ({ content, totalStep, language = "eng", back, next, s
             <ProgressBar progress={process} color="#00C9A2" style={{ backgroundColor: '#FFC858' }} />
         </View>
 
-        <Text variant="headlineMedium" >{content[language].title}</Text>
+        <Text variant="headlineLarge" style={{ fontWeight: 'bold' }}>{content[language].title}</Text>
         <Icon
             source={content.icon}
             color="#00C9A2"
             size={200}
 
         />
-        <Text variant="titleMedium" style={{ textAlign: "center" }} >{content[language].description}</Text>
+        <Text variant="titleLarge" style={{ textAlign: "center", fontWeight: 'bold' }} >{content[language].description}</Text>
 
         <View>
             <View  style={styles.buttonContainer}>

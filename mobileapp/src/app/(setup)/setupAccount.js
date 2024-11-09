@@ -68,7 +68,7 @@ const IconSection = () => {
     return (<>
 
         {/* Questionnaire View */}
-        <Text variant="headlineMedium" style={{ textAlign: "center", marginBottom: 30 }}>Select an Icon</Text>
+        <Text variant="headlineLarge" style={{ textAlign: "center", marginBottom: 30, fontWeight: 'bold' }}>Select an Icon</Text>
         <View style={styles.questionSelectorContainer}>
             <Image
                 source={require('@/assets/images/elements/user_icon1.png')}
@@ -98,7 +98,7 @@ const ProfileSection = () => {
     ];
     return (<>
 
-        <Text variant="headlineMedium" style={{ textAlign: "center", marginBottom: 30 }}>Create a Profile</Text>
+        <Text variant="headlineLarge" style={{ textAlign: "center", marginBottom: 30, fontWeight: 'bold' }}>Create a Profile</Text>
         <View style={styles.questionContainer}>
             <PrimaryInputText label="Nickname" value={nickname} onChangeText={setNickname} />
             <PrimaryInputText label="Age" value={age} onChangeText={setAge} />
@@ -124,7 +124,7 @@ const AllergiesSection = () => {
         "Fish", "Crustaceans and molluscs", "Sesame seeds", "Soy", "Sulphites", "Tree nuts", "Wheat and triticale"
     ]);
     return (<>
-        <Text variant="headlineMedium" style={{ textAlign: "center", marginBottom: 30 }}>Select Allergy</Text>
+        <Text variant="headlineLarge" style={{ textAlign: "center", marginBottom: 30, fontWeight: 'bold' }}>Select Allergy</Text>
         <View style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", gap: 10, width: 280 }}>
             {allergies && allergies.map((item, index) => {
                 return (<>
@@ -148,7 +148,7 @@ const EmergencySection = () => {
     const [relationship, setRelationship] = useState("")
     const [contactPhone, setContactPhone] = useState("")
     return (<>
-        <Text variant="headlineMedium" style={{ textAlign: "center", marginBottom: 30 }}>Emergency Contact</Text>
+        <Text variant="headlineLarge" style={{ textAlign: "center", marginBottom: 30, fontWeight: 'bold' }}>Emergency Contact</Text>
         <View style={styles.questionContainer}>
             <PrimaryInputText label="Emergency Contact" value={contact} onChangeText={setContact} />
             <PrimaryInputText label="Relationship" value={relationship} onChangeText={setRelationship} />

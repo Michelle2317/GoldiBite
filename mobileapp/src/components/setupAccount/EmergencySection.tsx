@@ -26,7 +26,7 @@ const EmergencySection = ({ profile, callback }) => {
         <View style={styles.questionContainer}>
             <PrimaryInputText label="Emergency Contact" value={profileInformation.emergency_contact_name} onChangeText={handleEmergencyContactNameOnChange} />
             <PrimaryInputText label="Relationship" value={profileInformation.emergency_relationship} onChangeText={handleEmergencyRelationshipOnChange} />
-            <PrimaryInputText label="contactPhone" value={profileInformation.emergency_contact_number} onChangeText={handleEmergencyContactNumberOnChange} />
+            <PrimaryInputText label="Contact Phone" value={profileInformation.emergency_contact_number} onChangeText={handleEmergencyContactNumberOnChange} />
         </View>
     </>)
 }

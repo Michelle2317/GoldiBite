@@ -1,57 +1,78 @@
-import React, { useState } from "react";
-import { View, StyleSheet, Image } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, StyleSheet, Image, TouchableHighlight } from "react-native";
 import { ProgressBar, Text } from 'react-native-paper';
 import PrimaryButton from "../../components/paperUiElement/PrimaryButton";
-import { PaperProvider } from 'react-native-paper';
-import { Dropdown } from 'react-native-paper-dropdown';
 import PrimaryInputText from "../../components/paperUiElement/PrimaryInputText"
 import { Chip } from 'react-native-paper';
+import UserStoreDataUtils from "../../utils/UserStoreDataUtils";
+import ProfileSection from '../../components/setupAccount/ProfileSection'
+import IconSection from '../../components/setupAccount/IconSection'
+import EmergencySection from '../../components/setupAccount/EmergencySection'
 
 import { useRouter } from "expo-router";
 
 const SetupAccount = () => {
     const router = useRouter();
-    
     const [step, setStep] = useState(1);
     const totalStep = 4
     const [process, setProcess] = useState(1)
+    const [profile, setProfile] = useState({});
+    const { getProfile, storeProfile, removeProfile } = UserStoreDataUtils();;
 
-    
+
+    useEffect(() => {
+
+        const getProfileData = async () => {
+            let storeData = await getProfile();
+            setProfile(storeData);
+        }
+        getProfileData();
+    }, []);
+    const onButtonPressHandles = () => {
+
+    }
+
     const handleBackBtn = () => {
-        if(step == 1) return;
+        if (step == 1) return;
         setStep(step - 1);
         setProcess((step - 1) / totalStep);
-        console.log(process)
     }
     const handleNextBtn = () => {
-        if(step == 4) router.replace('/(setup)/welcome'); ; // router to anther path
+        if (step == 4) router.replace('/(setup)/welcome');; // router to anther path
         setStep(step + 1);
         setProcess((step + 1) / totalStep);
-        console.log(process)
+    }
+
+    const updataPofile = async (data) => {
+        await storeProfile(JSON.stringify(data));
+        // storeData(getKey(), JSON.stringify(store.profile ))
+
+        let storeData = await getProfile();
+        setProfile(storeData);
     }
     return (<>
         <View style={styles.container}>
 
             <View style={styles.processBarContainer}>
-                <ProgressBar progress={ (step/totalStep) } color="#00C9A2" style={{ backgroundColor: '#FFC858' }} />
+                <ProgressBar progress={(step / totalStep)} color="#00C9A2" style={{ backgroundColor: '#FFC858' }} />
             </View>
 
             <View style={{ display: "flex", height: 500 }}>
                 {
-                    (step == 1) && <IconSection />
+                    (step == 1) && <IconSection profile={profile} callback={updataPofile}  />
                 }
                 {
-                    (step == 2) && <ProfileSection />
+                    (step == 2) && <ProfileSection profile={profile} callback={updataPofile} />
                 }
                 {
                     (step == 3) && <AllergiesSection />
                 }
                 {
-                    (step == 4) && <EmergencySection />
+                    (step == 4) && <EmergencySection profile={profile} callback={updataPofile}  />
                 }
             </View>
 
-            
+
 
             <View style={styles.buttonContainer}>
                 {/* Button Container */}
@@ -61,59 +82,6 @@ const SetupAccount = () => {
 
         </View>
 
-    </>)
-}
-
-const IconSection = () => {
-    return (<>
-
-        {/* Questionnaire View */}
-        <Text variant="headlineLarge" style={{ textAlign: "center", marginBottom: 30, fontWeight: 'bold' }}>Select an Icon</Text>
-        <View style={styles.questionSelectorContainer}>
-            <Image
-                source={require('@/assets/images/elements/user_icon1.png')}
-                style={{ width: 80, height: 80 }}
-            />
-            <Image
-                source={require('@/assets/images/elements/user_icon2.png')}
-                style={{ width: 80, height: 80 }}
-            />
-            <Image
-                source={require('@/assets/images/elements/user_icon3.png')}
-                style={{ width: 80, height: 80 }}
-            />
-        </View>
-    </>)
-}
-
-const ProfileSection = () => {
-    const [nickname, setNickname] = useState("")
-    const [gender, setGender] = useState("male")
-    const [age, setAge] = useState("")
-
-    const OPTIONS = [
-        { label: 'Male', value: 'male' },
-        { label: 'Female', value: 'female' },
-        { label: 'Other', value: 'other' },
-    ];
-    return (<>
-
-        <Text variant="headlineLarge" style={{ textAlign: "center", marginBottom: 30, fontWeight: 'bold' }}>Create a Profile</Text>
-        <View style={styles.questionContainer}>
-            <PrimaryInputText label="Nickname" value={nickname} onChangeText={setNickname} />
-            <PrimaryInputText label="Age" value={age} onChangeText={setAge} />
-
-           
-                <Dropdown
-                    label="Gender"
-                    placeholder="Select Gender"
-                    options={OPTIONS}
-                    value={gender}
-                    onSelect={setGender}
-                    hideMenuHeader={true}
-                    menuContentStyle={{ backgroundColor: "#FCE4B6" }}
-                />
-        </View>
     </>)
 }
 
@@ -140,21 +108,6 @@ const AllergiesSection = () => {
         </View>
     </>)
 
-}
-
-const EmergencySection = () => {
-
-    const [contact, setContact] = useState("")
-    const [relationship, setRelationship] = useState("")
-    const [contactPhone, setContactPhone] = useState("")
-    return (<>
-        <Text variant="headlineLarge" style={{ textAlign: "center", marginBottom: 30, fontWeight: 'bold' }}>Emergency Contact</Text>
-        <View style={styles.questionContainer}>
-            <PrimaryInputText label="Emergency Contact" value={contact} onChangeText={setContact} />
-            <PrimaryInputText label="Relationship" value={relationship} onChangeText={setRelationship} />
-            <PrimaryInputText label="contactPhone" value={contactPhone} onChangeText={setContactPhone} />
-        </View>
-    </>)
 }
 
 const styles = StyleSheet.create({

@@ -1,13 +1,25 @@
 import { View, StyleSheet } from 'react-native';
+import {useState, useEffect} from 'react'
 import { Text, IconButton } from 'react-native-paper';
-import { Role, useAuth } from '../../context/AuthContext';
+import UserStoreDataUtils from "../../utils/UserStoreDataUtils";
 
-const Header = ({ name = 'Kaylie'}) => {
-	const { authState } = useAuth();
+const Header = () => {
+
+    const { getProfileName } = UserStoreDataUtils();
+	const [name, setName] = useState(''); 
+
+	useEffect(()=>{
+		const getUsername = async ()=>{
+			const username = await getProfileName();
+			setName(username);
+		}
+		getUsername();
+	}, [])
+
 	return (
 		<View style={styles.container}>
 			<Text variant='titleMedium' style={styles.text}>
-				Hello {authState?.role},
+				Hello {name},
 			</Text>
 			<View style={styles.buttonContainer}>
 				<IconButton

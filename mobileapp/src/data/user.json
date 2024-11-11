@@ -79,5 +79,32 @@
             "isAllowNotifications": true,
             "timeSensitiveNotifications": true
         }
+    },
+    {
+        "id": 4,
+        "email": "c",
+        "password": "c",
+        "icon": "a",
+        "isSetupProfile": false,
+        "profile": {
+            "name": "",
+            "gender": "",
+            "age": null
+        },
+        "allergy": [
+            "dairy",
+            "Nuts"
+        ],
+        "emergencyContact": {
+            "name": "",
+            "relationship": "",
+            "phoneNumber": ""
+        },
+        "setting": {
+            "language": "eng",
+            "location": "",
+            "isAllowNotifications": true,
+            "timeSensitiveNotifications": true
+        }
     }
 ]

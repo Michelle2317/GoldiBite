@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Image, View, StyleSheet } from "react-native";
 import PrimaryButton from "../../components/paperUiElement/PrimaryButton";
 import { ProgressBar, Text} from 'react-native-paper';

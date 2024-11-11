@@ -1,12 +1,24 @@
 import { View, StyleSheet } from 'react-native';
+import {useState, useEffect} from 'react'
 import UserToolBar from '@/src/components/homePage/UserToolBar';
 import HomePageCards from '@/src/components/homePage/HomePageCards';
 import { useNavigation } from '@react-navigation/native';
+import UserStoreDataUtils from "../../utils/UserStoreDataUtils";
 
 export default function Index() {
-	const name = 'Kaylie';
+
+    const { getProfileName } = UserStoreDataUtils();
+
+	const [name, setName] = useState(''); 
 	const navigation = useNavigation();
 
+	useEffect(()=>{
+		const getUsername = async ()=>{
+			const username = await getProfileName();
+			setName(username);
+		}
+		getUsername();
+	}, [])
 	return (
 		<View style={styles.container}>
 			<UserToolBar name={name} />

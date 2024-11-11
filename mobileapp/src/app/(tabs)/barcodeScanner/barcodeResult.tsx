@@ -23,9 +23,6 @@ console.log(barcode);
         // Make sure to include these imports:
         // import { GoogleGenerativeAI } from "@google/generative-ai";
         const EXPO_PUBLIC_GOOGLE_GEMINE_API_KEY = process.env.EXPO_PUBLIC_GOOGLE_GEMINE_API_KEY;
-
-
-        console.log(EXPO_PUBLIC_GOOGLE_GEMINE_API_KEY)
         const genAI = new GoogleGenerativeAI(EXPO_PUBLIC_GOOGLE_GEMINE_API_KEY);
         const model = genAI.getGenerativeModel(
             {

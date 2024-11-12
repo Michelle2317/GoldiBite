@@ -10,33 +10,33 @@ import UserStoreDataUtils from "../../../utils/UserStoreDataUtils";
 
 const profileView = () => {
     const router = useRouter();
-    const { getProfile, storeProfile, removeProfile } = UserStoreDataUtils();
+    const { getProfile, storeProfile } = UserStoreDataUtils();
     const [profile, setProfile] = useState({});
 
+    const LANGUAGE_OPTIONS = [{ label: 'English', value: 'English' }];
+    const LOCATION_OPTIONS = [
+        { label: 'NL', value: 'Newfoundland and Labrador' },
+        { label: 'PE', value: 'Prince Edward Island' },
+        { label: 'NB', value: 'New Brunswick' },
+        { label: 'QC', value: 'Quebec' },
+        { label: 'QN', value: 'Ontario' },
+        { label: 'MB', value: 'Manitoba' },
+        { label: 'SK', value: 'Saskatchewan' },
+        { label: 'AB', value: 'Alberta' },
+        { label: 'BC', value: 'British Columbia' },
+    ]
     useEffect(() => {
-
         const getProfileData = async () => {
             let storeData = await getProfile();
+            if(!storeData.location) storeData.location = '';
+            if(!storeData.language) storeData.language = '';
             setProfile(storeData);
-            console.log(storeData);
-            console.log(storeData.icon.source);
+            
         }
         getProfileData();
     }, []);
 
-    const OPTIONS = [
-        { label: 'Male', value: 'male' },
-        { label: 'Female', value: 'female' },
-        { label: 'Other', value: 'other' },
-    ];
-    let age_range = []
-    for (let i = 1; i <= 100; i++) {
-        age_range.push({ label: i.toString(), value: i.toString() });
-    }
-    const AGE_OPTIONS = age_range;
-
     const handleBackBtn = () => {
-        
         const storeData = async () => {
             await storeProfile(JSON.stringify(profile));
           }
@@ -44,49 +44,40 @@ const profileView = () => {
         router.back();
     }
 
-
-    const handleUsernameOnChange = (e) => {
-        setProfile({ ...profile, 'username': e });
+    const handleLanguageOnChange = (e) => {
+        setProfile({ ...profile, 'language': e });
     }
 
-    const handleAgeOnChange = (e) => {
-        setProfile({ ...profile, 'age': e });
+    const handleLocationOnChange = (e) => {
+        setProfile({ ...profile, 'location': e });
     }
-    const handleGenderOnChange = (e) => {
-        setProfile({ ...profile, 'gender': e });
-    }
+
+    
+
     return (<>
         <View style={styles.container}>
             <View style={styles.profileContainer}>
-{/* 
-                <Image
-                    source={profile.icon.source}
-                    style={{ width: 130, height: 130, alignSelf: "center" }}
-                />  */}
 
                 <View style={styles.questionContainer}>
-                    <PrimaryInputText label="Nickname" value={profile.username} onChangeText={handleUsernameOnChange} />
-
                     <Dropdown
-                        label="Age"
-                        placeholder="Select Age"
-                        options={AGE_OPTIONS}
-                        value={profile.age}
-                        onSelect={handleAgeOnChange}
+                        label="Language"
+                        placeholder="Select language"
+                        options={LANGUAGE_OPTIONS}
+                        value={profile.language}
+                        onSelect={handleLanguageOnChange}
                         hideMenuHeader={true}
                         menuContentStyle={{ backgroundColor: "#FCE4B6" }}
                     />
 
                     <Dropdown
-                        label="Gender"
-                        placeholder="Select Gender"
-                        options={OPTIONS}
-                        value={profile.gender}
-                        onSelect={handleGenderOnChange}
+                        label="Location"
+                        placeholder="Select location"
+                        options={LOCATION_OPTIONS}
+                        value={profile.location}
+                        onSelect={handleLocationOnChange}
                         menuContentStyle={{ backgroundColor: "#FCE4B6" }}
                         hideMenuHeader={true}
                     />
-
                     <PrimaryButton buttonText="Save" callback={handleBackBtn} />
                 </View>
             </View>

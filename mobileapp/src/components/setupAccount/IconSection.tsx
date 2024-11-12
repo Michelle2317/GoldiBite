@@ -31,10 +31,12 @@ const IconSection = ({ profile, callback }) => {
         let iconList = [];
         icons.map(icon => {
             if (icon.name == name && icon.value == value) {
+                console.log(icon.source)
                 iconList.push({ name: icon.name, value: icon.value, selected: true, source: icon.source })
                 setIsCallCallback(true)
                 setProfileInformation({ ...profileInformation, icon: icon });
             } else {
+                console.log(icon.source)
                 iconList.push({ name: icon.name, value: icon.value, selected: false, source: icon.source })
             }
         })

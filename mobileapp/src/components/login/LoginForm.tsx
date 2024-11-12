@@ -12,26 +12,28 @@ const LoginForm = ({ callback }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-	const { onLogin } = useAuth();
-    
-	const onSignInPress = async () => {
-		await onLogin!(email, password);
-	};
+    const { onLogin } = useAuth();
+
+    const onSignInPress = async () => {
+        await onLogin!(email, password);
+    };
     return (<>
         <PrimaryInputText label="Email" value={email} onChangeText={setEmail} />
         <PrimaryInputText label="Password" value={password} onChangeText={setPassword} secureTextEntry={true} />
-        <InTextButton butonText=" Forget Password?" callback={() => console.log('Pressed')} style={{ alignSelf: 'self-start' }} />
+        <View style={{height:28}}>
+            <InTextButton butonText=" Forget Password?" callback={() => console.log('Pressed')} style={{ alignSelf: 'self-start' }} />
+        </View>
         <Button mode="contained" onPress={onSignInPress} theme={{ colors: { onPrimary: '#000000', primary: 'rgba(213,203,68, 0.7)' } }} >
             Login
         </Button>
         <Text variant="labelMedium" style={{ alignSelf: 'center', marginBottom: 50 }}>
             Don't have an account? <InTextButton butonText="Sign up" callback={callback} /></Text>
 
-       
+
         <Image
-                source={require('@/assets/images/elements/Sign-in-with.png')}
-                style={{ width: 320, height:28, alignSelf: "center" }}
-            />
+            source={require('@/assets/images/elements/Sign-in-with.png')}
+            style={{ width: 320, height: 28, alignSelf: "center" }}
+        />
         <View style={styles.socialMediaLoginContainer}>
             <IconButton
                 icon="google"
@@ -76,7 +78,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         gap: 10
     },
-    textBoxContainer:{
+    textBoxContainer: {
         width: '100%',
         textAlign: "center",
         borderBottomColor: '#0FF',
@@ -84,8 +86,8 @@ const styles = StyleSheet.create({
         lineHeight: 0.1,
         backgroundColor: '#FF0'
     },
-    textBox:{
-        backgroundColor: 'rgb(250, 241, 228)', 
+    textBox: {
+        backgroundColor: 'rgb(250, 241, 228)',
         fontSize: 22, fontWeight: "bold"
     }
 

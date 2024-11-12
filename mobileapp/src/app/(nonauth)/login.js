@@ -29,19 +29,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'column',
-        justifyContent: 'center',
+        justifyContent: "flex-start",
         padding: 20,
-        gap: 10
-    },
-    contentContainer: {
-        flex: 1,
-        padding: 36,
-        alignItems: 'center',
-        backgroundColor: "#FAF1E4"
-    },
-    socialMediaLoginContainer: {
-        flexDirection: 'row',
-        justifyContent: 'center',
+        paddingTop:180,
         gap: 10
     }
 });

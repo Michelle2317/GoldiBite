@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }: any) => {
 				role: Role.ADMIN
 			});
 		} else {
-			alert('Invalid username or password!');
+			alert('Invalid email or password!');
 		}
 	};
 

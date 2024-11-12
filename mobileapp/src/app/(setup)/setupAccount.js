@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, Image, TouchableHighlight } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { ProgressBar, Text } from 'react-native-paper';
 import PrimaryButton from "../../components/paperUiElement/PrimaryButton";
-import PrimaryInputText from "../../components/paperUiElement/PrimaryInputText"
-import { Chip } from 'react-native-paper';
 import UserStoreDataUtils from "../../utils/UserStoreDataUtils";
 import ProfileSection from '../../components/setupAccount/ProfileSection'
 import IconSection from '../../components/setupAccount/IconSection'
 import EmergencySection from '../../components/setupAccount/EmergencySection'
+import AllergiesSection from '../../components/setupAccount/AllergiesSection'
 
 import { useRouter } from "expo-router";
 
@@ -17,7 +16,7 @@ const SetupAccount = () => {
     const totalStep = 4
     const [process, setProcess] = useState(1)
     const [profile, setProfile] = useState({});
-    const { getProfile, storeProfile, removeProfile } = UserStoreDataUtils();;
+    const { getProfile, storeProfile, removeProfile } = UserStoreDataUtils();
 
 
     useEffect(() => {
@@ -28,9 +27,6 @@ const SetupAccount = () => {
         }
         getProfileData();
     }, []);
-    const onButtonPressHandles = () => {
-
-    }
 
     const handleBackBtn = () => {
         if (step == 1) return;
@@ -59,16 +55,16 @@ const SetupAccount = () => {
 
             <View style={{ display: "flex", height: 500 }}>
                 {
-                    (step == 1) && <IconSection profile={profile} callback={updataPofile}  />
+                    (step == 1) && <IconSection profile={profile} callback={updataPofile} />
                 }
                 {
                     (step == 2) && <ProfileSection profile={profile} callback={updataPofile} />
                 }
                 {
-                    (step == 3) && <AllergiesSection />
+                    (step == 3) && <AllergiesSection profile={profile} callback={updataPofile} />
                 }
                 {
-                    (step == 4) && <EmergencySection profile={profile} callback={updataPofile}  />
+                    (step == 4) && <EmergencySection profile={profile} callback={updataPofile} />
                 }
             </View>
 
@@ -83,31 +79,6 @@ const SetupAccount = () => {
         </View>
 
     </>)
-}
-
-const AllergiesSection = () => {
-
-    const [allergies, setAllergies] = useState([
-        "Eggs", "Milk", "Mustard", "Peanuts",
-        "Fish", "Crustaceans and molluscs", "Sesame seeds", "Soy", "Sulphites", "Tree nuts", "Wheat and triticale"
-    ]);
-    return (<>
-        <Text variant="headlineLarge" style={{ textAlign: "center", marginBottom: 30, fontWeight: 'bold' }}>Select Allergy</Text>
-        <View style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", gap: 10, width: 280 }}>
-            {allergies && allergies.map((item, index) => {
-                return (<>
-                    <Chip key={index} theme={{ colors: { secondaryContainer: '#FFC858' } }}
-                        mode='flat'
-                        onPress={() => console.log('Pressed')}
-                        selected={index % 2}>
-                        {item}
-                    </Chip>
-                </>)
-            })
-            }
-        </View>
-    </>)
-
 }
 
 const styles = StyleSheet.create({

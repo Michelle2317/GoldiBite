@@ -46,8 +46,6 @@ export default function UserStoreDataUtils() {
     const getProfileName = async () => {
         try {
             const profile = await getProfile(); 
-            console.log(profile.username);
-            //return '';
             return profile.username;
         } catch (error) {
             console.error(e.message)

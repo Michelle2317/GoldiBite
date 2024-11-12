@@ -5,43 +5,70 @@ import { Text, } from 'react-native-paper';
 import PrimaryButton from '../../../components/paperUiElement/PrimaryButton';
 import { Chip } from 'react-native-paper';
 import { useRouter } from "expo-router";
+import UserStoreDataUtils from "../../../utils/UserStoreDataUtils";
 
 const allergy = () => {
     const router = useRouter();
-
-    const [nickname, setNickname] = useState('Kaylic Sanchez');
-    const [gender, setGender] = useState('male');
-    const [age, setAge] = useState('21');
-
+    const { getProfile, storeProfile } = UserStoreDataUtils();
+    const [profile, setProfile] = useState({});
+    const [selectedAllergies, setSelectedAllergies] = useState([])
 
     const [allergies, setAllergies] = useState([
         "Eggs", "Milk", "Mustard", "Peanuts",
         "Fish", "Crustaceans and molluscs", "Sesame seeds", "Soy", "Sulphites", "Tree nuts", "Wheat and triticale"
     ]);
+
+    useEffect(() => {
+        const getProfileData = async () => {
+            let storeData = await getProfile();
+            setProfile(storeData);
+            setSelectedAllergies(storeData.allergies)
+        }
+        getProfileData();
+    }, []);
+
+
     const handleBackBtn = () => {
-        //router.replace('/(tabs)/setting/Home')
+        const storeData = async () => {
+
+            await storeProfile(JSON.stringify(profile));
+        }
+        storeData()
         router.back();
+    }
+
+    useEffect(() => {
+        setProfile({ ...profile, allergies: selectedAllergies });
+    }, [selectedAllergies]);
+
+    const handleAllergyOnPress = (e, allergy) => {
+        if (!selectedAllergies) {
+            setSelectedAllergies([allergy])
+        } else if (selectedAllergies.indexOf(allergy) >= 0) { //remove the item
+            setSelectedAllergies(selectedAllergies.filter((item) => item != allergy))
+        } else {
+            setSelectedAllergies([...selectedAllergies, allergy])
+        }
     }
     return (<>
         <View style={styles.container}>
-            <View style={styles.profileContainer}>
 
-                <Image
-                    source={require('@/assets/images/elements/user_icon1.png')}
-                    style={{ width: 130, height: 130, alignSelf: "center" }}
-                />
-                <Text variant="titleMedium" style={{ alignSelf: "center" }}>Kaylie1333</Text>
-                <Text variant="bodyMedium" style={{ alignSelf: "center", marginBottom: 80 }}>kayliecca113@gmail.com</Text>
+               
+                <Text variant="titleMedium" style={{ alignSelf: "center", paddingLeft:20, paddingRight:20, textAlign:'center', marginBottom:10 }}>
+                Have a new allergen or selected something wrong, edit below!
+                </Text>
 
                 <View style={styles.questionContainer}>
-                    <View style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", gap: 20, width: 280 }}>
+                    <View style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", gap: 10, paddingLeft:20, paddingRight:20 }}>
 
                         {allergies && allergies.map((item, index) => {
+                            const selected = selectedAllergies && selectedAllergies.indexOf(item) >= 0;
+                            const color = selected ? '#FFC858' : '#FCE4B6'
                             return (<>
-                                <Chip key={index} theme={{ colors: { secondaryContainer: '#FFC858' } }}
-                                    mode='flat'
-                                    onPress={() => console.log('Pressed')}
-                                    selected={index % 2}>
+                                <Chip key={index} theme={{ colors: { secondaryContainer: color } }}
+                                    mode='flat' showSelectedCheck={false}
+                                    onPress={(e) => handleAllergyOnPress(e, item)}
+                                    selected={selected}>
                                     {item}
                                 </Chip>
                             </>)
@@ -50,7 +77,6 @@ const allergy = () => {
                     </View>
                     <PrimaryButton buttonText="Save" callback={handleBackBtn} />
                 </View>
-            </View>
         </View>
     </>)
 }

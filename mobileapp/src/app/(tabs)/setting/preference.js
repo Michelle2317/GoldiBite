@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
 import { View, StyleSheet, Image } from "react-native";
-import { Text, } from 'react-native-paper';
-import PrimaryInputText from '../../../components/paperUiElement/PrimaryInputText';
-import { Dropdown } from 'react-native-paper-dropdown';
-import PrimaryButton from '../../../components/paperUiElement/PrimaryButton';
+import PrimaryButton from '@/src/components/paperUiElement/PrimaryButton';
 import { useRouter } from "expo-router";
-import UserStoreDataUtils from "../../../utils/UserStoreDataUtils";
+import UserStoreDataUtils from "@/src/utils/UserStoreDataUtils";
+import PaperUIDropdown from '@/src/components/paperUiElement/PaperUIDropdown'
 
 const profileView = () => {
     const router = useRouter();
@@ -15,23 +13,23 @@ const profileView = () => {
 
     const LANGUAGE_OPTIONS = [{ label: 'English', value: 'English' }];
     const LOCATION_OPTIONS = [
-        { label: 'NL', value: 'Newfoundland and Labrador' },
-        { label: 'PE', value: 'Prince Edward Island' },
-        { label: 'NB', value: 'New Brunswick' },
-        { label: 'QC', value: 'Quebec' },
-        { label: 'QN', value: 'Ontario' },
-        { label: 'MB', value: 'Manitoba' },
-        { label: 'SK', value: 'Saskatchewan' },
-        { label: 'AB', value: 'Alberta' },
-        { label: 'BC', value: 'British Columbia' },
+        { value: 'NL', label: 'Newfoundland and Labrador' },
+        { value: 'PE', label: 'Prince Edward Island' },
+        { value: 'NB', label: 'New Brunswick' },
+        { value: 'QC', label: 'Quebec' },
+        { value: 'QN', label: 'Ontario' },
+        { value: 'MB', label: 'Manitoba' },
+        { value: 'SK', label: 'Saskatchewan' },
+        { value: 'AB', label: 'Alberta' },
+        { value: 'BC', label: 'British Columbia' },
     ]
     useEffect(() => {
         const getProfileData = async () => {
             let storeData = await getProfile();
-            if(!storeData.location) storeData.location = '';
-            if(!storeData.language) storeData.language = '';
+            if (!storeData.location) storeData.location = '';
+            if (!storeData.language) storeData.language = '';
             setProfile(storeData);
-            
+
         }
         getProfileData();
     }, []);
@@ -39,8 +37,8 @@ const profileView = () => {
     const handleBackBtn = () => {
         const storeData = async () => {
             await storeProfile(JSON.stringify(profile));
-          }
-          storeData()
+        }
+        storeData()
         router.back();
     }
 
@@ -52,32 +50,15 @@ const profileView = () => {
         setProfile({ ...profile, 'location': e });
     }
 
-    
+
 
     return (<>
         <View style={styles.container}>
             <View style={styles.profileContainer}>
 
                 <View style={styles.questionContainer}>
-                    <Dropdown
-                        label="Language"
-                        placeholder="Select language"
-                        options={LANGUAGE_OPTIONS}
-                        value={profile.language}
-                        onSelect={handleLanguageOnChange}
-                        hideMenuHeader={true}
-                        menuContentStyle={{ backgroundColor: "#FCE4B6" }}
-                    />
-
-                    <Dropdown
-                        label="Location"
-                        placeholder="Select location"
-                        options={LOCATION_OPTIONS}
-                        value={profile.location}
-                        onSelect={handleLocationOnChange}
-                        menuContentStyle={{ backgroundColor: "#FCE4B6" }}
-                        hideMenuHeader={true}
-                    />
+                    <PaperUIDropdown label="Language" placeholder="Select language" option={LANGUAGE_OPTIONS} value={profile.language} callback={handleLanguageOnChange} />
+                    <PaperUIDropdown label="Location" placeholder="Select location" option={LOCATION_OPTIONS} value={profile.location} callback={handleLocationOnChange} />
                     <PrimaryButton buttonText="Save" callback={handleBackBtn} />
                 </View>
             </View>

@@ -2,8 +2,6 @@ import { Button, Text } from "react-native-paper";
 
 const InTextBtn = ({butonText, callback, style  }) => {
     const onPressHandle = ()=>{
-        console.log('test')
-        console.log(callback)
         callback();
     }
     return (<> 

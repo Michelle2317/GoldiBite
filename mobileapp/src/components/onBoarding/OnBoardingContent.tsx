@@ -21,8 +21,8 @@ const OnBoardingContent = ({ content, totalStep, language = "eng", back, next, s
 
         <View>
             <View  style={styles.buttonContainer}>
-                <PrimaryButton buttonText={"Back"} callback={back} type="secondary" styles={{ alignSelf: "flex-start", display: (content.step == 1 ? "none" : "flex") }} />
-                <PrimaryButton buttonText={"Next"} callback={next} styles={{ alignSelf: "flex-end" }} />
+            <PrimaryButton buttonText={"Next"} callback={next}  />
+                <PrimaryButton buttonText={"Back"} callback={back} type="secondary" styles={{  display: (content.step == 1 ? "none" : "flex") }} />
             </View>
             <View style={styles.skipButtonContainer}>
                 <Button mode="text" theme={skipTheme} onPress={skip} style={styles.skipButtonStyle} labelStyle={styles.skipButtonLabelStyle}>Skip</Button>
@@ -47,16 +47,16 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         width: 300,
-        flexDirection: 'row',
+        flexDirection: 'row-reverse',
         justifyContent: 'space-between',
     },
     skipButtonContainer: {
         width: 300,
-        flexDirection: 'row',
-        justifyContent: 'flex-end',
+        flexDirection: 'row-reverse',
+        justifyContent: 'space-between',
     },
     skipButtonStyle:{
-        marginRight:11
+        marginHorizontal:7
     },
     skipButtonLabelStyle:{
         textDecorationLine:"underline"

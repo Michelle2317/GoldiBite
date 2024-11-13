@@ -51,6 +51,7 @@ export const Colors = {
       "level3": "rgb(241, 233, 227)",
       "level4": "rgb(240, 231, 224)",
       "level5": "rgb(237, 228, 219)"
+      
     },
     "surfaceDisabled": "rgba(31, 27, 22, 0.12)",
     "onSurfaceDisabled": "rgba(31, 27, 22, 0.38)",

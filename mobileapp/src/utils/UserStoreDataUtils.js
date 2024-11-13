@@ -7,7 +7,7 @@ export default function UserStoreDataUtils() {
     const getProfileId = () => {
         if (authState.username != null) {
             const key = `profile_${authState.username}`
-            //console.log(`key: ${key}`)
+            console.log(`key: ${key}`)
             return key;
         } else {
             return '';
@@ -52,5 +52,14 @@ export default function UserStoreDataUtils() {
         }
     }
 
-    return { getProfile, storeProfile, removeProfile, getProfileName}
+    const getProfileIcon = async () => {
+        try {
+            const profile = await getProfile(); 
+            return profile.icon;
+        } catch (error) {
+            console.error(e.message)
+        }
+    }
+
+    return { getProfile, storeProfile, removeProfile, getProfileIcon, getProfileName}
 }

@@ -18,6 +18,7 @@ import merge from "deepmerge";
 
 import { Colors } from "../constants/Colors";
 import { AuthProvider, useAuth } from '../context/AuthContext';
+import UserStoreDataUtils from "@/src/utils/UserStoreDataUtils";
 
 const customDarkTheme = { ...MD3DarkTheme, colors: Colors.dark };
 const customLightTheme = { ...MD3LightTheme, colors: Colors.light };
@@ -42,6 +43,7 @@ export function RootLayout() {
 
   const [initializing, setInitializing] = useState(true);
   const router = useRouter();
+  const { getProfile } = UserStoreDataUtils();
 
   useEffect(() => {
 
@@ -54,15 +56,19 @@ export function RootLayout() {
     console.log(segments[0])
     console.log(inAuthGroup)
     if (!authState?.authenticated) {
-      console.log("onBoarding")
       router.replace('(onBoarding)/onBoarding')
+
       //router.replace('/(setup)/welcome');
       //router.replace('/(setup)/setupAccount');
       //router.replace('/(nonauth)/login');
       //router.replace('/(tabs)/setting/profileView') 
 
     } else {
-      router.replace('/(setup)/setupAccount')
+      const profile = getProfile();
+      if (!profile)
+        router.replace('/(setup)/setupAccount')
+      else
+        router.replace('(tabs)/')
       console.log("login")
       //router.replace('/(setup)/setupAccount');
       //router.replace('(tabs)')

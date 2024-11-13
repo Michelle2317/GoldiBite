@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { View, StyleSheet, Image, TouchableHighlight } from "react-native";
 import { Text } from 'react-native-paper';
+import UserStoreDataUtils from "../../utils/UserStoreDataUtils";
 
 const IconSection = ({ profile, callback }) => {
     const [profileInformation, setProfileInformation] = useState({ ...profile });
     const [isCallCallback, setIsCallCallback] = useState(false);
+    const { getProfile, storeProfile, getProfileIcon } = UserStoreDataUtils();
 
     const [icons, setIcons] = useState(
         [
@@ -27,14 +29,14 @@ const IconSection = ({ profile, callback }) => {
                 source: require('@/assets/images/elements/user_icon3.png')
             }]);
     const handleOnPress = (element, name, value) => {
-
+        const profile = getProfile();
         let iconList = [];
         icons.map(icon => {
             if (icon.name == name && icon.value == value) {
                 console.log(icon.source)
                 iconList.push({ name: icon.name, value: icon.value, selected: true, source: icon.source })
                 setIsCallCallback(true)
-                setProfileInformation({ ...profileInformation, icon: icon });
+                setProfileInformation({ ...profile, icon: icon });
             } else {
                 console.log(icon.source)
                 iconList.push({ name: icon.name, value: icon.value, selected: false, source: icon.source })
@@ -45,26 +47,33 @@ const IconSection = ({ profile, callback }) => {
 
 
     useEffect(() => {
-        const selectedIcon = profileInformation.icon;
-        console.log('45' + profileInformation)
-        console.log('46' + selectedIcon)
-        let iconList = [];
-        icons.map(icon => {
-            if (selectedIcon == undefined) {
-                iconList.push({ name: icon.name, value: icon.value, selected: false, source: icon.source })
-            } else if (icon.name == selectedIcon.name && icon.value == selectedIcon.value) {
-                iconList.push({ name: icon.name, value: icon.value, selected: true, source: icon.source })
-                setIsCallCallback(true)
-                setIsCallCallback(true)
-            } else {
-                iconList.push({ name: icon.name, value: icon.value, selected: false, source: icon.source })
-            }
-        })
-        setIcons(iconList);
+        const getProfileData = async () => {
+            let storeData = await getProfileIcon();
+            setProfileInformation(storeData);
+
+            console.log('45' + storeData.name)
+            console.log('45' + storeData.value)
+            console.log('45' + storeData.source)
+            let iconList = [];
+            icons.map(icon => {
+                if (storeData == undefined) {
+                    iconList.push({ name: icon.name, value: icon.value, selected: false, source: icon.source })
+                } else if (icon.name == storeData.name && icon.value == storeData.value) {
+                    iconList.push({ name: icon.name, value: icon.value, selected: true, source: icon.source })
+                    setIsCallCallback(true)
+                } else {
+                    iconList.push({ name: icon.name, value: icon.value, selected: false, source: icon.source })
+                }
+            })
+            setIcons(iconList);
+        }
+        getProfileData();
+
+
     }, []);
 
     useEffect(() => {
-        if(isCallCallback)  callback(profileInformation);
+        if (isCallCallback) callback(profileInformation);
     }, [profileInformation]);
 
     return (<>

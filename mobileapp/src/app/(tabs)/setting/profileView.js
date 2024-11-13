@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
 import { View, StyleSheet, Image } from "react-native";
-import { Text, } from 'react-native-paper';
-import PrimaryInputText from '../../../components/paperUiElement/PrimaryInputText';
-import { Dropdown } from 'react-native-paper-dropdown';
-import PrimaryButton from '../../../components/paperUiElement/PrimaryButton';
+import PrimaryInputText from '@/src/components/paperUiElement/PrimaryInputText';
+import PrimaryButton from '@/src/components/paperUiElement/PrimaryButton';
 import { useRouter } from "expo-router";
-import UserStoreDataUtils from "../../../utils/UserStoreDataUtils";
+import UserStoreDataUtils from "@/src/utils/UserStoreDataUtils";
+import PaperUIDropdown from '@/src/components/paperUiElement/PaperUIDropdown'
 
 const profileView = () => {
     const router = useRouter();
@@ -67,25 +66,9 @@ const profileView = () => {
                 <View style={styles.questionContainer}>
                     <PrimaryInputText label="Nickname" value={profile.username} onChangeText={handleUsernameOnChange} />
 
-                    <Dropdown
-                        label="Age"
-                        placeholder="Select Age"
-                        options={AGE_OPTIONS}
-                        value={profile.age}
-                        onSelect={handleAgeOnChange}
-                        hideMenuHeader={true}
-                        menuContentStyle={{ backgroundColor: "#FCE4B6" }}
-                    />
-
-                    <Dropdown
-                        label="Gender"
-                        placeholder="Select Gender"
-                        options={OPTIONS}
-                        value={profile.gender}
-                        onSelect={handleGenderOnChange}
-                        menuContentStyle={{ backgroundColor: "#FCE4B6" }}
-                        hideMenuHeader={true}
-                    />
+                    <PaperUIDropdown label="Age" placeholder="Select age" option={AGE_OPTIONS} value={profile.age} callback={handleAgeOnChange} />
+            <PaperUIDropdown label="Gender" placeholder="Select gender" option={OPTIONS} value={profile.gender} callback={handleGenderOnChange} />
+                  
 
                     <PrimaryButton buttonText="Save" callback={handleBackBtn} />
                 </View>

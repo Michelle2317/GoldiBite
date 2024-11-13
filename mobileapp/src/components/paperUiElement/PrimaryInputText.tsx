@@ -1,6 +1,9 @@
 import { TextInput } from "react-native-paper";
 import { useState } from "react";
+import { useTheme } from '@react-navigation/native';
+
 const PrimaryInputText = ({ label, value, onChangeText, secureTextEntry = false, initialState = 'edit' }) => {
+    const { colors } = useTheme();
 
     const [isShowText, setShowText] = useState(!secureTextEntry);
     const [status, setStatus] = useState(initialState);
@@ -21,15 +24,15 @@ const PrimaryInputText = ({ label, value, onChangeText, secureTextEntry = false,
         setStatus('edit')
     }
     if (!secureTextEntry) {
-        if (initialState !== 'label') {
+        if (initialState !== 'label') {  //F3A405
             return (<>
                 <TextInput
                     label={label}
                     value={value}
                     onChangeText={onChangeHandle}
                     mode="flat"
-                    theme={{ colors: { surfaceVariant: '#FCE4B6' } }}
-                    underlineStyle={{ borderColor: "#F3A405" }}
+                    theme={{ colors: colors.mode=="dark"?{surfaceVariant: '#000000' }:{surfaceVariant: '#FCE4B6' } }}
+                    underlineStyle={ { borderColor: "#F3A405" }}
                     autoCapitalize='none'
                     autoCorrect={false}
                 />
@@ -44,7 +47,7 @@ const PrimaryInputText = ({ label, value, onChangeText, secureTextEntry = false,
                     autoCorrect={false}
                     disabled={status != 'edit'}
                     mode="flat"
-                    theme={{ colors: { surfaceVariant: '#FCE4B6' } }}
+                    theme={{ colors: colors.mode=="dark"?{surfaceVariant: '#000000' }:{surfaceVariant: '#FCE4B6' } }}
                     underlineStyle={{ borderColor: "#F3A405" }}
                     right={status == 'edit' ? <TextInput.Icon icon="content-save" onPress={onPressEditIcon} /> : <TextInput.Icon icon="pencil" onPress={onPressSaveIcon} />}
                 />
@@ -58,7 +61,7 @@ const PrimaryInputText = ({ label, value, onChangeText, secureTextEntry = false,
                 secureTextEntry={!isShowText}
                 onChangeText={onChangeHandle}
                 mode="flat"
-                theme={{ colors: { surfaceVariant: '#FCE4B6' } }}
+                    theme={{ colors: colors.mode=="dark"?{surfaceVariant: '#000000' }:{surfaceVariant: '#FCE4B6' } }}
                 underlineStyle={{ borderColor: "#F3A405" }}
                 right={isShowText ? <TextInput.Icon icon="eye-off" onPress={onPressIcon} /> : <TextInput.Icon icon="eye" onPress={onPressIcon} />}
             />

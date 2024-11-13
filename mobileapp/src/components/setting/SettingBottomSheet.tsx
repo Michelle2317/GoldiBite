@@ -4,6 +4,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 import TouchableButton from "./TouchableButton"
 import ToggleTheme from './ToggleTheme';
+import { useTheme } from '@react-navigation/native';
 
 const SettingBottomSheet = () => {
     // variables
@@ -14,18 +15,20 @@ const SettingBottomSheet = () => {
     const handleSheetChanges = useCallback((index) => {
         console.log('handleSheetChanges', index);
     }, [])
-
+    const { colors } = useTheme();
+    const containBackgroundColor =  colors.background;  
+const bottomSheetBackgroundColor =  colors.mode=="dark"? "#6A6A6A":"FCE4B6";  
     return (<>
-        <GestureHandlerRootView style={styles.bottomSheetContainer}>
+        <GestureHandlerRootView style={{...styles.bottomSheetContainer, backgroundColor:containBackgroundColor}}>
             <BottomSheet
                 ref={bottomSheetRef}
                 onChange={handleSheetChanges}
                 enableDynamicSizing={false}
                 enableOverDrag={false}
                 snapPoints={snapPoints}
-                handleStyle={{ backgroundColor: "#FCE4B6", borderTopLeftRadius: 15, borderTopRightRadius: 15 }}
+                handleStyle={{ backgroundColor: bottomSheetBackgroundColor, borderTopLeftRadius: 15, borderTopRightRadius: 15 }}
                 handleIndicatorStyle={{ backgroundColor: "unset" }} >
-                <BottomSheetView style={styles.bottomSheetStyle}>
+                <BottomSheetView style={{...styles.bottomSheetStyle, backgroundColor:bottomSheetBackgroundColor}}>
                 <TouchableButton name="Edit Profile" target="profileView" />
                 <TouchableButton name="Edit allergiers" target="allergy" />
                 <TouchableButton name="Emergency contact" target="emergency" />
@@ -49,7 +52,6 @@ const styles = StyleSheet.create({
         flex: 2,
         padding: 0,
         flexDirection: "column",
-        backgroundColor: "#F4EADA",
     },
     bottomSheetStyle: {
         flex: 1,
@@ -57,7 +59,6 @@ const styles = StyleSheet.create({
         gap: 10,
         flexDirection: 'column',
         alignContent: 'center',
-        backgroundColor: '#FCE4B6'
     },
 })
 

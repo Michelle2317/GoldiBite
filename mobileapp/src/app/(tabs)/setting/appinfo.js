@@ -107,7 +107,7 @@ const appinfo = () => {
 				<View style={styles.optionContainer}></View>
 
 				<PrimaryButton
-					buttonText='Save'
+					buttonText='Back'
 					callback={handleBackBtn}
 				/>
 			</View>

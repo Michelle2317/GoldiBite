@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, StyleSheet } from "react-native";
-import { Chip, Text } from 'react-native-paper';
+import { Text } from 'react-native-paper';
+import PaperUIChip from '@/src/components/paperUiElement/PaperUIChip'
 
 const AllergiesSection = ({ profile, callback }) => {
 
@@ -36,14 +37,8 @@ const AllergiesSection = ({ profile, callback }) => {
         <View style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", gap: 10, width: 280 }}>
             {allergies && allergies.map((item, index) => {
                 const selected = selectedAllergies && selectedAllergies.indexOf(item) >= 0;
-                const color = selected ? '#FFC858' : '#FCE4B6'
                 return (<>
-                    <Chip key={index} theme={{ colors: { secondaryContainer: color } }}
-                        mode='flat' showSelectedCheck={false}
-                        onPress={(e) => handleAllergyOnPress(e, item)}
-                        selected={selected}>
-                        {item}
-                    </Chip>
+                    <PaperUIChip name={item} isSelected={selected} callback={handleAllergyOnPress} />
                 </>)
             })
             }

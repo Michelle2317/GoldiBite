@@ -3,12 +3,12 @@ import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Image } from "react-native";
 import { Text, } from 'react-native-paper';
 import PrimaryButton from '../../../components/paperUiElement/PrimaryButton';
-import { Chip } from 'react-native-paper';
 import { useRouter } from "expo-router";
 import UserStoreDataUtils from "../../../utils/UserStoreDataUtils";
+import PaperUIChip from '@/src/components/paperUiElement/PaperUIChip'
 
 const allergy = () => {
-    const router = useRouter();
+    const router = useRouter(); 
     const { getProfile, storeProfile } = UserStoreDataUtils();
     const [profile, setProfile] = useState({});
     const [selectedAllergies, setSelectedAllergies] = useState([])
@@ -63,14 +63,9 @@ const allergy = () => {
 
                         {allergies && allergies.map((item, index) => {
                             const selected = selectedAllergies && selectedAllergies.indexOf(item) >= 0;
-                            const color = selected ? '#FFC858' : '#FCE4B6'
                             return (<>
-                                <Chip key={index} theme={{ colors: { secondaryContainer: color } }}
-                                    mode='flat' showSelectedCheck={false}
-                                    onPress={(e) => handleAllergyOnPress(e, item)}
-                                    selected={selected}>
-                                    {item}
-                                </Chip>
+                            <PaperUIChip name={item} isSelected={selected} callback={handleAllergyOnPress} />
+                               
                             </>)
                         })
                         }

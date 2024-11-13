@@ -17,19 +17,19 @@ const steps = [
 			'Hold the EpiPen in your dominant hand like a fist, keeping your thumb away from the ends. Pull off the blue safety cap. Place the orange tip against the middle of the child’s outer thigh, even through clothing if needed. Push firmly until you hear a click, signaling the injection has begun. Hold for 3 seconds to ensure the full dose is delivered.',
 	},
 	{
-		image: require('@/assets/images/guides/medicalFacilities.jpeg'),
+		image: require('@/assets/images/guides/massage.jpeg'),
 		heading: '3. Remove and Massage',
 		description:
 			'Carefully pull the EpiPen away from the thigh after the injection. The orange tip should extend to cover the needle automatically, preventing accidental needle sticks. Gently massage the injection site for 10 seconds to help spread the epinephrine and promote faster absorption into the bloodstream. This helps the medication act more quickly to relieve the allergic symptoms.',
 	},
 	{
-		image: require('@/assets/images/guides/tip4.jpeg'),
+		image: require('@/assets/images/guides/secure.jpeg'),
 		heading: '4. Secure the EpiPen',
 		description:
 			'Place the used EpiPen back in its carrying case or set it safely aside, ensuring that it stays out of reach of others to prevent accidental reuse or injury. This step is essential for safe disposal by medical professionals and ensures no one gets hurt by the exposed needle.',
 	},
 	{
-		image: require('@/assets/images/guides/tip5.jpeg'),
+		image: require('@/assets/images/guides/monitor.jpg'),
 		heading: '5. Monitor the Child',
 		description:
 			'Stay with the child and monitor their condition closely while waiting for emergency medical assistance. Observe for any improvement or worsening of symptoms. If the child’s breathing does not improve or symptoms return, a second dose might be necessary if available. This observation period is crucial for assessing whether additional treatment is needed.',

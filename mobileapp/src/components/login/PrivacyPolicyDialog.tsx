@@ -4,8 +4,10 @@ import { Button, Text, Dialog, Portal, } from "react-native-paper";
 export default function PrivacyPolicyDialog({visible, hideDialog}){
     return (<>
     <Portal>
-            <Dialog visible={visible} onDismiss={hideDialog}>
-                <Dialog.Title>Privacy Policy</Dialog.Title>
+            <Dialog visible={visible} onDismiss={hideDialog} style={{height:600}}>
+                <Dialog.Title> 
+                    <Text variant="titleMedium">Privacy Policy</Text>
+                    </Dialog.Title>
                 <Dialog.ScrollArea>
                     <ScrollView contentContainerStyle={{ paddingHorizontal: 24 }}>
                         <Text variant="bodyMedium" style={{ marginBottom: 20 }}>

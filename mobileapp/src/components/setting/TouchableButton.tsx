@@ -3,13 +3,12 @@ import { StyleSheet, TouchableOpacity } from "react-native";
 import { Divider, Text, Icon } from 'react-native-paper';
 import { useRouter } from "expo-router";
 import { useNavigation } from '@react-navigation/native';
+
 const TouchableButton = ({ name, target }) => {
     const navigation = useNavigation();
     const handleOnPress = (target) =>{
         navigation.navigate(target);
     }
-
-    
 
     return (<>
         <TouchableOpacity style={styles.menu} onPress={() => { handleOnPress(target) }}>
@@ -27,6 +26,7 @@ const styles = StyleSheet.create({
     itemText: {
         flex: 2,
         height: 30,
+        fontWeight: "bold",
     },
     dividerStyle: {
     },

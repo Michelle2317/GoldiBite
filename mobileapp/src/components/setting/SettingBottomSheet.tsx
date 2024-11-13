@@ -1,9 +1,10 @@
-import React, { useCallback, useMemo, useRef } from 'react';
-
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 import {  StyleSheet } from "react-native";
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 import TouchableButton from "./TouchableButton"
+import ToggleTheme from './ToggleTheme';
+
 const SettingBottomSheet = () => {
     // variables
     const snapPoints = useMemo(() => ["80%"], []);
@@ -29,6 +30,7 @@ const SettingBottomSheet = () => {
                 <TouchableButton name="Edit allergiers" target="allergy" />
                 <TouchableButton name="Emergency contact" target="emergency" />
                 <TouchableButton name="Preferences" target="preference" />
+                <ToggleTheme />
                 <TouchableButton name="App Info" target="appinfo" />
                 <TouchableButton name="Logout" target="" />
                     {/* <TouchableButton name="Allergy" target="allergy" />

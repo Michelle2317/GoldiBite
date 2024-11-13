@@ -1,6 +1,7 @@
 import { Tabs } from 'expo-router';
 import { Icon } from 'react-native-paper';
 import { useTheme } from '../../hooks/useTheme';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 export default function TabLayout() {
 	const { colorScheme } = useTheme();
@@ -10,7 +11,7 @@ export default function TabLayout() {
 			? { backgroundColor: '#FFC858' }
 			: { backgroundColor: '#000' };
 	const tabBarActiveTintColor =
-		colorScheme === 'light' ? '#fff' : '#FFC858';
+		colorScheme === 'light' ? '#000' : '#FFC858';
 	const tabBarInactiveTintColor =
 		colorScheme === 'light' ? '#1C1B1F' : '#FFC858';
 
@@ -61,14 +62,14 @@ export default function TabLayout() {
 			<Tabs.Screen
 				name='barcodeScanner'
 				options={{
-					title: 'Barcode Scanner',
+					title: 'Scan',
 					headerShown: false,
 					tabBarIcon: ({ color, focused }) => (
-						<Icon
-							source={
+						<Ionicons
+							name={
 								focused
-									? 'barcode-scan'
-									: 'barcode-scan'
+									? 'barcode'
+									: 'barcode-outline'
 							}
 							size={24}
 							color={color}
@@ -85,8 +86,8 @@ export default function TabLayout() {
 						<Icon
 							source={
 								focused
-									? 'book-open-variant'
-									: 'book-open-blank-variant'
+									? 'book'
+									: 'book-outline'
 							}
 							size={24}
 							color={color}

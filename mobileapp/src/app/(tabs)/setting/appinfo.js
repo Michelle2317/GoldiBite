@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { View, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet, Image, ScrollView } from 'react-native';
 import { Text, Switch } from 'react-native-paper';
 import PrimaryButton from '../../../components/paperUiElement/PrimaryButton';
 import { useRouter } from 'expo-router';
@@ -14,7 +14,7 @@ const appinfo = () => {
 	return (
 		<>
 			<View style={styles.container}>
-				<View style={styles.optionContainer}>
+				<ScrollView style={styles.optionContainer}>
 					<Text
 						variant='bodyMedium'
 						style={{ marginBottom: 10 }}
@@ -101,10 +101,7 @@ const appinfo = () => {
 						For more information, contact us
 						at +441 158 2755.
 					</Text>
-				</View>
-				<View style={styles.optionContainer}></View>
-				<View style={styles.optionContainer}></View>
-				<View style={styles.optionContainer}></View>
+				</ScrollView>
 
 				<PrimaryButton
 					buttonText='Back'
@@ -119,8 +116,7 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		padding: 2,
-		padding: 20,
-		paddingTop: 50,
+		padding: 40,
 		gap: 10,
 		flexDirection: 'column',
 		alignContent: 'center',
@@ -131,6 +127,7 @@ const styles = StyleSheet.create({
 	},
 	optionContainer: {
 		flex: 1,
+		display: 'flex',
 		flexDirection: 'column',
 	},
 	description: {

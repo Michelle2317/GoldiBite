@@ -1,112 +1,49 @@
-import { ScorllView, View, Text, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet, Image } from 'react-native';
+import GuideCategory from '@/src/components/guides/GuideCategory';
+import { useNavigation } from '@react-navigation/native';
 
-export default function Epipen() {
+export default function Guides() {
+	const navigation = useNavigation();
+
 	return (
 		<View style={styles.container}>
-			<Text style={styles.title}>How to use an Epipen?</Text>
-
 			<Image
-				source={require('@/assets/images/guides/prepare.jpeg')}
-				style={styles.image}
+				source={require('@/assets/images/guides/epipen.svg')}
+				style={{ width: 350, height: 320 }}
 			/>
-
-			<Text style={styles.subtitle}>Follow these steps:</Text>
-
-			<View style={styles.stepList}>
-				<Text style={styles.step}>
-					<Text style={styles.stepNumber}>
-						1.
-					</Text>{' '}
-					Remove the auto-injector from its case.
-				</Text>
-				<Text style={styles.step}>
-					<Text style={styles.stepNumber}>
-						2.
-					</Text>{' '}
-					Take off the safety cap (usually blue)
-					by pulling it straight up with your
-					other hand. DO NOT use the thumb from
-					the dominant hand.
-				</Text>
-				<Text style={styles.step}>
-					<Text style={styles.stepNumber}>
-						3.
-					</Text>{' '}
-					Hold the injector in your fist, orange
-					tip facing down, and keep your arm at
-					your side.
-				</Text>
-				<Text style={styles.step}>
-					<Text style={styles.stepNumber}>
-						4.
-					</Text>{' '}
-					Swing your arm outward, then bring it
-					down quickly to push the orange tip into
-					the side of your thigh.
-				</Text>
-				<Text style={styles.step}>
-					<Text style={styles.stepNumber}>
-						5.
-					</Text>{' '}
-					Hold it there, pressing down, for 3
-					seconds.
-				</Text>
-				<Text style={styles.step}>
-					<Text style={styles.stepNumber}>
-						6.
-					</Text>{' '}
-					Pull the auto-injector away from your
-					thigh.
-				</Text>
-				<Text style={styles.step}>
-					<Text style={styles.stepNumber}>
-						7.
-					</Text>{' '}
-					Return it to the case and go immediately
-					to the nearest hospital's emergency
-					department for medical attention and
-					safe disposal.
-				</Text>
-			</View>
+			<View style={styles.guideContainer} />
+			<GuideCategory
+				text='For Adults'
+				onPress={() => navigation.navigate('forAdults')}
+			/>
+			<GuideCategory
+				text='For Children'
+				onPress={() =>
+					navigation.navigate('forChildren')
+				}
+			/>
 		</View>
 	);
 }
 
 const styles = StyleSheet.create({
 	container: {
-		padding: 20,
-		// backgroundColor: '#f9f9f9',
+		flex: 1,
+		flexDirection: 'column',
+		justifyContent: 'start',
 		alignItems: 'center',
+		marginTop: 30,
 	},
-	title: {
-		fontSize: 26,
+	headerText: {
+		fontSize: 30,
 		fontWeight: 'bold',
-		marginBottom: 15,
-		textAlign: 'center',
 	},
-	image: {
-		width: 350,
-		height: 180,
-		marginBottom: 20,
-		borderRadius: 10,
-	},
-	subtitle: {
-		fontSize: 25,
-		fontWeight: '600',
-		marginBottom: 10,
-		textAlign: 'center',
-	},
-	stepList: {
-		marginTop: 10,
-		width: '90%',
-	},
-	step: {
-		fontSize: 15,
-		lineHeight: 24,
-		marginBottom: 10,
-		textAlign: 'left',
-	},
-	stepNumber: {
+	subHeaderText: {
+		marginTop: 25,
+		fontSize: 20,
 		fontWeight: 'bold',
+	},
+	guideContainer: {
+		marginTop: 28,
 	},
 });

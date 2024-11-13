@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import GuideDetails from '@/src/components/guides/GuideDetails';
 
@@ -57,21 +57,29 @@ export default function TravelTips() {
 	};
 
 	return (
-		<View style={styles.container}>
-			<GuideDetails
-				title={steps[step].title}
-				image={steps[step].image}
-				heading={steps[step].heading}
-				description={steps[step].description}
-				onNext={handleNextStep}
-				showNextButton={step < steps.length - 1}
-				onBack={step > 0 ? handleBackStep : null}
-			/>
-		</View>
+		<ScrollView contentContainerStyle={styles.scrollContainer}>
+			<View style={styles.container}>
+				<GuideDetails
+					title={steps[step].title}
+					image={steps[step].image}
+					heading={steps[step].heading}
+					description={steps[step].description}
+					onNext={handleNextStep}
+					showNextButton={step < steps.length - 1}
+					onBack={
+						step > 0 ? handleBackStep : null
+					}
+				/>
+			</View>
+		</ScrollView>
 	);
 }
 
 const styles = StyleSheet.create({
+	scrollContainer: {
+		paddingVertical: 20,
+		alignItems: 'center',
+	},
 	container: {
 		flex: 1,
 		justifyContent: 'center',

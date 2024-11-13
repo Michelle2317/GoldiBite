@@ -9,7 +9,7 @@ export default function Guides() {
 	return (
 		<View style={styles.container}>
 			<Image
-				source={require('@/assets/images/guides/howTo.png')}
+				source={require('@/assets/images/guides/guide.svg')}
 				style={{ width: 350, height: 320 }}
 			/>
 			<View style={styles.guideContainer} />

@@ -10,8 +10,8 @@ export const Colors = {
   light: {
     navBar: {
       backgroundColor: '#FFC858',
-      activeTintColor: '#FFFFFF',
-      inactiveTintColor: '#1C1B1F',
+      activeTintColor: '#000',
+      inactiveTintColor: '#000',
     },
     "primary": "rgb(129, 85, 0)",
     "onPrimary": "rgb(255, 255, 255)",

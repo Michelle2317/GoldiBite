@@ -10,28 +10,31 @@ const OnBoardingContent = ({ content, totalStep, language = "eng", back, next, s
             <ProgressBar progress={process} color="#00C9A2" style={{ backgroundColor: '#FFC858' }} />
         </View>
         <View style={styles.title}>
-        <Text variant="headlineLarge" style={{ fontWeight: 'bold' }}>{content[language].title}</Text>
+            <Text variant="headlineLarge" style={{ fontWeight: 'bold' }}>{content[language].title}</Text>
         </View>
         <Icon
             source={content.icon}
             color="#00C9A2"
             size={200}
         />
-        <Text variant="titleLarge" style={{ textAlign: "center", fontWeight: 'bold', height:100 }}>{content[language].description}</Text>
+        <Text variant="titleLarge" style={{ textAlign: "center", fontWeight: 'bold', height: 100 }}>{content[language].description}</Text>
 
         <View>
-            <View  style={styles.buttonContainer}>
-            <PrimaryButton buttonText={"Next"} callback={next}  />
-                <PrimaryButton buttonText={"Back"} callback={back} type="secondary" styles={{  display: (content.step == 1 ? "none" : "flex") }} />
+            <View style={styles.buttonContainer}>
+                <View>
+                    <PrimaryButton buttonText={"Next"} callback={next} />
+                    <Button mode="text" theme={skipTheme} onPress={skip} style={styles.skipButtonStyle} labelStyle={styles.skipButtonLabelStyle}>Skip</Button>
+                </View>
+                <View>
+                    <PrimaryButton buttonText={"Back"} callback={back} type="secondary" styles={{ display: (content.step == 1 ? "none" : "flex") }} /></View>
             </View>
             <View style={styles.skipButtonContainer}>
-                <Button mode="text" theme={skipTheme} onPress={skip} style={styles.skipButtonStyle} labelStyle={styles.skipButtonLabelStyle}>Skip</Button>
             </View>
         </View>
     </>)
 }
 
-const skipTheme = {colors:{primary:'#000000'}}
+const skipTheme = { colors: { primary: '#000000' } }
 
 const styles = StyleSheet.create({
     processBarContainer: {
@@ -42,8 +45,8 @@ const styles = StyleSheet.create({
     title: {
         width: 300,
         height: 50,
-        justifyContent:"center",
-        alignItems:"center"
+        justifyContent: "center",
+        alignItems: "center"
     },
     buttonContainer: {
         width: 300,
@@ -55,11 +58,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row-reverse',
         justifyContent: 'space-between',
     },
-    skipButtonStyle:{
-        marginHorizontal:7
-    },
-    skipButtonLabelStyle:{
-        textDecorationLine:"underline"
+    skipButtonLabelStyle: {
+        textDecorationLine: "underline"
     }
 
 });

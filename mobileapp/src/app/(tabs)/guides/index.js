@@ -14,7 +14,7 @@ export default function Guides() {
 			/>
 			<View style={styles.guideContainer} />
 			<GuideCategory
-				text='How to use an Epipen?'
+				text='How to Use an Epipen?'
 				onPress={() => navigation.navigate('epipen')}
 			/>
 			<GuideCategory

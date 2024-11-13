@@ -52,7 +52,7 @@ const profileView = () => {
                 <View style={styles.questionContainer}>
                     <PrimaryInputText label="Emergency Contact" value={profile.emergency_contact_name} onChangeText={handleEmergencyContactNameOnChange} />
                     <PrimaryInputText label="Relationship" value={profile.emergency_relationship} onChangeText={handleEmergencyRelationshipOnChange} />
-                    <PrimaryInputText label="Contact Phone" value={profile.emergency_contact_number} onChangeText={handleEmergencyContactNumberOnChange} />
+                    <PrimaryInputText label="Phone Number" value={profile.emergency_contact_number} onChangeText={handleEmergencyContactNumberOnChange} />
 
                     <PrimaryButton buttonText="Save" callback={handleBackBtn} />
                 </View>

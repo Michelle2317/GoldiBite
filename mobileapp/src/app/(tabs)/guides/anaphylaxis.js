@@ -15,28 +15,28 @@ const steps = [
 		image: require('@/assets/images/guides/stage1.jpeg'),
 		heading: '1. Initial Reactions',
 		description:
-			"Symptoms are mild and may resemble a regular allergy, such as:\n\t• Itching\n\t• Hives\n\t• Runny nose\n\n If you're at risk for Anaphylaxis, keep an eye on these early signs.",
+			"Symptoms are mild and may resemble a regular allergy, such as:\n\t• Itching\n\t• Hives\n\t• Runny nose\n\n If you're at risk for Anaphylaxis, keep \n\nan eye on these early signs.",
 	},
 	{
 		title: 'Progressive Stage',
 		image: require('@/assets/images/guides/stage2.jpeg'),
 		heading: '2. Escalation',
 		description:
-			'Symptoms spread and become more noticeable:\n\t• Face swelling\n\t• Lips\n\t• Tongue\n\t• Watery eyes\n\t• (Possibly) Digestive issues\n\t• Swallowing may become difficult\n\nSeek help to prevent worsening.',
+			'Symptoms spread and become more noticeable:\n\t• Face swelling\n\t• Lips\n\t• Tongue\n\t• Watery eyes\n\t• (Possibly) Digestive issues\n\t• Swallowing may become difficult \n\nSeek help to prevent worsening.',
 	},
 	{
 		title: 'Severe Stage',
 		image: require('@/assets/images/guides/stage3.jpeg'),
 		heading: '3. Respiratory Distress',
 		description:
-			'Breathing becomes difficult, accompanied by:\n\t• Weak Pulse\n\t• Chest Pain\n\t• Dizziness\n\t• Or Fainting\n\nThis stage is often referred to as Anaphylactic shock.',
+			'Breathing becomes difficult, accompanied by:\n\t• Weak Pulse\n\t• Chest Pain\n\t• Dizziness\n\t• Or Fainting\n\nThis stage is often referred to as \n\nAnaphylactic shock.',
 	},
 	{
 		title: 'Critical Stage',
 		image: require('@/assets/images/guides/stage4.jpeg'),
 		heading: '4. Condition',
 		description:
-			'Symptoms reach a life-threatening level with:\n\t• Severe drops in blood pressure\n\t• Poor blood circulation\n\t• Swelling that blocks airways\n\nAt this stage, Anaphylaxis can lead to heart failure.',
+			'Symptoms reach a life-threatening level with:\n\t• Severe drops in blood pressure\n\t• Poor blood circulation\n\t• Swelling that blocks airways\n\nAt this stage, Anaphylaxis can lead to heart \n\nfailure.',
 	},
 ];
 

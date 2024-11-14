@@ -11,7 +11,7 @@ const StackLayout = () => {
 				headerTintColor: '#000',
 				headerTitleStyle: {
 					fontWeight: 'bold',
-					fontSize: 36,
+					fontSize: 28,
 				},
 				headerShadowVisible: false,
 				headerTitleAlign: 'center',
@@ -29,7 +29,7 @@ const StackLayout = () => {
 			<Stack.Screen
 				name='anaphylaxis'
 				options={{
-					headerTitle: 'Anaphylaxis',
+					headerTitle: '',
 					HeaderRightButton: (props) => (
 						<HeaderRightButton {...props} />
 					),
@@ -38,7 +38,7 @@ const StackLayout = () => {
 			<Stack.Screen
 				name='travelTips'
 				options={{
-					headerTitle: 'Quick Travel Tips',
+					headerTitle: '',
 					HeaderRightButton: (props) => (
 						<HeaderRightButton {...props} />
 					),

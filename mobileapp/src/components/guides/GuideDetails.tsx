@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center',
 		padding: 20,
+		marginTop: -40,
 	},
 	header: {
 		width: '100%',
@@ -77,8 +78,8 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 	},
 	image: {
-		width: 300,
-		height: 170,
+		width: 340,
+		height: 200,
 		borderRadius: 10,
 		marginBottom: 20,
 	},
@@ -86,6 +87,7 @@ const styles = StyleSheet.create({
 		fontSize: 23,
 		fontWeight: 'bold',
 		marginBottom: 10,
+		textAlign: 'center',
 	},
 	description: {
 		fontSize: 15,

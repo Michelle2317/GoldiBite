@@ -10,7 +10,7 @@ export default function Guides() {
 		<View style={styles.container}>
 			<Image
 				source={require('@/assets/images/guides/guide.png')}
-				style={{ width: 350, height: 320 }}
+				style={{ width: 370, height: 270 }}
 			/>
 			<View style={styles.guideContainer} />
 			<GuideCategory
@@ -39,18 +39,9 @@ const styles = StyleSheet.create({
 		flexDirection: 'column',
 		justifyContent: 'start',
 		alignItems: 'center',
-		marginTop: 30,
-	},
-	headerText: {
-		fontSize: 30,
-		fontWeight: 'bold',
-	},
-	subHeaderText: {
-		marginTop: 25,
-		fontSize: 20,
-		fontWeight: 'bold',
+		marginTop: 28,
 	},
 	guideContainer: {
-		marginTop: 28,
+		marginTop: 32,
 	},
 });

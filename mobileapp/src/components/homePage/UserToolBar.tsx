@@ -16,14 +16,9 @@ export default function UserToolBar({ name }) {
 					size={28}
 					style={styles.profileButton}
 					iconColor='#000'
-					onPress={() => navigation.navigate('setting')}
-				/>
-				<IconButton
-					icon='bell'
-					size={25}
-					style={styles.bellButton}
-					iconColor='#000'
-					onPress={() => navigation.navigate('notification')}
+					onPress={() =>
+						navigation.navigate('setting')
+					}
 				/>
 			</View>
 		</View>
@@ -36,25 +31,22 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'center',
 		marginBottom: 20,
-		marginLeft: 26,
+		marginLeft: 30,
+		marginRight: 30,
 	},
 	text: {
 		flex: 1,
 		fontWeight: 'bold',
 		fontSize: 25,
+		color: 'white',
 	},
 	buttonContainer: {
 		flexDirection: 'row',
 		alignItems: 'center',
-		marginRight: 19,
+		marginLeft: 20,
 	},
 	profileButton: {
 		backgroundColor: '#BFEDDD',
-		width: 66,
-		height: 38,
-	},
-	bellButton: {
-		backgroundColor: '#e6a177',
 		width: 66,
 		height: 38,
 	},

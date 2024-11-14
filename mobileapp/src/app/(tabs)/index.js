@@ -1,77 +1,229 @@
-import { View, StyleSheet } from 'react-native';
-import {useState, useEffect} from 'react'
+import {
+	View,
+	Image,
+	StyleSheet,
+	ImageBackground,
+	ScrollView,
+	Dimensions,
+} from 'react-native';
+import { useState, useEffect } from 'react';
 import UserToolBar from '@/src/components/homePage/UserToolBar';
 import HomePageCards from '@/src/components/homePage/HomePageCards';
 import { useNavigation } from '@react-navigation/native';
-import UserStoreDataUtils from "../../utils/UserStoreDataUtils";
+import UserStoreDataUtils from '../../utils/UserStoreDataUtils';
+import { Text } from 'react-native-paper';
+import PrimaryButton from '../../components/paperUiElement/PrimaryButton';
 
 export default function Index() {
-
-    const { getProfileName } = UserStoreDataUtils();
-
-	const [name, setName] = useState(''); 
+	const { getProfileName } = UserStoreDataUtils();
+	const [name, setName] = useState('');
 	const navigation = useNavigation();
+	const screenWidth = Dimensions.get('window').width;
 
-	useEffect(()=>{
-		const getUsername = async ()=>{
+	useEffect(() => {
+		const getUsername = async () => {
 			const username = await getProfileName();
 			setName(username);
-		}
+		};
 		getUsername();
-	}, [])
+	}, []);
+
 	return (
-		<View style={styles.container}>
-			<UserToolBar name={name} />
-			<HomePageCards
-				title='Allergen Scanner'
-				icon='barcode-scan'
-				description='Scan barcode or menus to get instant results and make safe choices.'
-				cardColor='#beeddd'
-				width={350}
-				height={270}
-				iconSize={110}
-				iconColor='#cf7334'
-				onPress={() => navigation.navigate('barcodeScanner')}
-			/>
-			<View style={styles.cardRow}>
-				<HomePageCards
-					title='Emergency'
-					icon='alarm-light'
-					description='Explore our emergency assistance for when you have a severe allergy reaction.'
-					cardColor='#fedc9d'
-					width={165}
-					height={308}
-					iconSize={93}
-					iconColor='#cf7334'
-					onPress={() => navigation.navigate('emergency')}
-				/>
-				<HomePageCards
-					title='Guides'
-					icon='book'
-					description='Helpful information for food allergen problems when traveling'
-					cardColor='#eae1a0'
-					width={165}
-					height={308}
-					iconSize={93}
-					iconColor='#00c8a1'
-					onPress={() => navigation.navigate('guides')}
-				/>
+		<ScrollView contentContainerStyle={styles.container}>
+			<View style={styles.homeTop}>
+				<ImageBackground
+					source={require('@/assets/images/home/Home-scanner.jpg')}
+					style={styles.homeTopImage}
+					resizeMode={'cover'}
+				>
+					<View style={styles.homeTopTint}>
+						<View style={styles.userStyle}>
+							<UserToolBar
+								name={name}
+							/>
+						</View>
+						<View
+							style={
+								styles.homeTopScan
+							}
+						>
+							<Image
+								source={require('@/assets/images/home/Scan.gif')}
+								style={[
+									styles.gif,
+									{
+										width: screenWidth,
+									},
+								]}
+								resizeMode='contain'
+							/>
+							<PrimaryButton
+								buttonText='Scan Now'
+								callback={() =>
+									navigation.navigate(
+										'barcodeScanner'
+									)
+								}
+							/>
+						</View>
+					</View>
+				</ImageBackground>
 			</View>
-		</View>
+			<View style={styles.homeBottom}>
+				<View style={styles.textStyle}>
+					<Text
+						variant='titleLarge'
+						style={{
+							textAlign: 'left',
+							marginBottom: 5,
+							fontWeight: 'bold',
+						}}
+					>
+						Emergency
+					</Text>
+					<Text
+						variant='bodyMedium'
+						style={{
+							textAlign: 'left',
+							marginBottom: 5,
+							flexShrink: 1,
+							maxWidth: '80vw',
+						}}
+					>
+						Explore our emergency assistance
+						for when you have a severe
+						allergy reaction
+					</Text>
+				</View>
+				<HomePageCards
+					title=''
+					backgroundImage={require('@/assets/images/home/Home-emergency.jpg')}
+					width={350}
+					height={140}
+					borderRadius={10}
+					onPress={() =>
+						navigation.navigate('emergency')
+					}
+				/>
+				<View style={styles.textStyle}>
+					<Text
+						variant='titleLarge'
+						style={{
+							textAlign: 'left',
+							marginBottom: 5,
+							fontWeight: 'bold',
+						}}
+					>
+						Guides
+					</Text>
+					<Text
+						variant='bodyMedium'
+						style={{
+							textAlign: 'left',
+							marginBottom: 5,
+							flexShrink: 1,
+							maxWidth: '80vw',
+						}}
+					>
+						Helpful information for food
+						allergen problems when traveling
+					</Text>
+				</View>
+
+				<ScrollView
+					horizontal={true}
+					showsHorizontalScrollIndicator={false}
+					contentContainerStyle={styles.cardRow}
+				>
+					<HomePageCards
+						title='What is Anaphylaxis'
+						backgroundImage={require('@/assets/images/guides/whatIs.jpeg')}
+						width={300}
+						height={140}
+						borderRadius={10}
+						onPress={() =>
+							navigation.navigate(
+								'guides'
+							)
+						}
+					/>
+					<HomePageCards
+						title='Quick Travel Tips'
+						backgroundImage={require('@/assets/images/guides/lookInAdvanced.jpeg')}
+						width={300}
+						height={140}
+						borderRadius={10}
+						onPress={() =>
+							navigation.navigate(
+								'guides'
+							)
+						}
+					/>
+					<HomePageCards
+						title='How to Use an Epipen'
+						backgroundImage={require('@/assets/images/guides/prepare.jpeg')}
+						width={300}
+						height={140}
+						borderRadius={10}
+						onPress={() =>
+							navigation.navigate(
+								'guides'
+							)
+						}
+					/>
+				</ScrollView>
+			</View>
+		</ScrollView>
 	);
 }
 
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		margin: 16,
 		alignItems: 'center',
-		justifyContent: 'center',
+		gap: '10vh',
+	},
+	homeTop: {
+		flex: 1,
+		alignItems: 'center',
+	},
+	homeBottom: {
+		flex: 1,
+		alignItems: 'center',
+	},
+	homeTopScan: {
+		flex: 1,
+		alignItems: 'center',
+		width: '100%',
+	},
+	homeTopTint: {
+		flex: 1,
+		backgroundColor: 'rgba(55,55,55, 0.65)',
+	},
+	homeTopImage: {
+		width: '100vw',
+		height: '60vh',
+		borderBottomLeftRadius: 10,
+		borderBottomRightRadius: 10,
+		overflow: 'hidden',
+	},
+	gif: {
+		marginTop: -12,
+		height: 250,
+		marginBottom: -6,
 	},
 	cardRow: {
 		flexDirection: 'row',
-		justifyContent: 'center',
-		gap: 20,
-		marginTop: 22,
+		gap: 15,
+		paddingHorizontal: 10,
+		paddingBottom: 15,
+	},
+	userStyle: {
+		marginTop: 60,
+	},
+	textStyle: {
+		marginBottom: 10,
+		marginTop: 10,
+		marginLeft: 20,
 	},
 });

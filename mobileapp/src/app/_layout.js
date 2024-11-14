@@ -55,7 +55,7 @@ export function RootLayout() {
     console.log(inAuthGroup)
     if (!authState?.authenticated) {
       console.log("onBoarding")
-      router.replace('(onBoarding)/onBoarding')
+      router.replace('(onBoarding)/')
       //router.replace('/(setup)/welcome');
       //router.replace('/(setup)/setupAccount');
       //router.replace('/(nonauth)/login');

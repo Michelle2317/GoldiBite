@@ -1,6 +1,6 @@
 import { Stack, useRouter, useSegments } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 import {
   MD3DarkTheme,
@@ -13,11 +13,11 @@ import {
   DefaultTheme as NavigationDefaultTheme,
   ThemeProvider, NavigationContainer
 } from "@react-navigation/native";
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import merge from "deepmerge";
 
 import { Colors } from "../constants/Colors";
-import { AuthProvider, useAuth } from '../context/AuthContext';
+import { AuthProvider, useAuth } from "../context/AuthContext";
 
 const customDarkTheme = { ...MD3DarkTheme, colors: Colors.dark };
 const customLightTheme = { ...MD3LightTheme, colors: Colors.light };
@@ -49,23 +49,23 @@ export function RootLayout() {
     console.log(authState?.authenticated)
     //if (initializing) return;
 
-    const inAuthGroup = (segments[0] === '(tabs)' || segments[0] === '(setup)');
+    const inAuthGroup = (segments[0] === "(tabs)" || segments[0] === "(setup)");
     console.log("line 52")
     console.log(segments[0])
     console.log(inAuthGroup)
     if (!authState?.authenticated) {
       console.log("onBoarding")
-      router.replace('(onBoarding)/')
-      //router.replace('/(setup)/welcome');
-      //router.replace('/(setup)/setupAccount');
-      //router.replace('/(nonauth)/login');
-      //router.replace('/(tabs)/setting/profileView') 
+      router.replace("(onBoarding)/")
+      //router.replace("/(setup)/welcome");
+      //router.replace("/(setup)/setupAccount");
+      //router.replace("/(nonauth)/login");
+      //router.replace("/(tabs)/setting/profileView") 
 
     } else {
-      router.replace('/(setup)/setupAccount')
+      router.replace("/(setup)/setupAccount")
       console.log("login")
-      //router.replace('/(setup)/setupAccount');
-      //router.replace('(tabs)')
+      //router.replace("/(setup)/setupAccount");
+      //router.replace("(tabs)")
     }
   }, [authState, initializing]);
 

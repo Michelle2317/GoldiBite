@@ -8,19 +8,19 @@ const steps = [
 		image: require('@/assets/images/guides/forChildren.jpeg'),
 		heading: '1. Check EpiPen',
 		description:
-			'Before using the EpiPen, verify that it is in good condition. Inspect the device for an expiration date and ensure the liquid inside the viewing window is clear and colorless. If it appears discolored or contains particles, the EpiPen may be ineffective. This step is important because using an expired or damaged device could result in insufficient treatment during an allergic reaction.',
+			'Before using the EpiPen, verify that it is in good condition. Inspect the device for an expiration date and ensure the liquid inside the viewing window is clear and colorless. If it appears discolored or contains particles, the EpiPen may be ineffective. This step is important because using an expired or damaged device could result in insufficient treatment during an allergic \n\nreaction.',
 	},
 	{
 		image: require('@/assets/images/guides/administer.jpeg'),
 		heading: '2. Administer',
 		description:
-			'Hold the EpiPen in your dominant hand like a fist, keeping your thumb away from the ends. Pull off the blue safety cap. Place the orange tip against the middle of the child’s outer thigh, even through clothing if needed. Push firmly until you hear a click, signaling the injection has begun. Hold for 3 seconds to ensure the full dose is delivered.',
+			'Hold the EpiPen in your dominant hand like a fist, keeping your thumb away from the ends. Pull off the blue safety cap. Place the orange tip against the middle of the child’s outer thigh, even through clothing if needed. Push firmly until you hear a click, signaling the injection has begun. Hold for 3 seconds to ensure the full\n\ndose is delivered.',
 	},
 	{
 		image: require('@/assets/images/guides/massage.jpeg'),
 		heading: '3. Remove and Massage',
 		description:
-			'Carefully pull the EpiPen away from the thigh after the injection. The orange tip should extend to cover the needle automatically, preventing accidental needle sticks. Gently massage the injection site for 10 seconds to help spread the epinephrine and promote faster absorption into the bloodstream. This helps the medication act more quickly to relieve the allergic symptoms.',
+			'Carefully pull the EpiPen away from the thigh after the injection. The orange tip should \nextend to cover the needle automatically, preventing accidental needle sticks. Gently massage the injection site for 10 seconds to help spread the epinephrine and promote faster absorption into the bloodstream. This helps the medication act more quickly to relieve the \n\nallergic symptoms.',
 	},
 	{
 		image: require('@/assets/images/guides/secure.jpeg'),
@@ -32,7 +32,7 @@ const steps = [
 		image: require('@/assets/images/guides/monitor.jpg'),
 		heading: '5. Monitor the Child',
 		description:
-			'Stay with the child and monitor their condition closely while waiting for emergency medical assistance. Observe for any improvement or worsening of symptoms. If the child’s breathing does not improve or symptoms return, a second dose might be necessary if available. This observation period is crucial for assessing whether additional treatment is needed.',
+			'Stay with the child and monitor their condition closely while waiting for emergency medical assistance. Observe for any improvement or worsening of symptoms. If the child’s breathing does not improve or symptoms return, a second dose might be necessary if available. This observation period is crucial for assessing \n\nwhether additional treatment is needed.',
 	},
 ];
 
@@ -80,6 +80,6 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
-		padding: 35,
+		padding: 20,
 	},
 });

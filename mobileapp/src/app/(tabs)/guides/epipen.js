@@ -9,7 +9,7 @@ export default function Guides() {
 		<View style={styles.container}>
 			<Image
 				source={require('@/assets/images/guides/epipen.png')}
-				style={{ width: 350, height: 320 }}
+				style={{ width: 370, height: 270 }}
 			/>
 			<View style={styles.guideContainer} />
 			<GuideCategory
@@ -33,15 +33,6 @@ const styles = StyleSheet.create({
 		justifyContent: 'start',
 		alignItems: 'center',
 		marginTop: 30,
-	},
-	headerText: {
-		fontSize: 30,
-		fontWeight: 'bold',
-	},
-	subHeaderText: {
-		marginTop: 25,
-		fontSize: 20,
-		fontWeight: 'bold',
 	},
 	guideContainer: {
 		marginTop: 28,

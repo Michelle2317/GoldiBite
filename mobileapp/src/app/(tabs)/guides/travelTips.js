@@ -7,14 +7,14 @@ const steps = [
 	{
 		title: 'Tip 1',
 		image: require('@/assets/images/guides/lookInAdvanced.jpeg'),
-		heading: 'Make a Research on Local Restaurants',
+		heading: 'Research on Local Restaurants',
 		description:
 			'To safely enjoy dining out while traveling with food allergies, research 2-3 nearby restaurants so you have backup options. Even with careful vetting, some places may not be as allergy-aware as expected, so having alternatives avoids disappointment.',
 	},
 	{
 		title: 'Tip 2',
 		image: require('@/assets/images/guides/bookFriendly.jpeg'),
-		heading: 'Cook your own food preferably',
+		heading: 'Cook Your Own Food Preferably',
 		description:
 			'The safest way to travel with food allergies is to cook your own meals. By doing so, you control every step and avoid relying on others’ knowledge of food allergies, allowing you to enjoy your trip worry-free.',
 	},
@@ -23,19 +23,19 @@ const steps = [
 		image: require('@/assets/images/guides/medicalFacilities.jpeg'),
 		heading: 'Buy Travel Medical Insurance',
 		description:
-			"When traveling internationally with a nut allergy or any food allergy, it's essential to buy travel medical insurance. This coverage can help mitigate the high costs of hospitalization in case of a severe reaction, which can be financially burdensome. Prioritize your safety by planning carefully and ensuring you have the necessary protections in place for a worry-free trip.",
+			"When traveling internationally with a nut allergy or any food allergy, it's essential to buy travel medical insurance. This coverage can help mitigate the high costs of hospitalization in case of a severe reaction, which can be financially burdensome. Prioritize your safety by planning carefully and ensuring you have the necessary \n\nprotections in place for a worry-free trip.",
 	},
 	{
 		title: 'Tip 4',
 		image: require('@/assets/images/guides/tip4.jpeg'),
 		heading: 'Prepare Allergy Cards in the Local Language',
 		description:
-			"If you're traveling to a country where the spoken language differs from your own, bring an allergy translation card. This card can help you communicate your allergies clearly, ensuring that restaurant staff and others understand your dietary needs, which is crucial for your safety. Being prepared with this tool can make dining out and navigating food options much easier while you travel.",
+			"If you're traveling to a country where the spoken language differs from your own, bring an allergy translation card. This card can help you communicate your allergies clearly, ensuring that restaurant staff and others understand your dietary needs, which is crucial for your safety.\n\nBeing prepared with this tool can make dining out and navigating food options much easier while you travel.",
 	},
 	{
 		title: 'Tip 5',
 		image: require('@/assets/images/guides/tip5.jpeg'),
-		heading: 'How to travel as someone who suffers from Nut allergies?',
+		heading: 'How to Travel as Someone Who Suffers From Nut Allergies?',
 		description:
 			'Traveling abroad with a nut allergy, or any food allergy, requires similar precautions. Regardless of your specific allergy—be it nuts, peanuts, milk, wheat, or Celiac disease—the approach remains the same: plan and pack safe foods for your needs. Cooking for yourself is more beneficial, as it allows you to control food safety without worrying about the prevalence of certain allergens. Focus on effective planning and packing for your specific allergies to ensure a safe and enjoyable trip.',
 	},
@@ -85,6 +85,6 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
-		padding: 35,
+		padding: 20,
 	},
 });

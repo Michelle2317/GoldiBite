@@ -8,7 +8,7 @@ export default function Guides() {
 	return (
 		<View style={styles.container}>
 			<Image
-				source={require('@/assets/images/guides/epipen.svg')}
+				source={require('@/assets/images/guides/epipen.png')}
 				style={{ width: 350, height: 320 }}
 			/>
 			<View style={styles.guideContainer} />

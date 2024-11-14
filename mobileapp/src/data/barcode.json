@@ -21,18 +21,18 @@
       "image": "https://images.barcodelookup.com/81657/816570551-1.jpg"
     },
     {
-      "id": 3,
+      "id": 4,
       "barcode":"07339001127",
       "name": "Mentos Pure Fresh Gum",
       "ingredient": "Xylitol, Chewing Gum Base , Sorbitol, Mannitol, Glycerol, Maltitol Ayrup, Natural And Artifical Flavors; Contains Less Than 2 Percent Of: Gum Arabic, Color (Titanium Dioxide), Gelatine, Soya Lecithin, Aspartame, Acesulfame K, Green Tea Extract, Carnuba Wax, Sucralose, Sodium Carbosymethylcellose, Bht To Maintain Freshness, Sucrose Esters Of Fatty Acids, Blue 1",
       "image": "https://images.barcodelookup.com/81657/816570551-1.jpg"
     },
     {
-      "id": 4,
-      "barcode":"071464302514",
-      "name": "item D",
-      "ingredient": "Pear Juice From Concentrate (water, Pear Juice Concentrate), Mango Puree From Concentrate (water, Mango Puree Concentrate), Acerola Puree From Concentrate (water, Acerola Puree Concentrate), Lemon Juice From Concentrate (water, Lemon Juice Concentrate), Cherry Juice From Concentrate (water, Cherry Juice Concentrate), Kiwi Puree, Natural Flavor, Pectin, Vitamin C (ascorbic Acid), Vitamin A (beta Carotene), Zinc, Vitamin E (d-alpha Tocopheryl), Maitake Mushroom Powder, Echinacea, Astragalus, Camu Camu Powder.",
-      "image": "@/assets/images/products/064042003498.jpg"
+      "id": 5,
+      "barcode":"073390011277",
+      "name": "Mentos Pure Fresh Gum",
+      "ingredient": "Xylitol, Chewing Gum Base , Sorbitol, Mannitol, Glycerol, Maltitol Ayrup, Natural And Artifical Flavors; Contains Less Than 2 Percent Of: Gum Arabic, Color (Titanium Dioxide), Gelatine, Soya Lecithin, Aspartame, Acesulfame K, Green Tea Extract, Carnuba Wax, Sucralose, Sodium Carbosymethylcellose, Bht To Maintain Freshness, Sucrose Esters Of Fatty Acids, Blue 1",
+      "image": "https://images.barcodelookup.com/81657/816570551-1.jpg"
     }
   ]
  

@@ -5,17 +5,23 @@ import { Card, Text, Chip } from 'react-native-paper';
 import ScanButton from '../../../components/ScanButton';
 import barcodeData from '../../../data/barcode.json';
 import { useLocalSearchParams } from 'expo-router';
+import { useRouter, useNavigation } from 'expo-router';
 
 export default function barcodeResult() {
     const { barcode } = useLocalSearchParams<{ barcode: string }>();
     const [item, setItem] = useState({ name: 'test', ingredient: 'test 2', image: '' });
-console.log(barcode);
+    console.log(barcode);
     const [allergyList, setAllergyList] = useState([]);
+    const router = useRouter();
 
     useEffect(() => {
         const filtered = barcodeData.filter((item) => item.barcode == barcode);
-        setItem(filtered[0])
-        GemineAPI(filtered[0]);
+        if (filtered.length == 0)
+            router.push({ pathname: "productNotfound" })
+        else {
+            setItem(filtered[0])
+            GemineAPI(filtered[0]);
+        }
     }, [])
 
 
@@ -44,7 +50,7 @@ console.log(barcode);
         const res = JSON.parse(result.response.text())
         console.log(result.response.text());
         let allergies = [];
-        console.log(typeof(res));
+        console.log(typeof (res));
         if (res['eggs'].length > 0) {
             console.log("Eggs")
             console.log(res['eggs'].length)
@@ -132,11 +138,11 @@ console.log(barcode);
                             <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: '8', color: '#000' }}>
                                 {allergyList && allergyList.map((allergy, index) => {
                                     return (<>
-                                    <Chip key={index} style={{ backgroundColor: '#FFC858', borderWidth: '1', borderColor: '#F3A405' }} onPress={() => console.log('Pressed')}>{allergy['allergy']}</Chip>
+                                        <Chip key={index} style={{ backgroundColor: '#FFC858', borderWidth: '1', borderColor: '#F3A405' }} onPress={() => console.log('Pressed')}>{allergy['allergy']}</Chip>
                                     </>)
                                 })}
 
-                                
+
                             </View>
                         </View>
                         <View>

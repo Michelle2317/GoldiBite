@@ -1,22 +1,27 @@
 import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { Image, View, StyleSheet, TextInput } from "react-native";
-import { Button, Card, Text } from "react-native-paper";
-import { BarCodeScanner } from 'expo-barcode-scanner';
+import { Button, Text } from "react-native-paper";
+import { CameraView } from 'expo-camera';
 
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import BottomSheet, { BottomSheetView, BottomSheetTextInput } from '@gorhom/bottom-sheet';
-import { useRouter, useNavigation } from 'expo-router';
-
+import { useRouter } from 'expo-router';
+import ProductUtils from '@/src/utils/ProductUtils';
 
 export default function Scanner(props) {
     const parent = props.navigation;
     const router = useRouter();
+    const getProduct = ProductUtils();
 
     const handleBarCodeScanned = ({ type, data }) => {
         if (data !== null || data !== "") {
-            setScanned(true);
-            router.push({ pathname: "barcodeScanner/barcodeResult", params: { barcode: data } })
-            //alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+            setScanned(false);
+            const product = getProduct(data);
+            if (!product[0]) {
+                router.push({ pathname: "barcodeScanner/productNotfound" })
+            } else {
+                router.push({ pathname: "barcodeScanner/barcodeResult", params: { barcode: data } })
+            }
         }
     };
 
@@ -31,7 +36,7 @@ export default function Scanner(props) {
     useEffect(() => {
         setScanned(false);
         const getBarCodeScannerPermissions = async () => {
-            const { status } = await BarCodeScanner.requestPermissionsAsync();
+            const { status } = await Camera.requestPermissionsAsync();
             setHasPermission(status === 'granted');
         };
 
@@ -46,9 +51,13 @@ export default function Scanner(props) {
     }, [scanned])
 
     useEffect(() => {
-        if (barcode !== null && barcode !== "") {
+        const product = getProduct(barcode);
+        if (!product[0]) {
+            router.push({ pathname: "barcodeScanner/productNotfound" })
+        } else {
             router.push({ pathname: "barcodeScanner/barcodeResult", params: { barcode: barcode } })
         }
+
     }, [barcode])
 
     // hidden the bottom navigation bar
@@ -64,8 +73,11 @@ export default function Scanner(props) {
         //options={{        tabBarStyle: { display: "none" },    }}
         <View style={styles.container}  >
             <View style={styles.barcodeContainer}>
-                <BarCodeScanner
-                    onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+                <CameraView
+                    barcodeScannerSettings={{
+                        barcodeTypes: ["aztec", 'ean13', 'ean8', 'qr', 'pdf417', 'upc_e', 'datamatrix', 'code39', 'code93', 'itf14', 'codabar', 'code128', 'upc_a'],
+                    }}
+                    onBarcodeScanned={handleBarCodeScanned}
                     style={StyleSheet.absoluteFillObject}
                 />
                 {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}

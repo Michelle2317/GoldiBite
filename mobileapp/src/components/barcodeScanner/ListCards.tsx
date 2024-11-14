@@ -80,61 +80,56 @@ const ListCards = () => {
 				</View>
 
 				<View style={styles.mainContentWrapper}>
-					<TextInput
-						value={item.title}
-						onChangeText={(newTitle) =>
-							handleTitle(
-								item.id,
+					<View style={styles.titleRow}>
+						<TextInput
+							value={item.title}
+							onChangeText={(
 								newTitle
-							)
-						}
-						style={styles.title}
-					/>
-					<TextInput
-						value={item.allergenStatus}
-						onChangeText={(newStatus) =>
-							handleAllergenStatus(
-								item.id,
-								newStatus
-							)
-						}
-						style={styles.allergenStatus}
-					/>
-					<View style={styles.allergensWrapper}>
-						{item.allergens.map(
-							(allergen, index) => {
-								let iconName;
-								switch (
-									allergen
-								) {
-									case 'fish':
-										iconName =
-											'fish';
-										break;
-									case 'egg':
-										iconName =
-											'egg';
-										break;
-									case 'bread-slice':
-										iconName =
-											'bread-slice';
-										break;
-									default:
-										iconName =
-											'circle';
-										break;
-								}
+							) =>
+								handleTitle(
+									item.id,
+									newTitle
+								)
+							}
+							style={styles.title}
+						/>
+						<View
+							style={
+								styles.allergensWrapper
+							}
+						>
+							{item.allergens.map(
+								(
+									allergen,
+									index
+								) => {
+									let iconName;
+									switch (
+										allergen
+									) {
+										case 'fish':
+											iconName =
+												'fish';
+											break;
+										case 'egg':
+											iconName =
+												'egg';
+											break;
+										case 'bread-slice':
+											iconName =
+												'bread-slice';
+											break;
+										default:
+											iconName =
+												'circle';
+											break;
+									}
 
-								return (
-									<View
-										key={
-											index
-										}
-										style={
-											styles.allergenIconWrapper
-										}
-									>
+									return (
 										<IconButton
+											key={
+												index
+											}
 											icon={
 												iconName
 											}
@@ -146,11 +141,21 @@ const ListCards = () => {
 												styles.allergenIcon
 											}
 										/>
-									</View>
-								);
-							}
-						)}
+									);
+								}
+							)}
+						</View>
 					</View>
+					<TextInput
+						value={item.allergenStatus}
+						onChangeText={(newStatus) =>
+							handleAllergenStatus(
+								item.id,
+								newStatus
+							)
+						}
+						style={styles.allergenStatus}
+					/>
 					<View style={styles.quantityWrapper}>
 						<IconButton
 							icon='minus'
@@ -205,7 +210,7 @@ const ListCards = () => {
 const styles = StyleSheet.create({
 	card: {
 		width: 324,
-		height: 88,
+		height: 67,
 		borderRadius: 10,
 		backgroundColor: '#fce4b6',
 		elevation: 3,
@@ -221,33 +226,42 @@ const styles = StyleSheet.create({
 	statusWrapper: {
 		justifyContent: 'center',
 		alignItems: 'center',
+		marginBottom: 10,
+		marginLeft: -4,
 	},
 	mainContentWrapper: {
 		justifyContent: 'space-evenly',
-		paddingLeft: 10,
+		paddingLeft: 2,
 		paddingTop: 6,
+		flex: 1,
+	},
+	titleRow: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'space-between',
 	},
 	title: {
 		fontWeight: 'bold',
 		fontSize: 14,
+		flex: 1,
 	},
 	allergenStatus: {
 		fontSize: 10,
 	},
 	allergensWrapper: {
 		flexDirection: 'row',
-		flexWrap: 'wrap',
-		justifyContent: 'flex-start',
+		marginLeft: -62,
+		paddingTop: 2,
 	},
 	allergenIcon: {
-		margin: 0,
-		paddingRight: 15,
+		margin: -4,
+		padding: 0,
 	},
 	quantityWrapper: {
 		flexDirection: 'row',
 		alignItems: 'center',
+		marginTop: -9,
 		marginLeft: -15,
-		marginTop: -16,
 	},
 	quantityAmount: {
 		fontSize: 14,
@@ -256,9 +270,11 @@ const styles = StyleSheet.create({
 	chevronWrapper: {
 		justifyContent: 'center',
 		alignItems: 'center',
+		marginRight: -28,
 	},
 	chevronIcon: {
-		marginLeft: 20,
+		marginLeft: 35,
+		marginBottom: 13,
 	},
 });
 

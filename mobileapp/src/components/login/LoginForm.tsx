@@ -9,8 +9,8 @@ import { useAuth } from "@/src/context/AuthContext";
 
 const LoginForm = ({ callback }) => {
     const router = useRouter();
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('goldibite@my.bcit.ca');
+    const [password, setPassword] = useState('123123');
 
     const { onLogin } = useAuth();
 

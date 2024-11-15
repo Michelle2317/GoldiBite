@@ -1,20 +1,23 @@
-import { Tabs } from 'expo-router';
+import { Tabs, router, useSegments } from 'expo-router';
 import { Icon } from 'react-native-paper';
 import { useTheme } from '../../hooks/useTheme';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 export default function TabLayout() {
 	const { colorScheme } = useTheme();
-
+	const segments = useSegments();
 	const tabBarStyle =
 		colorScheme === 'light'
 			? { backgroundColor: '#FFC858' }
 			: { backgroundColor: '#000' };
+			const backgroundColor = colorScheme === 'light'? '#FFC858':'#000';
 	const tabBarActiveTintColor =
 		colorScheme === 'light' ? '#000' : '#FFC858';
 	const tabBarInactiveTintColor =
 		colorScheme === 'light' ? '#1C1B1F' : '#FFC858';
 
+	const displayTabbar = segments[2] === 'menuCamera' || segments[2] === undefined ? 'none' : 'flex';
+	
 	return (
 		<Tabs
 			screenOptions={{
@@ -23,6 +26,7 @@ export default function TabLayout() {
 				tabBarStyle,
 			}}
 		>
+
 			<Tabs.Screen
 				name='index'
 				options={{
@@ -63,6 +67,12 @@ export default function TabLayout() {
 				name='barcodeScanner'
 				options={{
 					title: 'Scan',
+					tabBarStyle: {
+						display: displayTabbar,
+						backgroundColor:backgroundColor
+					},
+					tabBarActiveTintColor:tabBarActiveTintColor,
+					tabBarInactiveTintColor:tabBarInactiveTintColor,
 					headerShown: false,
 					tabBarIcon: ({ color, focused }) => (
 						<Ionicons

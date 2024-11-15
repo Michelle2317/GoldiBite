@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
 import { SegmentedButtons } from 'react-native-paper';
+import { useRouter } from 'expo-router';
 
 const SegmentedButton = () => {
     const [value, setValue] = React.useState('');
+    const router = useRouter();
 
     const theme = {
         "colors": {
@@ -12,15 +14,23 @@ const SegmentedButton = () => {
             "borderColor": '#BFEDDD', // active backgroundColor
             "onSurface": '#000000', //
             "outline": '#BFEDDD',
-            "background":'#BFEDDD',
+            "background": '#BFEDDD',
         }
     }
 
+    const handleOnPress = (e, name) => {
+        if (name === 'barcode')
+            router.push({ pathname: "(tabs)/barcodeScanner/" })
+        if (name
+            
+             === 'menu')
+            router.push({ pathname: "(tabs)/barcodeScanner/menuCamera" })
+    }
 
     return (<>
         <SafeAreaView style={styles.container}>
-            <SegmentedButtons style={{ backgroundColor:'#BFEDDD', borderRadius:18}}
-            theme={theme}
+            <SegmentedButtons style={{ backgroundColor: '#BFEDDD', borderRadius: 18 }}
+                theme={theme}
                 density='small'
                 value={value}
                 onValueChange={setValue}
@@ -28,10 +38,12 @@ const SegmentedButton = () => {
                     {
                         value: 'Barcode',
                         label: 'Barcode',
+                        onPress: (e) => handleOnPress(e, 'barcode'),
                     },
                     {
                         value: 'Menu',
                         label: 'Menu',
+                        onPress: (e) => handleOnPress(e, 'menu'),
                     }
                 ]}
             />

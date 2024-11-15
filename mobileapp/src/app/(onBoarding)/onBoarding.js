@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import {View, StyleSheet } from "react-native";
-import { onboardingList } from "../../data/onboarding";
-import OnBoardingContent from "../../components/onBoarding/OnBoardingContent";
+import { onboardingList } from "@/src/data/onboarding";
+import OnBoardingContent from "@/src/components/onBoarding/OnBoardingContent";
 import { useRouter } from "expo-router";
 const OnBoarding = () => {
     const [currentStep, setCurrentStep] = useState(0);

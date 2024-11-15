@@ -72,8 +72,9 @@ const SetupAccount = () => {
 
             <View style={styles.buttonContainer}>
                 {/* Button Container */}
-                <PrimaryButton buttonText={"Back"} callback={handleBackBtn} type="secondary" styles={{ alignSelf: "flex-start", display: "flex" }} />
-                <PrimaryButton buttonText={"Next"} callback={handleNextBtn} styles={{ alignSelf: "flex-end" }} />
+                <PrimaryButton buttonText={"Next"} callback={handleNextBtn} />
+                {(step != 1)&& <PrimaryButton buttonText={"Back"} callback={handleBackBtn} type="secondary"  />}
+                
             </View>
 
         </View>
@@ -117,7 +118,7 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         width: 280,
-        flexDirection: 'row',
+        flexDirection: 'row-reverse',
         justifyContent: 'space-between',
     },
     allergyContainer: {

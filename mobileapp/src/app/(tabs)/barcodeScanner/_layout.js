@@ -27,9 +27,21 @@ const StackLayout = () => {
                   headerTitleStyle: {
                     fontWeight: 'bold',
                   },
-            }}
-
-            />
+            }} />
+            
+            <Stack.Screen name="menuCamera" options={{
+                headerBackTitle: 'Back',
+                headerBackTitleStyle: { fontSize: 18 },
+                headerTitle: () => <SegmentedButton />,
+                headerShown: true,
+                headerStyle: {
+                    backgroundColor: '#FFC858',
+                  },
+                  headerTintColor: 'unset',
+                  headerTitleStyle: {
+                    fontWeight: 'bold',
+                  },
+            }} />
             <Stack.Screen name="barcodeResult" options={{
                 headerBackTitle: 'Back',
                 headerBackTitleStyle: { fontSize: 18 },
@@ -38,7 +50,18 @@ const StackLayout = () => {
                 headerShown: true,
             }} />
             <Stack.Screen name="menuScannerResult" options={{
-                headerShown: false,
+                headerBackTitle: 'Back',
+                headerBackTitleStyle: { fontSize: 18 },
+                headerTitle: "",
+                HeaderRightButton: props => <HeaderRightButton {...props} />,
+                headerShown: true,
+            }} />
+            <Stack.Screen name="menuScannerResultDetail" options={{
+                headerBackTitle: 'Back',
+                headerBackTitleStyle: { fontSize: 18 },
+                headerTitle: "",
+                HeaderRightButton: props => <HeaderRightButton {...props} />,
+                headerShown: true,
             }} />
             <Stack.Screen name="productNotfound" options={{
                 headerBackTitle: 'Back',
@@ -47,6 +70,7 @@ const StackLayout = () => {
                 HeaderRightButton: props => <HeaderRightButton {...props} />,
                 headerShown: true,
             }} />
+            
         </Stack>
 
     )

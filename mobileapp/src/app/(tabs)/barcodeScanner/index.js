@@ -51,6 +51,7 @@ export default function Scanner(props) {
     }, [scanned])
 
     useEffect(() => {
+        if(barcode == "") return;
         const product = getProduct(barcode);
         if (!product[0]) {
             router.push({ pathname: "barcodeScanner/productNotfound" })

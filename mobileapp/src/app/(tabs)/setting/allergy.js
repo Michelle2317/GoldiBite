@@ -6,9 +6,10 @@ import PrimaryButton from '../../../components/paperUiElement/PrimaryButton';
 import { useRouter } from "expo-router";
 import UserStoreDataUtils from "../../../utils/UserStoreDataUtils";
 import PaperUIChip from '@/src/components/paperUiElement/PaperUIChip'
+import PaperUIChipStyle from '@/src/components/paperUiElement/PaperUIChipStyle'
 
 const allergy = () => {
-    const router = useRouter(); 
+    const router = useRouter();
     const { getProfile, storeProfile } = UserStoreDataUtils();
     const [profile, setProfile] = useState({});
     const [selectedAllergies, setSelectedAllergies] = useState([])
@@ -30,7 +31,6 @@ const allergy = () => {
 
     const handleBackBtn = () => {
         const storeData = async () => {
-
             await storeProfile(JSON.stringify(profile));
         }
         storeData()
@@ -41,37 +41,44 @@ const allergy = () => {
         setProfile({ ...profile, allergies: selectedAllergies });
     }, [selectedAllergies]);
 
-    const handleAllergyOnPress = (e, allergy) => {
-        if (!selectedAllergies) {
-            setSelectedAllergies([allergy])
-        } else if (selectedAllergies.indexOf(allergy) >= 0) { //remove the item
-            setSelectedAllergies(selectedAllergies.filter((item) => item != allergy))
-        } else {
-            setSelectedAllergies([...selectedAllergies, allergy])
-        }
+    const handleAllergyOnPress = (allergy) => {
+        const tempAllergies = [];
+        selectedAllergies.forEach((item) => {
+            if (item.name == allergy) {
+                tempAllergies.push({name:item.name, selected:!item.selected});
+            } else {
+                tempAllergies.push(item);
+
+            }
+        });
+        setSelectedAllergies(tempAllergies);
     }
     return (<>
         <View style={styles.container}>
 
-               
-                <Text variant="titleMedium" style={{ alignSelf: "center", paddingLeft:20, paddingRight:20, textAlign:'center', marginBottom:10 }}>
+
+            <Text variant="titleMedium" style={{ alignSelf: "center", paddingLeft: 20, paddingRight: 20, textAlign: 'center', marginBottom: 10 }}>
                 Have a new allergen or selected something wrong, edit below!
-                </Text>
+            </Text>
 
-                <View style={styles.questionContainer}>
-                    <View style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", gap: 10, paddingLeft:20, paddingRight:20 }}>
+            <View style={styles.questionContainer}>
+                <View style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", gap: 10, paddingLeft: 20, paddingRight: 20 }}>
 
-                        {allergies && allergies.map((item, index) => {
-                            const selected = selectedAllergies && selectedAllergies.indexOf(item) >= 0;
-                            return (<>
-                            <PaperUIChip name={item} isSelected={selected} callback={handleAllergyOnPress} />
-                               
-                            </>)
-                        })
-                        }
-                    </View>
-                    <PrimaryButton buttonText="Save" callback={handleBackBtn} />
+
+                    {selectedAllergies && selectedAllergies.map((item, index) => {
+                        return (<>
+                            {
+                                item.selected ? <PaperUIChip key={index} name={item.name} isSelected={true} callback={handleAllergyOnPress} />
+                                    :
+                                    <PaperUIChipStyle key={index} name={item.name} isSelected={false} callback={handleAllergyOnPress} />
+                            }
+                        </>
+                        )
+                    })
+                    }
                 </View>
+                <PrimaryButton buttonText="Save" callback={handleBackBtn} />
+            </View>
         </View>
     </>)
 }

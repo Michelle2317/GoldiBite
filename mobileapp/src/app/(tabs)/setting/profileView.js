@@ -35,11 +35,11 @@ const profileView = () => {
     const AGE_OPTIONS = age_range;
 
     const handleBackBtn = () => {
-        
+
         const storeData = async () => {
             await storeProfile(JSON.stringify(profile));
-          }
-          storeData()
+        }
+        storeData()
         router.back();
     }
 
@@ -56,22 +56,19 @@ const profileView = () => {
     }
     return (<>
         <View style={styles.container}>
-            <View style={styles.profileContainer}>
-{/* 
+
+            <View style={styles.contentContainer}>
                 <Image
-                    source={profile.icon.source}
+                    source={require('@/assets/images/elements/user_icon1.png')}
                     style={{ width: 130, height: 130, alignSelf: "center" }}
-                />  */}
+                />
+                <PrimaryInputText label="Nickname" value={profile.username} onChangeText={handleUsernameOnChange} />
+                <PaperUIDropdown label="Age" placeholder="Select age" option={AGE_OPTIONS} value={profile.age} callback={handleAgeOnChange} />
+                <PaperUIDropdown label="Gender" placeholder="Select gender" option={OPTIONS} value={profile.gender} callback={handleGenderOnChange} />
 
-                <View style={styles.questionContainer}>
-                    <PrimaryInputText label="Nickname" value={profile.username} onChangeText={handleUsernameOnChange} />
-
-                    <PaperUIDropdown label="Age" placeholder="Select age" option={AGE_OPTIONS} value={profile.age} callback={handleAgeOnChange} />
-            <PaperUIDropdown label="Gender" placeholder="Select gender" option={OPTIONS} value={profile.gender} callback={handleGenderOnChange} />
-                  
-
-                    <PrimaryButton buttonText="Save" callback={handleBackBtn} />
-                </View>
+            </View>
+            <View style={styles.buttonContainer}>
+                <PrimaryButton buttonText="Save" callback={handleBackBtn} />
             </View>
         </View>
     </>)
@@ -83,14 +80,17 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 2,
         padding: 20,
-        paddingTop: 50,
         gap: 10,
         flexDirection: 'column',
-        alignContent: 'center',
+        justifyContent: "flex-start"
     },
-    questionContainer: {
-        flex: 0,
+    contentContainer: {
+        flex: 6,
         display: "flex",
+        gap: 10,
+    },
+    buttonContainer: {
+        flex: 1,
         gap: 10,
     },
 

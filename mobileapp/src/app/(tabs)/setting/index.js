@@ -30,7 +30,6 @@ const App = () => {
                 />
                 <Text variant="titleMedium" style={{ alignSelf: "center" }}>{profile.username}</Text>
                 <Text variant="bodyMedium" style={{ alignSelf: "center" }}>{authState?.username}</Text>
-               
             </View>
             <SettingBottomSheet />
         </View>
@@ -42,14 +41,12 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 0,
-        gap: 10,
         flexDirection: 'column',
-        alignContent: 'center',
+        alignContent: "flex-start",
     },
     profileContainer: {
-        flex: 1,
-        padding: 20,
-        paddingTop: 50,
+        flex: 0,
+        paddingTop: 20,
         gap: 10,
     }
 });

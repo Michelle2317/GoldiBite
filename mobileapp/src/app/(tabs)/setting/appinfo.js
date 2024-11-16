@@ -14,10 +14,9 @@ const appinfo = () => {
 	return (
 		<>
 			<View style={styles.container}>
-				<View style={styles.optionContainer}>
+				<View style={styles.contentContainer}>
 					<Text
 						variant='bodyMedium'
-						style={{ marginBottom: 10 }}
 					>
 						GoldiBite is an AI-powered app
 						designed to assist individuals
@@ -34,7 +33,6 @@ const appinfo = () => {
 
 					<Text
 						variant='bodyMedium'
-						style={{ marginBottom: 10 }}
 					>
 						GoldiBite is inspired by the
 						Goldilocks story, specifically
@@ -54,7 +52,6 @@ const appinfo = () => {
 
 					<Text
 						variant='bodyMedium'
-						style={{ marginBottom: 10 }}
 					>
 						We are a team of students from
 						the Digital Design and Web
@@ -64,7 +61,6 @@ const appinfo = () => {
 					</Text>
 					<Text
 						variant='bodyMedium'
-						style={{ marginBottom: 10 }}
 					>
 						{' '}
 						{'\u2022'} Michelle & Timothy -
@@ -72,7 +68,6 @@ const appinfo = () => {
 					</Text>
 					<Text
 						variant='bodyMedium'
-						style={{ marginBottom: 10 }}
 					>
 						{' '}
 						{'\u2022'} Leslie & Gavin -
@@ -80,7 +75,6 @@ const appinfo = () => {
 					</Text>
 					<Text
 						variant='bodyMedium'
-						style={{ marginBottom: 10 }}
 					>
 						{' '}
 						{'\u2022'} Cindy & Ale -
@@ -88,7 +82,6 @@ const appinfo = () => {
 					</Text>
 					<Text
 						variant='bodyMedium'
-						style={{ marginBottom: 10 }}
 					>
 						{' '}
 						{'\u2022'} Julia & Andrew -
@@ -96,50 +89,42 @@ const appinfo = () => {
 					</Text>
 					<Text
 						variant='bodyMedium'
-						style={{ marginBottom: 10 }}
 					>
 						For more information, contact us
 						at +441 158 2755.
 					</Text>
 				</View>
-				<View style={styles.optionContainer}></View>
-				<View style={styles.optionContainer}></View>
-				<View style={styles.optionContainer}></View>
+				<View style={styles.buttonContainer}>
+					<PrimaryButton buttonText="Save" callback={handleBackBtn} />
+				</View>
 
-				<PrimaryButton
-					buttonText='Back'
-					callback={handleBackBtn}
-				/>
 			</View>
 		</>
 	);
 };
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		padding: 2,
-		padding: 20,
-		paddingTop: 50,
-		gap: 10,
-		flexDirection: 'column',
-		alignContent: 'center',
-	},
-	questionContainer: {
-		flex: 1,
-		display: 'flex',
-	},
-	optionContainer: {
-		flex: 1,
-		flexDirection: 'column',
-	},
+
+    container: {
+        flex: 1,
+        padding: 2,
+        padding: 20,
+        gap: 10,
+        flexDirection: 'column',
+        alignContent: 'center',
+    },
+    contentContainer: {
+        flex: 10,
+        display: "flex",
+        gap: 10,
+    },
+    buttonContainer: {
+        flex: 1,
+        gap: 10,
+    },
 	description: {
 		flex: 1,
 		flexDirection: 'column',
-	},
-	buttonContainer: {
-		flex: 1,
-		alignSelf: 'flex-end',
 	},
 });
 export default appinfo;

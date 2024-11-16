@@ -54,13 +54,12 @@ const profileView = () => {
 
     return (<>
         <View style={styles.container}>
-            <View style={styles.profileContainer}>
-
-                <View style={styles.questionContainer}>
-                    <PaperUIDropdown label="Language" placeholder="Select language" option={LANGUAGE_OPTIONS} value={profile.language} callback={handleLanguageOnChange} />
-                    <PaperUIDropdown label="Location" placeholder="Select location" option={LOCATION_OPTIONS} value={profile.location} callback={handleLocationOnChange} />
-                    <PrimaryButton buttonText="Save" callback={handleBackBtn} />
-                </View>
+            <View style={styles.contentContainer}>
+                <PaperUIDropdown label="Language" placeholder="Select language" option={LANGUAGE_OPTIONS} value={profile.language} callback={handleLanguageOnChange} />
+                <PaperUIDropdown label="Location" placeholder="Select location" option={LOCATION_OPTIONS} value={profile.location} callback={handleLocationOnChange} />
+            </View>
+            <View style={styles.buttonContainer}>
+                <PrimaryButton buttonText="Save" callback={handleBackBtn} />
             </View>
         </View>
     </>)
@@ -77,12 +76,22 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         alignContent: 'center',
     },
-    questionContainer: {
-        flex: 0,
+    contentContainer: {
+        flex: 6,
         display: "flex",
         gap: 10,
     },
-
+    buttonContainer: {
+        flex: 1,
+        gap: 10,
+    },
+    title: {
+        alignSelf: "center",
+        paddingLeft: 20,
+        paddingRight: 20,
+        textAlign: 'center',
+        marginBottom: 10
+    }
 });
 
 export default profileView;

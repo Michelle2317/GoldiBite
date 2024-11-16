@@ -31,12 +31,10 @@ const IconSection = ({ profile, callback }) => {
         let iconList = [];
         icons.map(icon => {
             if (icon.name == name && icon.value == value) {
-                console.log(icon.source)
                 iconList.push({ name: icon.name, value: icon.value, selected: true, source: icon.source })
                 setIsCallCallback(true)
                 setProfileInformation({ ...profileInformation, icon: icon });
             } else {
-                console.log(icon.source)
                 iconList.push({ name: icon.name, value: icon.value, selected: false, source: icon.source })
             }
         })
@@ -46,8 +44,6 @@ const IconSection = ({ profile, callback }) => {
 
     useEffect(() => {
         const selectedIcon = profileInformation.icon;
-        console.log('45' + profileInformation)
-        console.log('46' + selectedIcon)
         let iconList = [];
         icons.map(icon => {
             if (selectedIcon == undefined) {
@@ -64,7 +60,7 @@ const IconSection = ({ profile, callback }) => {
     }, []);
 
     useEffect(() => {
-        if(isCallCallback)  callback(profileInformation);
+        if (isCallCallback) callback(profileInformation);
     }, [profileInformation]);
 
     return (<>
@@ -74,14 +70,14 @@ const IconSection = ({ profile, callback }) => {
         <View style={styles.questionSelectorContainer}>
             {icons && icons.map((icon, index) => {
                 let borderColor = icon.selected ? '#ffffff' : 'transparent';
-                return (<>
+                return (
                     <TouchableHighlight key={index} onPress={(element) => { handleOnPress(element, icon.name, icon.value) }} underlayColor="transparent">
-                        <Image key={index}
+                        <Image
                             source={icon.source}
                             style={{ width: 80, height: 80, borderWidth: 5, borderRadius: '50%', borderColor: borderColor }}
                         />
                     </TouchableHighlight>
-                </>)
+                )
 
             })}
 

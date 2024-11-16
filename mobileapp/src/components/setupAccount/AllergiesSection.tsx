@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { Text } from 'react-native-paper';
 import PaperUIChip from '@/src/components/paperUiElement/PaperUIChip'
+import PaperUIChipStyle from '@/src/components/paperUiElement/PaperUIChipStyle'
 
 const AllergiesSection = ({ profile, callback }) => {
 
@@ -10,8 +11,17 @@ const AllergiesSection = ({ profile, callback }) => {
     const [selectedAllergies, setSelectedAllergies] = useState(profileInformation.allergies)
 
     const [allergies, setAllergies] = useState([
-        "Eggs", "Milk", "Mustard", "Peanuts",
-        "Fish", "Crustaceans and molluscs", "Sesame seeds", "Soy", "Sulphites", "Tree nuts", "Wheat and triticale"
+        { name: "Eggs", selected: false },
+        { name: "Milk", selected: false },
+        { name: "Mustard", selected: false },
+        { name: "Peanuts", selected: false },
+        { name: "Fish", selected: false },
+        { name: "Crustaceans and molluscs", selected: false },
+        { name: "Sesame seeds", selected: false },
+        { name: "Soy", selected: false },
+        { name: "Sulphites", selected: false },
+        { name: "Tree nuts", selected: false },
+        { name: "Wheat and triticale", selected: false }
     ]);
 
     useEffect(() => {
@@ -20,26 +30,43 @@ const AllergiesSection = ({ profile, callback }) => {
 
     useEffect(() => {
         setProfileInformation({ ...profileInformation, allergies: selectedAllergies });
+        console.log(selectedAllergies)
     }, [selectedAllergies]);
 
-    const handleAllergyOnPress = (e, allergy) => {
-        if (!selectedAllergies) {
-            setSelectedAllergies([allergy])
-        } else if (selectedAllergies.indexOf(allergy) >= 0) { //remove the item
-            setSelectedAllergies(selectedAllergies.filter((item) => item != allergy))
-        } else {
-            setSelectedAllergies([...selectedAllergies, allergy])
+    useEffect(() => {
+        console.log(selectedAllergies == undefined)
+        if (selectedAllergies == undefined) // no allergies
+        {
+            setSelectedAllergies(allergies);
         }
+    }, []);
+
+
+    const handleAllergyOnPress = (allergy) => {
+        const tempAllergies = [];
+        selectedAllergies.forEach((item) => {
+            if (item.name == allergy) {
+                tempAllergies.push({name:item.name, selected:!item.selected});
+            } else {
+                tempAllergies.push(item);
+
+            }
+        });
+        setSelectedAllergies(tempAllergies);
     }
 
     return (<>
         <Text variant="headlineLarge" style={{ textAlign: "center", marginBottom: 30, fontWeight: 'bold' }}>Select Allergy</Text>
         <View style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", gap: 10, width: 280 }}>
-            {allergies && allergies.map((item, index) => {
-                const selected = selectedAllergies && selectedAllergies.indexOf(item) >= 0;
+            {selectedAllergies && selectedAllergies.map((item, index) => {
                 return (<>
-                    <PaperUIChip name={item} isSelected={selected} callback={handleAllergyOnPress} />
-                </>)
+                    {
+                        item.selected? <PaperUIChip key={index} name={item.name} isSelected={true} callback={handleAllergyOnPress} />
+                        : 
+                        <PaperUIChipStyle key={index} name={item.name} isSelected={false} callback={handleAllergyOnPress} />
+                }
+                   </>
+                )
             })
             }
         </View>
@@ -48,7 +75,7 @@ const AllergiesSection = ({ profile, callback }) => {
 }
 
 const styles = StyleSheet.create({
-   
+
     questionContainer: {
         width: 280,
         flex: 1,

@@ -1,12 +1,11 @@
 import { useState } from "react";
-import { Image, View, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { Button, Text, IconButton, MD3Colors } from "react-native-paper";
 import { useRouter } from "expo-router";
 import InTextButton from "../paperUiElement/InTextButton"
 import PrimaryInputText from "../paperUiElement/PrimaryInputText"
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useAuth } from "@/src/context/AuthContext";
-
+import SignInWith from './SignInWith'
 const LoginForm = ({ callback }) => {
     const router = useRouter();
     const [email, setEmail] = useState('goldibite@my.bcit.ca');
@@ -20,7 +19,7 @@ const LoginForm = ({ callback }) => {
     return (<>
         <PrimaryInputText label="Email" value={email} onChangeText={setEmail} />
         <PrimaryInputText label="Password" value={password} onChangeText={setPassword} secureTextEntry={true} />
-        <View style={{height:28}}>
+        <View style={{ height: 28 }}>
             <InTextButton butonText=" Forget Password?" callback={() => console.log('Pressed')} style={{ alignSelf: 'self-start' }} />
         </View>
         <Button mode="contained" onPress={onSignInPress} theme={{ colors: { onPrimary: '#000000', primary: 'rgba(213,203,68, 0.7)' } }} >
@@ -29,11 +28,9 @@ const LoginForm = ({ callback }) => {
         <Text variant="labelMedium" style={{ alignSelf: 'center', marginBottom: 50 }}>
             Don't have an account? <InTextButton butonText="Sign up" callback={callback} /></Text>
 
+        <SignInWith />
 
-        <Image
-            source={require('@/assets/images/elements/Sign-in-with.png')}
-            style={{ width: 320, height: 28, alignSelf: "center" }}
-        />
+        
         <View style={styles.socialMediaLoginContainer}>
             <IconButton
                 icon="google"

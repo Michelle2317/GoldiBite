@@ -12,7 +12,7 @@ const TouchableButton = ({ name, target }) => {
 
     return (<>
         <TouchableOpacity style={styles.menu} onPress={() => { handleOnPress(target) }}>
-            <Text variant="titleLarge" style={styles.itemText}>{name}</Text>
+            <Text variant="titleMedium" style={styles.label}>{name}</Text>
             <Icon 
                 source="menu-right"
                 size={25}
@@ -23,9 +23,8 @@ const TouchableButton = ({ name, target }) => {
 }
 
 const styles = StyleSheet.create({
-    itemText: {
+    label: {
         flex: 2,
-        height: 30,
         fontWeight: "bold",
     },
     dividerStyle: {
@@ -36,6 +35,7 @@ const styles = StyleSheet.create({
         paddingRight: 15,
         flexDirection: "row",
         justifyContent: "space-between",
+        alignItems:"center",
     },
     icon: {
         alignSelf:"flex-end"

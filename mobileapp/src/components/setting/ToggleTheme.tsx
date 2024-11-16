@@ -15,7 +15,7 @@ const ToggleTheme = () => {
 	return (
 		<>
 			<View style={styles.container}>
-				<Text variant='titleLarge' style={styles.label}>
+				<Text variant='titleMedium' style={styles.label}>
 					Dark Mode
 				</Text>
 				<Switch
@@ -38,7 +38,6 @@ const styles = StyleSheet.create({
 		marginLeft: 14,
 		fontWeight: 'bold',
 		flex: 2,
-		height: 25,
 	},
 	switch: {
 		marginRight: 10,

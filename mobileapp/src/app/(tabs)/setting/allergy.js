@@ -45,7 +45,7 @@ const allergy = () => {
         const tempAllergies = [];
         selectedAllergies.forEach((item) => {
             if (item.name == allergy) {
-                tempAllergies.push({name:item.name, selected:!item.selected});
+                tempAllergies.push({ name: item.name, selected: !item.selected });
             } else {
                 tempAllergies.push(item);
 
@@ -55,16 +55,11 @@ const allergy = () => {
     }
     return (<>
         <View style={styles.container}>
-
-
-            <Text variant="titleMedium" style={{ alignSelf: "center", paddingLeft: 20, paddingRight: 20, textAlign: 'center', marginBottom: 10 }}>
-                Have a new allergen or selected something wrong, edit below!
-            </Text>
-
-            <View style={styles.questionContainer}>
-                <View style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", gap: 10, paddingLeft: 20, paddingRight: 20 }}>
-
-
+            <View style={styles.contentContainer}>
+                <Text variant="titleMedium" style={styles.title}>
+                    Have a new allergen or selected something wrong, edit below!
+                </Text>
+                <View style={styles.allergyContainer}>
                     {selectedAllergies && selectedAllergies.map((item, index) => {
                         return (<>
                             {
@@ -77,6 +72,8 @@ const allergy = () => {
                     })
                     }
                 </View>
+            </View>
+            <View style={styles.buttonContainer}>
                 <PrimaryButton buttonText="Save" callback={handleBackBtn} />
             </View>
         </View>
@@ -94,11 +91,30 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         alignContent: 'center',
     },
-    questionContainer: {
-        flex: 0,
+    contentContainer: {
+        flex: 6,
         display: "flex",
         gap: 10,
     },
+    allergyContainer: {
+        display: "flex",
+        flexDirection: "row",
+        flexWrap: "wrap",
+        gap: 10,
+        paddingLeft: 20,
+        paddingRight: 20
+    },
+    buttonContainer: {
+        flex: 1,
+        gap: 10,
+    },
+    title: {
+        alignSelf: "center",
+        paddingLeft: 20,
+        paddingRight: 20,
+        textAlign: 'center',
+        marginBottom: 10
+    }
 
 });
 

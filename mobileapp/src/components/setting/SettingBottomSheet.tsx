@@ -49,7 +49,7 @@ const bottomSheetBackgroundColor =  colors.mode=="dark"? "#6A6A6A":"FCE4B6";
 const styles = StyleSheet.create({
     
     bottomSheetContainer: {
-        flex: 2,
+        flex: 3,
         padding: 0,
         flexDirection: "column",
     },

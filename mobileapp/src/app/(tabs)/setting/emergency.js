@@ -28,8 +28,8 @@ const profileView = () => {
 
         const storeData = async () => {
             await storeProfile(JSON.stringify(profile));
-          }
-          storeData()
+        }
+        storeData()
         router.back();
     }
 
@@ -46,16 +46,16 @@ const profileView = () => {
 
     return (<>
         <View style={styles.container}>
-            <View style={styles.profileContainer}>
+            <View style={styles.contentContainer}>
 
-                <Text variant="headlineLarge" style={{ textAlign: "center", marginBottom: 30, fontWeight: 'bold' }}>Emergency Contact 1</Text>
-                <View style={styles.questionContainer}>
-                    <PrimaryInputText label="Emergency Contact" value={profile.emergency_contact_name} onChangeText={handleEmergencyContactNameOnChange} />
-                    <PrimaryInputText label="Relationship" value={profile.emergency_relationship} onChangeText={handleEmergencyRelationshipOnChange} />
-                    <PrimaryInputText label="Phone Number" value={profile.emergency_contact_number} onChangeText={handleEmergencyContactNumberOnChange} />
+                <Text variant="titleMedium" style={styles.title}>Emergency Contact 1</Text>
+                <PrimaryInputText label="Emergency Contact" value={profile.emergency_contact_name} onChangeText={handleEmergencyContactNameOnChange} />
+                <PrimaryInputText label="Relationship" value={profile.emergency_relationship} onChangeText={handleEmergencyRelationshipOnChange} />
+                <PrimaryInputText label="Phone Number" value={profile.emergency_contact_number} onChangeText={handleEmergencyContactNumberOnChange} />
 
-                    <PrimaryButton buttonText="Save" callback={handleBackBtn} />
-                </View>
+            </View>
+            <View style={styles.buttonContainer}>
+                <PrimaryButton buttonText="Save" callback={handleBackBtn} />
             </View>
         </View>
     </>)
@@ -72,11 +72,22 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         alignContent: 'center',
     },
-    questionContainer: {
-        flex: 0,
+    contentContainer: {
+        flex: 6,
         display: "flex",
         gap: 10,
     },
+    buttonContainer: {
+        flex: 1,
+        gap: 10,
+    },
+    title: {
+        alignSelf: "center",
+        paddingLeft: 20,
+        paddingRight: 20,
+        textAlign: 'center',
+        marginBottom: 10
+    }
 
 });
 

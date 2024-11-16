@@ -13,9 +13,9 @@ export default function GuideDetails({
 }) {
 	return (
 		<View style={styles.container}>
-			<View style={styles.header}>
+			{/* <View style={styles.header}>
 				<Text style={styles.title}>{title}</Text>
-			</View>
+			</View> */}
 			{image && <Image source={image} style={styles.image} />}
 			<Text style={styles.heading}>{heading}</Text>
 			<Text style={styles.description}>{description}</Text>

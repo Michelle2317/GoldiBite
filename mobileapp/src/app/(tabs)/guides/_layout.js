@@ -20,55 +20,43 @@ const StackLayout = () => {
 			<Stack.Screen
 				name='index'
 				options={{
+					headerBackTitle:'Back',
 					headerTitle: 'Explore Our Guides',
-					HeaderRightButton: (props) => (
-						<HeaderRightButton {...props} />
-					),
 				}}
 			/>
 			<Stack.Screen
 				name='anaphylaxis'
 				options={{
+					headerBackTitle:'Back',
 					headerTitle: '',
-					HeaderRightButton: (props) => (
-						<HeaderRightButton {...props} />
-					),
 				}}
 			/>
 			<Stack.Screen
 				name='travelTips'
 				options={{
+					headerBackTitle:'Back',
 					headerTitle: '',
-					HeaderRightButton: (props) => (
-						<HeaderRightButton {...props} />
-					),
 				}}
 			/>
 			<Stack.Screen
 				name='epipen'
 				options={{
+					headerBackTitle:'Back',
 					headerTitle: 'Epipen',
-					HeaderRightButton: (props) => (
-						<HeaderRightButton {...props} />
-					),
 				}}
 			/>
 			<Stack.Screen
 				name='forAdults'
 				options={{
+					headerBackTitle:'Back',
 					headerTitle: 'For Adults',
-					HeaderRightButton: (props) => (
-						<HeaderRightButton {...props} />
-					),
 				}}
 			/>
 			<Stack.Screen
 				name='forChildren'
 				options={{
+					headerBackTitle:'Back',
 					headerTitle: 'For Children',
-					HeaderRightButton: (props) => (
-						<HeaderRightButton {...props} />
-					),
 				}}
 			/>
 		</Stack>

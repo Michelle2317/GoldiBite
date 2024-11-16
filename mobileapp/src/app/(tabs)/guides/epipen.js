@@ -1,9 +1,15 @@
 import { View, StyleSheet, Image } from 'react-native';
 import GuideCategory from '@/src/components/guides/GuideCategory';
 import { useNavigation } from '@react-navigation/native';
+import { useLayoutEffect } from 'react';
 
 export default function Guides() {
 	const navigation = useNavigation();
+	useLayoutEffect(() => {
+		navigation.setOptions({
+			headerTitle: "Epipen",
+		});
+	  }, [navigation]);
 
 	return (
 		<View style={styles.container}>

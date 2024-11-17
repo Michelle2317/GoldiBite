@@ -10,22 +10,22 @@ const OnBoardingContent = ({ content, totalStep, language = "eng", back, next, s
             <ProgressBar progress={process} color="#00C9A2" style={{ backgroundColor: '#FFC858' }} />
         </View>
         <View style={styles.title}>
-            <Text variant="headlineLarge" style={{ fontWeight: 'bold' }}>{content[language].title}</Text>
+            <Text variant="headlineMedium" style={{ fontWeight: 'bold' }}>{content[language].title}</Text>
         </View>
         <Icon
             source={content.icon}
             color="#00C9A2"
             size={200}
         />
-        <Text variant="titleLarge" style={{ textAlign: "center", fontWeight: 'bold', height: 100 }}>{content[language].description}</Text>
+        <Text variant="titleMedium" style={{ textAlign: "center", fontWeight: 'bold', height: 100 }}>{content[language].description}</Text>
 
         <View>
             <View style={styles.buttonContainer}>
-                <View style={styles.nextContainer}>
+                <View >
                     <PrimaryButton buttonText={"Next"} callback={next} />
                     <Button mode="text" theme={skipTheme} onPress={skip} labelStyle={styles.skipButtonLabelStyle}>Skip</Button>
                 </View>
-                <View style={styles.backContainer}>
+                <View >
 
                     {content.step != 1 && <PrimaryButton buttonText={"Back"} callback={back} type="secondary"  />}
                     
@@ -48,11 +48,6 @@ const styles = StyleSheet.create({
         height: 50,
         justifyContent: "center",
         alignItems: "center"
-    },
-    buttonContainer: {
-        width: 300,
-        flexDirection: 'row-reverse',
-        justifyContent: 'space-between',
     },
     buttonContainer: {
         width: 300,

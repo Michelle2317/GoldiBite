@@ -66,7 +66,7 @@ const IconSection = ({ profile, callback }) => {
     return (<>
 
         {/* Questionnaire View */}
-        <Text variant="headlineLarge" style={{ textAlign: "center", marginBottom: 30, fontWeight: 'bold' }}>Select an Icon</Text>
+        <Text variant="headlineMedium" style={{ textAlign: "center", marginBottom: 30, fontWeight: 'bold' }}>Select an Icon</Text>
         <View style={styles.questionSelectorContainer}>
             {icons && icons.map((icon, index) => {
                 let borderColor = icon.selected ? '#ffffff' : 'transparent';

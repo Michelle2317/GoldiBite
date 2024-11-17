@@ -22,7 +22,7 @@ useEffect(()=>{
         <View style={styles.container}>
             <Image
                 source={require('@/assets/images/elements/goldibiteLogo.webp')}
-                style={{ width: 300, height: 300 }}
+                style={{ width: 280, height: 280 }}
             />
         </View>
     </>)

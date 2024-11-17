@@ -18,7 +18,8 @@ export default function Scanner(props) {
             setScanned(false);
             const product = getProduct(data);
             if (!product[0]) {
-                router.push({ pathname: "barcodeScanner/productNotfound" })
+                //router.push({ pathname: "barcodeScanner/productNotfound" })
+                router.push({ pathname: "barcodeScanner/barcodeResult", params: { barcode: data } })
             } else {
                 router.push({ pathname: "barcodeScanner/barcodeResult", params: { barcode: data } })
             }

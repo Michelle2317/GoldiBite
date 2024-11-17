@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { IconButton } from 'react-native-paper';
+import PrimaryButton from "../../components/paperUiElement/PrimaryButton";
 
 export default function GuideDetails({
 	title,
@@ -12,48 +13,25 @@ export default function GuideDetails({
 }) {
 	return (
 		<View style={styles.container}>
-			<View style={styles.header}>
+			{/* <View style={styles.header}>
 				<Text style={styles.title}>{title}</Text>
-			</View>
+			</View> */}
 			{image && <Image source={image} style={styles.image} />}
 			<Text style={styles.heading}>{heading}</Text>
 			<Text style={styles.description}>{description}</Text>
-			<View style={styles.arrowContainer}>
-				{onBack && (
-					<IconButton
-						icon='arrow-left-bold'
-						onPress={onBack}
-						mode='contained'
-						size={30}
-						theme={{
-							colors: {
-								onPrimary: 'red',
-								primary: '#000000',
-								surfaceVariant:
-									'#00c8a1',
-							},
-						}}
-						style={styles.arrowButton}
-					/>
-				)}
-				{showNextButton && (
-					<IconButton
-						icon='arrow-right-bold'
-						onPress={onNext}
-						mode='contained'
-						size={30}
-						theme={{
-							colors: {
-								onPrimary: 'red',
-								primary: '#000000',
-								surfaceVariant:
-									'#00c8a1',
-							},
-						}}
-						style={styles.arrowButton}
-					/>
-				)}
+
+			<View style={styles.buttonContainer}>
+				<View>
+					{showNextButton && <PrimaryButton buttonText={"Next"} callback={onNext} />}
+				</View>
+				<View>
+					{onBack && <PrimaryButton buttonText={"Back"} callback={onBack} type="secondary" />}
+
+				</View>
 			</View>
+
+
+
 		</View>
 	);
 }
@@ -104,5 +82,13 @@ const styles = StyleSheet.create({
 		width: 60,
 		height: 60,
 		borderRadius: 30,
+	},
+
+	buttonContainer: {
+		flex: 1,
+		display: "flex",
+		width: "100%",
+		flexDirection: 'row-reverse',
+		justifyContent: 'space-between',
 	},
 });

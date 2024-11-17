@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useLayoutEffect } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import GuideDetails from '@/src/components/guides/GuideDetails';
@@ -44,6 +44,12 @@ const steps = [
 export default function TravelTips() {
 	const [step, setStep] = useState(0);
 	const navigation = useNavigation();
+	
+	useLayoutEffect(() => {
+		navigation.setOptions({
+			headerTitle: steps[step].title,
+		});
+	  }, [navigation, step]);
 
 	const handleNextStep = () => {
 		if (step < steps.length - 1) {

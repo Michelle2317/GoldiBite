@@ -38,7 +38,7 @@ const ProfileSection = ({ profile, callback }) => {
     }
     return (<>
 
-        <Text variant="headlineLarge" style={{ textAlign: "center", marginBottom: 30, fontWeight: 'bold' }}>Create a Profile</Text>
+        <Text variant="headlineMedium" style={{ textAlign: "center", marginBottom: 30, fontWeight: 'bold' }}>Create a Profile</Text>
         <View style={styles.questionContainer}>
             <PrimaryInputText label="Username" value={profileInformation.username} onChangeText={handleUsernameOnChange} />
             <PaperUIDropdown label="Age" placeholder="Select age" option={AGE_OPTIONS} value={profileInformation.age} callback={handleAgeOnChange} />

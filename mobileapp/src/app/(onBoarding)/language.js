@@ -25,7 +25,7 @@ export default function language() {
     <>
       <View style={styles.container}>
 
-        <Text variant="headlineLarge" style={{ fontWeight: 'bold', textAlign:"center" }}>Select a Language</Text>
+        <Text variant="headlineMedium" style={{ fontWeight: 'bold', textAlign:"center" }}>Select a Language</Text>
 
         <View style={styles.languageDropDownListContainer}>
           <Dropdown

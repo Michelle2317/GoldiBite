@@ -28,10 +28,10 @@ export const onboardingList = [
     },
     {
       "step": 4,
-      "icon": "account-multiple",
+      "icon": "book-outline",
       "eng": {
-        "title": "Multiple Profiles",
-        "description": "Create multiple user profiles for different friends or family in one account.",
+        "title": "Guides",
+        "description": "Consult the guides to learn how to help yourself and others.",
         
       }
     },

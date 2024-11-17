@@ -22,7 +22,7 @@ const EmergencySection = ({ profile, callback }) => {
     }
 
     return (<>
-        <Text variant="headlineLarge" style={{ textAlign: "center", marginBottom: 30, fontWeight: 'bold' }}>Emergency Contact</Text>
+        <Text variant="headlineMedium" style={{ textAlign: "center", marginBottom: 30, fontWeight: 'bold' }}>Emergency Contact</Text>
         <View style={styles.questionContainer}>
             <PrimaryInputText label="Emergency Contact" value={profileInformation.emergency_contact_name} onChangeText={handleEmergencyContactNameOnChange} />
             <PrimaryInputText label="Relationship" value={profileInformation.emergency_relationship} onChangeText={handleEmergencyRelationshipOnChange} />

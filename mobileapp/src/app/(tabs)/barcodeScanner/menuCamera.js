@@ -5,6 +5,7 @@ import { IconButton } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import * as MediaLibrary from 'expo-media-library';
 import {  useRouter  } from 'expo-router';
+import menuAnalyistUtils from '@/src/utils/menuAnalyistUtils'
 
 
 export default function menuCamera() {
@@ -15,7 +16,9 @@ export default function menuCamera() {
     const [photo, setPhoto] = useState();
     const [hasMediaLibraryPermissions, setMediaLibraryPermissions] = useState();
   
+    const { getImageBase64, storeImageBase64 } = menuAnalyistUtils();
 
+    
     const router = useRouter();
     useEffect(() => {
         async function getMediaPermissions() {
@@ -43,7 +46,7 @@ export default function menuCamera() {
 
     const takePicture = async () => {
         try {
-            const options = { quality: 1, base64: true };
+            const options = { quality: 0.5, base64: true };
             const data = await  cameraRef.current.takePictureAsync(options);
             setPhoto(data);
         } catch (error) {
@@ -52,13 +55,13 @@ export default function menuCamera() {
     };
     // Assume we have a photo
     if (photo) {
-
-        
         const handleOnPress = () => {
-            router.push({ pathname: "barcodeScanner/menuScannerResult", params: { image: photo.uri }  })
-            setPhoto(undefined);
+           // router.push({ pathname: "barcodeScanner/menuScannerResult", params: { image: photo.uri }  })
+           storeImageBase64(photo.base64)
+           router.push({ pathname: "barcodeScanner/menuScannerResultTim", params: { image: photo.uri }  })
+           // console.log(photo);
+           setPhoto(undefined);
         }
-
      
         return (
             <SafeAreaView style={styles.container}>

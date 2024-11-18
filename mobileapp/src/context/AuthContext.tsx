@@ -21,10 +21,12 @@ export const AuthProvider = ({ children }: any) => {
 	const [authState, setAuthState] = useState<{
 		authenticated: boolean | null;
 		username: string | null;
+		id: string | null;
 		role: Role | null;
 	}>({
 		authenticated: null,
 		username: null,
+		id: null,
 		role: null
 	});
 
@@ -35,6 +37,7 @@ export const AuthProvider = ({ children }: any) => {
 			setAuthState({
 				authenticated: true,
 				username: username,
+				id: account.id.toString(),
 				role: Role.ADMIN
 			});
 		} else {
@@ -46,6 +49,7 @@ export const AuthProvider = ({ children }: any) => {
 		setAuthState({
 			authenticated: false,
 			username: null,
+			id: null,
 			role: null
 		});
 	};

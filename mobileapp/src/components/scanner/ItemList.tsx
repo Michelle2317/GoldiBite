@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, FlatList, TextInput, Text } from 'react-native';
+import { View, StyleSheet, FlatList, Text } from 'react-native';
 import { Card, IconButton } from 'react-native-paper';
 
 const demoData = [
 	{
 		id: '1',
+		languageTitle: '意大利宽面鸡肉',
 		title: 'Fettuccini Chicken',
 		allergenStatus: 'No Allergen Detected',
 		allergens: ['fish', 'egg', 'bread-slice'],
@@ -13,34 +14,19 @@ const demoData = [
 	},
 	{
 		id: '2',
+		languageTitle: '意大利宽面鸡肉',
 		title: 'Fettuccini Chicken',
-		allergenStatus: 'No Allergen Detected',
+		allergenStatus: 'Allergen Detected',
 		allergens: ['fish', 'egg', 'bread-slice'],
 		quantity: 0,
 		status: 'danger',
 	},
 ];
 
-const ListCards = () => {
+export default function ItemList() {
 	const [data, setData] = useState(demoData);
 
-	const handleTitle = (id, newTitle) => {
-		const updatedData = data.map((item) =>
-			item.id === id ? { ...item, title: newTitle } : item
-		);
-		setData(updatedData);
-	};
-
-	const handleAllergenStatus = (id, newStatus) => {
-		const updatedData = data.map((item) =>
-			item.id === id
-				? { ...item, allergenStatus: newStatus }
-				: item
-		);
-		setData(updatedData);
-	};
-
-	const handleQuantityChange = (id, action) => {
+	const handleQuantity = (id, action) => {
 		const updatedData = data.map((item) =>
 			item.id === id
 				? {
@@ -70,7 +56,7 @@ const ListCards = () => {
 								? 'check-circle'
 								: 'close-circle'
 						}
-						size={24}
+						size={28}
 						iconColor={
 							item.status === 'safe'
 								? '#3D852F'
@@ -80,19 +66,14 @@ const ListCards = () => {
 				</View>
 
 				<View style={styles.mainContentWrapper}>
-					<View style={styles.titleRow}>
-						<TextInput
-							value={item.title}
-							onChangeText={(
-								newTitle
-							) =>
-								handleTitle(
-									item.id,
-									newTitle
-								)
+					<View style={styles.languageTitleRow}>
+						<Text
+							style={
+								styles.languageTitle
 							}
-							style={styles.title}
-						/>
+						>
+							{item.languageTitle}
+						</Text>
 						<View
 							style={
 								styles.allergensWrapper
@@ -126,59 +107,76 @@ const ListCards = () => {
 									}
 
 									return (
-										<IconButton
+										<View
 											key={
 												index
 											}
-											icon={
-												iconName
-											}
-											size={
-												13
-											}
-											iconColor='#000'
-											style={
-												styles.allergenIcon
-											}
-										/>
+											style={[
+												styles.allergenCircle,
+												{
+													backgroundColor:
+														item.status ===
+														'safe'
+															? '#D5CB44'
+															: '#FF4342',
+												},
+											]}
+										>
+											<IconButton
+												icon={
+													iconName
+												}
+												size={
+													15
+												}
+												iconColor={
+													item.status ===
+													'safe'
+														? '#000'
+														: '#FFF'
+												}
+												style={
+													styles.allergenIcon
+												}
+											/>
+										</View>
 									);
 								}
 							)}
 						</View>
 					</View>
-					<TextInput
-						value={item.allergenStatus}
-						onChangeText={(newStatus) =>
-							handleAllergenStatus(
-								item.id,
-								newStatus
-							)
-						}
-						style={styles.allergenStatus}
-					/>
+
+					<View>
+						<Text>{item.title}</Text>
+					</View>
+
+					<Text style={styles.allergenStatus}>
+						{item.allergenStatus}
+					</Text>
+
 					<View style={styles.quantityWrapper}>
 						<IconButton
 							icon='minus'
-							size={16}
+							size={24}
 							onPress={() =>
-								handleQuantityChange(
+								handleQuantity(
 									item.id,
 									'decrement'
 								)
 							}
 						/>
 						<Text
-							style={
-								styles.quantityAmount
-							}
+							style={{
+								fontWeight: 'bold',
+							}}
 						>
 							{item.quantity}
 						</Text>
 						<IconButton
 							icon='plus'
-							size={16}
+							size={24}
 							onPress={() =>
-								handleQuantityChange(
+								handleQuantity(
 									item.id,
 									'increment'
 								)
@@ -186,10 +184,11 @@ const ListCards = () => {
 						/>
 					</View>
 				</View>
+
 				<View style={styles.chevronWrapper}>
 					<IconButton
 						icon='chevron-right'
-						size={20}
+						size={35}
 						iconColor='#000'
 						style={styles.chevronIcon}
 					/>
@@ -205,77 +204,72 @@ const ListCards = () => {
 			keyExtractor={(item) => item.id}
 		/>
 	);
-};
+}
 
 const styles = StyleSheet.create({
 	card: {
-		width: 324,
-		height: 67,
+		width: 350,
+		height: 90,
 		borderRadius: 10,
 		backgroundColor: '#fce4b6',
-		elevation: 3,
-		flexDirection: 'row',
-		paddingHorizontal: 10,
+		elevation: 2,
 		marginBottom: 10,
 	},
 	rowWrapper: {
 		flexDirection: 'row',
 		alignItems: 'center',
-		justifyContent: 'space-between',
 	},
 	statusWrapper: {
 		justifyContent: 'center',
 		alignItems: 'center',
 		marginBottom: 10,
-		marginLeft: -4,
 	},
 	mainContentWrapper: {
-		justifyContent: 'space-evenly',
-		paddingLeft: 2,
-		paddingTop: 6,
 		flex: 1,
 	},
-	titleRow: {
+	languageTitle: {
+		fontWeight: 'bold',
+	},
+	languageTitleRow: {
 		flexDirection: 'row',
 		alignItems: 'center',
 		justifyContent: 'space-between',
-	},
-	title: {
 		fontWeight: 'bold',
-		fontSize: 14,
-		flex: 1,
+		marginTop: 10,
 	},
 	allergenStatus: {
-		fontSize: 10,
+		fontWeight: 'bold',
 	},
 	allergensWrapper: {
 		flexDirection: 'row',
-		marginLeft: -62,
-		paddingTop: 2,
+	},
+
+	allergenCircle: {
+		width: 20,
+		height: 20,
+		borderRadius: 10,
+		justifyContent: 'center',
+		alignItems: 'center',
+		marginHorizontal: 2,
 	},
 	allergenIcon: {
-		margin: -4,
+		margin: 0,
 		padding: 0,
 	},
 	quantityWrapper: {
 		flexDirection: 'row',
 		alignItems: 'center',
-		marginTop: -9,
-		marginLeft: -15,
+		marginTop: -15,
+		marginLeft: -18,
 	},
-	quantityAmount: {
-		fontSize: 14,
-		fontWeight: 'bold',
-	},
+
 	chevronWrapper: {
 		justifyContent: 'center',
 		alignItems: 'center',
-		marginRight: -28,
+		marginLeft: 8,
+		marginBottom: 10,
 	},
 	chevronIcon: {
-		marginLeft: 35,
-		marginBottom: 13,
+		margin: 0,
 	},
 });
-
-export default ListCards;

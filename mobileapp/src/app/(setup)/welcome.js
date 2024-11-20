@@ -9,11 +9,12 @@ const welcome = () => {
 
     return (<>
         <View style={styles.container}>
-        <Text variant="displayMedium" style={{ textAlign: "center", marginBottom: 30, fontWeight: 'bold' }}>You Are All Set!</Text>
+        <Text variant="displayMedium" style={{ textAlign: "center", marginBottom: 30, fontWeight: 'bold' }}>Welcome!</Text>
             <Image
-                source={require('@/assets/images/elements/user_icon1.png')}
+                source={require('@/assets/images/elements/goldibiteLogo.png')}
                 style={{ width: 188, height: 188, alignSelf: "center", marginBottom: 50 }}
             />
+            <Text variant="headlineMedium" style={{ textAlign: "center", marginBottom: 30, fontWeight: 'bold' }}>Yay, you’re finally here!</Text>
             <Text variant="titleMedium" style={{ textAlign: "center", marginBottom: 30, fontWeight: 'bold' }}>You are all set!</Text>
             <PrimaryButton buttonText="Let's get started" callback={()=>{ router.replace('/(tabs)/'); }} />
         </View>

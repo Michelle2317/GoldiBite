@@ -58,7 +58,7 @@ export default function menuCamera() {
         const handleOnPress = () => {
            // router.push({ pathname: "barcodeScanner/menuScannerResult", params: { image: photo.uri }  })
            storeImageBase64(photo.base64)
-           router.push({ pathname: "barcodeScanner/menuScannerResultTim", params: { image: photo.uri }  })
+           router.push({ pathname: "barcodeScanner/menuScannerResult", params: { image: photo.uri }  })
            // console.log(photo);
            setPhoto(undefined);
         }

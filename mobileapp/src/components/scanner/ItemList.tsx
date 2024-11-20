@@ -23,197 +23,187 @@ const demoData = [
 	},
 ];
 
-export default function ItemList() {
-	const [data, setData] = useState(demoData);
+export default function ItemList({ dish }) {
+	//const [data, setData] = useState(demoData);
+	const safity = dish.allergens == undefined;
 
-	const handleQuantity = (id, action) => {
-		const updatedData = data.map((item) =>
-			item.id === id
-				? {
-						...item,
-						quantity:
-							action === 'increment'
-								? item.quantity +
-								  1
-								: item.quantity >
-								  0
-								? item.quantity -
-								  1
-								: item.quantity,
-				  }
-				: item
-		);
-		setData(updatedData);
-	};
+	const handleQuantity = () => {
+		console.log("On Press")
+	}
+	// const handleQuantity = (id, action) => {
+	// 	const updatedData = data.map((item) =>
+	// 		dish.EnglishName === id
+	// 			? {
+	// 					...item,
+	// 					quantity:
+	// 						action === 'increment'
+	// 							? item.quantity +
+	// 							  1
+	// 							: item.quantity >
+	// 							  0
+	// 							? item.quantity -
+	// 							  1
+	// 							: item.quantity,
+	// 			  }
+	// 			: item
+	// 	);
+	// 	setData(updatedData);
+	// };
+	//eggs,  milk,  mustard,  peanuts,  Crustaceans and molluscs,  fish,  sesame seeds,  soy,  sulphites,  tree nuts,  wheat and triticale
+	const allergyIcon = {
+		'egg': 'egg',
+		'milk': 'milk',
+		'mustard': 'bread-slice',
+		'peanuts': 'circle',
+		'Crustaceans and molluscs': 'circle',
+		'fish': 'fish',
+		'sesame seeds': ' circle',
+		'soy': 'circle',
+		'sulphites': 'circle',
+		'tree nuts': 'circle',
+		'wheat and triticale': 'circle'
+	}
 
-	const renderItem = ({ item }) => (
-		<Card style={styles.card}>
-			<View style={styles.rowWrapper}>
-				<View style={styles.statusWrapper}>
-					<IconButton
-						icon={
-							item.status === 'safe'
-								? 'check-circle'
-								: 'close-circle'
-						}
-						size={28}
-						iconColor={
-							item.status === 'safe'
-								? '#3D852F'
-								: '#FF4342'
-						}
-					/>
-				</View>
+	// const allergenIconUI = dish.allergens.map((allergen, index) => {
+	// 	return (
+	// 		<View
+	// 			key={
+	// 				index
+	// 			}
+	// 			style={[
+	// 				styles.allergenCircle,
+	// 				{
+	// 					backgroundColor: '#D5CB44',
+	// 				},
+	// 			]}
+	// 		>
+	// 			<IconButton
+	// 				icon={
+	// 					allergenIconUI[allergen]
+	// 				}
+	// 				size={
+	// 					15
+	// 				}
+	// 				iconColor='#000'
+	// 				style={
+	// 					styles.allergenIcon
+	// 				}
+	// 			/>
+	// 		</View>
+	// 	);
+	// })
 
-				<View style={styles.mainContentWrapper}>
-					<View style={styles.languageTitleRow}>
-						<Text
-							style={
-								styles.languageTitle
+
+	return (
+		<>
+			<Card style={styles.card}>
+				<View style={styles.rowWrapper}>
+					<View style={styles.statusWrapper}>
+						<IconButton
+							icon={
+								safity === true
+									? 'check-circle'
+									: 'close-circle'
 							}
-						>
-							{item.languageTitle}
-						</Text>
-						<View
-							style={
-								styles.allergensWrapper
+							size={28}
+							iconColor={
+								safity === true
+									? '#3D852F'
+									: '#FF4342'
 							}
-						>
-							{item.allergens.map(
-								(
-									allergen,
-									index
-								) => {
-									let iconName;
-									switch (
-										allergen
-									) {
-										case 'fish':
-											iconName =
-												'fish';
-											break;
-										case 'egg':
-											iconName =
-												'egg';
-											break;
-										case 'bread-slice':
-											iconName =
-												'bread-slice';
-											break;
-										default:
-											iconName =
-												'circle';
-											break;
-									}
+						/>
+					</View>
 
-									return (
-										<View
-											key={
-												index
-											}
-											style={[
-												styles.allergenCircle,
-												{
-													backgroundColor:
-														item.status ===
-														'safe'
-															? '#D5CB44'
-															: '#FF4342',
-												},
-											]}
-										>
-											<IconButton
-												icon={
-													iconName
-												}
-												size={
-													15
-												}
-												iconColor={
-													item.status ===
-													'safe'
-														? '#000'
-														: '#FFF'
-												}
-												style={
-													styles.allergenIcon
-												}
-											/>
-										</View>
-									);
+					<View style={styles.mainContentWrapper}>
+						<View style={styles.languageTitleRow}>
+							<Text
+								style={
+									styles.languageTitle
 								}
-							)}
+							>
+								{dish.OriginalName}
+							</Text>
+							<View
+								style={
+									styles.allergensWrapper
+								}
+							>
+
+							</View>
+						</View>
+
+						<View>
+							<Text>{dish.EnglishName}</Text>
+						</View>
+
+						<Text style={styles.allergenStatus}>
+							{
+								safity == true ? 'No Allergen Detected' : 'Allergen Detected'
+
+							}
+						</Text>
+
+						<View style={styles.quantityWrapper}>
+							<IconButton
+								icon='minus'
+								size={24}
+								onPress={() =>
+									handleQuantity(
+										dish.EnglishName,
+										'decrement'
+									)
+								}
+							/>
+							<Text
+								style={{
+									fontWeight: 'bold',
+								}}
+							> 0
+							</Text>
+							<IconButton
+								icon='plus'
+								size={24}
+								onPress={() =>
+									handleQuantity(
+										dish.EnglishName,
+										'increment'
+									)
+								}
+							/>
 						</View>
 					</View>
 
-					<View>
-						<Text>{item.title}</Text>
-					</View>
-
-					<Text style={styles.allergenStatus}>
-						{item.allergenStatus}
-					</Text>
-
-					<View style={styles.quantityWrapper}>
+					<View style={styles.chevronWrapper}>
 						<IconButton
-							icon='minus'
-							size={24}
-							onPress={() =>
-								handleQuantity(
-									item.id,
-									'decrement'
-								)
-							}
-						/>
-						<Text
-							style={{
-								fontWeight: 'bold',
-							}}
-						>
-							{item.quantity}
-						</Text>
-						<IconButton
-							icon='plus'
-							size={24}
-							onPress={() =>
-								handleQuantity(
-									item.id,
-									'increment'
-								)
-							}
+							icon='chevron-right'
+							size={35}
+							iconColor='#000'
+							style={styles.chevronIcon}
 						/>
 					</View>
 				</View>
-
-				<View style={styles.chevronWrapper}>
-					<IconButton
-						icon='chevron-right'
-						size={35}
-						iconColor='#000'
-						style={styles.chevronIcon}
-					/>
-				</View>
-			</View>
-		</Card>
+			</Card>
+		</>
 	);
 
-	return (
-		<FlatList
-			data={data}
-			renderItem={renderItem}
-			keyExtractor={(item) => item.id}
-		/>
-	);
+	// return (
+	// 	<FlatList
+	// 		data={data}
+	// 		renderItem={renderItem}
+	// 		keyExtractor={(item) => item.id}
+	// 	/>
+	// );
 }
 
 const styles = StyleSheet.create({
 	card: {
-		width: 350,
-		height: 90,
+		width: 330,
 		borderRadius: 10,
 		backgroundColor: '#fce4b6',
 		elevation: 2,
 		marginBottom: 10,
+		marginLeft: 10,
+		marginRight: 10
 	},
 	rowWrapper: {
 		flexDirection: 'row',

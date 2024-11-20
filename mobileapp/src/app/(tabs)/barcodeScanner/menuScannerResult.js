@@ -1,41 +1,171 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Image, View, StyleSheet, ScrollView, SafeAreaView, Text, FlatList } from 'react-native';
 import { Chip } from 'react-native-paper';
-import UserToolBar from '@/src/components/homePage/UserToolBar';
 import MenuItem from '../../../components/scanner/MenuItem';
+import { useLocalSearchParams } from 'expo-router';
+import menuAnalyistUtils from '@/src/utils/menuAnalyistUtils'
+import Loading from '../../../components/animation/Loading';
+const { GoogleGenerativeAI, SchemaType } = require("@google/generative-ai");
+import ItemList from '../../../components/scanner/ItemList';
 
 const menuScannerResult = () => {
     const name = useState("Kaylie");
+    
+    const { image } = useLocalSearchParams(image);
+    const [status, setStatue] = useState('idle');
+
+    const isLoading = status === 'loading';
+
+    const isError = status === 'error';
+    const { getImageBase64, storeImageBase64 } = menuAnalyistUtils();
+
+    const [dishes, setDishes] = useState([]);
+    const [categories, setCategories] = useState([]);
+
+
+    useEffect(() => {
+
+
+        const GemineAPI = async () => {
+            // Make sure to include these imports:
+            // import { GoogleGenerativeAI } from "@google/generative-ai";
+            try {
+                setStatue('loading')
+                const generationConfig = {
+                    temperature: 1,
+                    topP: 0.95,
+                    topK: 40,
+                    maxOutputTokens: 8192,
+                    responseMimeType: "application/json",
+                    responseSchema: {
+                        type: "object",
+                        properties: {
+                            response: {
+                                type: "array",
+                                items: {
+                                    type: "string"
+                                }
+                            },
+                            dishes: {
+                                type: "array",
+                                items: {
+                                    type: "object",
+                                    properties: {
+                                        EnglishName: {
+                                            type: "string"
+                                        },
+                                        OriginalName: {
+                                            type: "string"
+                                        },
+                                        EnglishCategory: {
+                                            type: "string"
+                                        },
+                                        OriginalCategory: {
+                                            type: "string"
+                                        },
+                                        ingredients: {
+                                            type: "array",
+                                            items: {
+                                                type: "string"
+                                            }
+                                        },
+                                        allergens: {
+                                            type: "array",
+                                            items: {
+                                                type: "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        required: [
+                            "response"
+                        ]
+                    },
+                };
+
+                const EXPO_PUBLIC_GOOGLE_GEMINE_API_KEY = process.env.EXPO_PUBLIC_GOOGLE_GEMINE_API_KEY;
+                const genAI = new GoogleGenerativeAI(EXPO_PUBLIC_GOOGLE_GEMINE_API_KEY);
+                const model = genAI.getGenerativeModel(
+                    {
+                        model: "gemini-1.5-pro", //"gemini-1.5-flash",
+                        generationConfig: {
+                            responseMimeType: "application/json",
+                        },
+                    },
+                );
+
+                let iData = await getImageBase64();
+                const parts = [
+                    {
+                        inlineData: {
+                            mimeType: "image/jpeg",
+                            data: iData
+                        }
+                    },
+                    //{ text: "list all dish in the image,analysis all dish that the image provided, list all ingredient, and possibile allergyen that include the dish original name, category. list the possible allery in the list (eggs,  milk,  mustard,  peanuts,  Crustaceans and molluscs,  fish,  sesame seeds,  soy,  sulphites,  tree nuts,  wheat and triticale), and list all ingredient in english, also translate the dish name and category to english. " },
+                    { text: "analysis all dish that the image provided, that include the dish original name, category, list the possible allery in the list (eggs,  milk,  mustard,  peanuts,  Crustaceans and molluscs,  fish,  sesame seeds,  soy,  sulphites,  tree nuts,  wheat and triticale)  , list all ingredient in english, also translate the dish name and category to english. also please provide the original name in dish name and category " },
+
+                    //{text: "analysis the images I provided."},
+
+                    { text: "output:" }
+                ];
+                console.log(parts)
+                const result = await model.generateContent({ contents: [{ role: "user", parts }], generationConfig });
+                const response = await result.response;
+                const res = JSON.parse(response.text())
+
+                console.log(res)
+                res.dishes.forEach(dish => {
+                    setDishes(data => [...data, dish]);
+                    if (categories.indexOf(dish.EnglishCategory) == -1) setCategories(data => [...data, dish.EnglishCategory])
+                });
+
+                console.log(dishes)
+                console.log(categories)
+
+                console.log('end')
+                setStatue('idle')
+
+            } catch (e) {
+                setStatue('error')
+                console.error(e.message)
+            }
+        }
+
+        GemineAPI()
+    }, []);
+
     return (<>
         <View style={styles.container}>
-            <UserToolBar name={name} />
-            <View style={styles.categoryContainer}>
-                <Chip theme={{ colors: { secondaryContainer: '#FFC858' } }} mode='flat' onPress={() => console.log('Pressed')} selected={true}> All </Chip>
-                <Chip theme={{ colors: { secondaryContainer: '#FFC858' } }} mode='flat' onPress={() => console.log('Pressed')} selected={true}> Breakfast </Chip>
-                <Chip theme={{ colors: { secondaryContainer: '#FFC858' } }} mode='flat' onPress={() => console.log('Pressed')} selected={false}> Lunch </Chip>
-                <Chip theme={{ colors: { secondaryContainer: '#FFC858' } }} mode='flat' onPress={() => console.log('Pressed')} selected={false}> Dinner </Chip>
-            </View>
 
-            <ScrollView>
-            <MenuItem name1="Krabmeat Alfredo" isDetected={false} bgColor="rgba(210, 84, 9, 0.5)" />
-            <MenuItem name1="Fettuccini Chicken" isDetected={true} bgColor="rgba(213, 203, 68, 0.7)" /> 
-            <MenuItem name1="Fettuccini Alfredo" isDetected={false} bgColor="rgba(210, 84, 9, 0.5)" />
-            <MenuItem name1="Krabmeat Alfredo" isDetected={false}  bgColor="rgba(213, 203, 68, 0.7)"  />
-            <MenuItem name1="Fettuccini Chicken" isDetected={true}  bgColor="rgba(210, 84, 9, 0.5)"  />
-            <MenuItem name1="Fettuccini Alfredo" isDetected={false} bgColor="rgba(213, 203, 68, 0.7)"  />
-            <MenuItem name1="Krabmeat Alfredo" isDetected={false}  bgColor="rgba(210, 84, 9, 0.5)" />
-            <MenuItem name1="Fettuccini Chicken" isDetected={true} bgColor="rgba(213, 203, 68, 0.7)" />
-            <MenuItem name1="Fettuccini Alfredo" isDetected={false} bgColor="rgba(210, 84, 9, 0.5)" />
-            <MenuItem name1="Krabmeat Alfredo" isDetected={false} bgColor="rgba(213, 203, 68, 0.7)" />
-            <MenuItem name1="Fettuccini Chicken" isDetected={true} bgColor="rgba(210, 84, 9, 0.5)" />
-            <MenuItem name1="Fettuccini Alfredo" isDetected={false} bgColor="rgba(213, 203, 68, 0.7)" />
-            <MenuItem name1="Krabmeat Alfredo" isDetected={false}  bgColor="rgba(210, 84, 9, 0.5)" />
-            <MenuItem name1="Fettuccini Chicken" isDetected={true} bgColor="rgba(213, 203, 68, 0.7)" />
-            <MenuItem name1="Fettuccini Alfredo" isDetected={false}  bgColor="rgba(210, 84, 9, 0.5)" />
-            </ScrollView>
+            {isLoading ? <Loading />
+                : isError ? <Text>Error while loading data</Text>
+                    : (<>
+                        <Image style={styles.photoPreview} source={{ uri: image }} />
+                        {/* <View style={styles.categoryContainer}>
+                            <Chip theme={{ colors: { secondaryContainer: '#FFC858' } }} mode='flat' onPress={() => console.log('Pressed')} selected={true}> All </Chip>
+                            {categories.map((item, index) => {
+                                return (
+                                    <Chip key={index} theme={{ colors: { secondaryContainer: '#FFC858' } }} mode='flat' onPress={() => console.log('Pressed')} selected={true}> {item} </Chip>
+                                )
+                            })}
+                        </View> */}
 
+                        <ScrollView style={{flex: 1}}>
+                             {dishes.map((dish, index) => {
+                                console.log(dish);
+                                return (
+                                    <ItemList key={index} dish={dish} />
+                                )
+                            })} 
+
+                        </ScrollView>
+                    </>
+                    )
+            }
         </View>
-
     </>)
 }
 

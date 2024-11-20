@@ -74,7 +74,7 @@ const IconSection = ({ profile, callback }) => {
                     <TouchableHighlight key={index} onPress={(element) => { handleOnPress(element, icon.name, icon.value) }} underlayColor="transparent">
                         <Image
                             source={icon.source}
-                            style={{ width: 80, height: 80, borderWidth: 5, borderRadius: '50%', borderColor: borderColor }}
+                            style={{ width: 80, height: 80, borderWidth: 5, borderRadius: 40, borderColor: borderColor }}
                         />
                     </TouchableHighlight>
                 )

@@ -56,6 +56,13 @@ const StackLayout = () => {
                 HeaderRightButton: props => <HeaderRightButton {...props} />,
                 headerShown: true,
             }} />
+            <Stack.Screen name="menuScannerResultTim" options={{
+                headerBackTitle: 'Back',
+                headerBackTitleStyle: { fontSize: 18 },
+                headerTitle: "",
+                HeaderRightButton: props => <HeaderRightButton {...props} />,
+                headerShown: true,
+            }} />
             <Stack.Screen name="menuScannerResultDetail" options={{
                 headerBackTitle: 'Back',
                 headerBackTitleStyle: { fontSize: 18 },

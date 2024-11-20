@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Image, View, StyleSheet, ScrollView, SafeAreaView, Text, FlatList } from 'react-native';
-import { Chip } from 'react-native-paper';
-import MenuItem from '../../../components/scanner/MenuItem';
+import { Image, View, StyleSheet, ScrollView,  Text,  } from 'react-native';
 import { useLocalSearchParams } from 'expo-router';
 import menuAnalyistUtils from '@/src/utils/menuAnalyistUtils'
 import Loading from '../../../components/animation/Loading';
-const { GoogleGenerativeAI, SchemaType } = require("@google/generative-ai");
+const { GoogleGenerativeAI } = require("@google/generative-ai");
 import ItemList from '../../../components/scanner/ItemList';
 
-const menuScannerResult = () => {
-    const name = useState("Kaylie");
-    
+const menuScannerResultTim = () => {
     const { image } = useLocalSearchParams(image);
     const [status, setStatue] = useState('idle');
 
@@ -166,6 +162,7 @@ const menuScannerResult = () => {
                     )
             }
         </View>
+
     </>)
 }
 
@@ -196,7 +193,12 @@ const styles = StyleSheet.create({
         gap: 20,
         marginTop: 22,
     },
+    photoPreview: {
+        alignSelf: 'stretch',
+        flex: 1, 
+        marginBottom:10
+    }
 });
 
 
-export default menuScannerResult;
+export default menuScannerResultTim;

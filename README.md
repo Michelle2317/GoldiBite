@@ -1,7 +1,7 @@
 # GoldiBite
 
 ## Description
-GoldiBite is an AI-powered app designed to assist individuals with food allergies and sensitivities by providing a comprehensive database to manage food safety concerns while traveling. It aims to eliminate the inconvenience and potential safety risks associated with varying ingredient information and regulations worldwide.
+GoldiBite is an AI-powered app designed to assist travellers with food allergies and sensitivities by providing a comprehensive database to manage food safety concerns while traveling. It aims to eliminate the inconvenience and potential safety risks associated with varying ingredient information and regulations worldwide.
 
 ## Created By
 - Michelle Ao
@@ -14,17 +14,17 @@ GoldiBite is an AI-powered app designed to assist individuals with food allergie
 - Gavin Pahal
 
 ## How To Run The Application Locally
-Run the following command to download the repo on your machine
+Run the following command to download the repo to your machine
 ```
-npx degit Michelle2317/GoldiBite
+git clone https://github.com/Michelle2317/GoldiBite.git
 ```
-
-Alternatively, you can download the folder or git clone the repo to your machine
-
 ## Run Application
 1. Navigate to folder
+```
+cd mobileapp
+```
 
-2. Install dependencies
+3. Install dependencies
 ```
 npm install
 ```
@@ -34,7 +34,7 @@ npm install
 ```
 npx expo start
 ```
-- Web App
+- For Tunneling
 ```
-npm run dev
+npm start
 ```

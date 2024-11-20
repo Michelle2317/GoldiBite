@@ -7,7 +7,6 @@ import { useRouter } from 'expo-router';
 
 
 const MenuItem = ({ checked = false, name1, isDetected, bgColor = "red" }) => {
-    console.log(isDetected)
     const [content, setContent] = useState("");
 
 
@@ -47,13 +46,13 @@ const MenuItem = ({ checked = false, name1, isDetected, bgColor = "red" }) => {
                         />
                     </View>
                     <View>
-                        <Text variant="titleLarge">{name1}</Text>
+                        <Text variant="titleMedium">{name1}</Text>
                         <Text>{isDetected}</Text>
                         <Text variant="bodyMedium">
                             <AllergenWarning isDetected={isDetected} />
                         </Text>
                     </View>
-                    <View>
+                    <View> 
                         <IconButton
                             icon="arrow-right-bold"
                             size={32}

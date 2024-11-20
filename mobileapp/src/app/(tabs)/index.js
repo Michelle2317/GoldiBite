@@ -8,7 +8,8 @@ import {
 } from 'react-native';
 import { useState, useEffect } from 'react';
 import UserToolBar from '@/src/components/homePage/UserToolBar';
-import HomePageCards from '@/src/components/homePage/HomePageCards';
+import Carousel from '@/src/components/homePage/Carousel';
+import EmergencyHome from '@/src/components/homePage/EmergencyHome';
 import { useNavigation } from '@react-navigation/native';
 import UserStoreDataUtils from '../../utils/UserStoreDataUtils';
 import { Text } from 'react-native-paper';
@@ -57,6 +58,20 @@ export default function Index() {
 								]}
 								resizeMode='contain'
 							/>
+							<Text
+								variant='titleMedium'
+								style={{
+									color: '#fff',
+									width: '50%',
+									textAlign: 'center',
+									marginBottom: 15,
+								}}
+							>
+								Quickly scan
+								your product or
+								menu for
+								allergens
+							</Text>
 							<PrimaryButton
 								buttonText='Scan Now'
 								callback={() =>
@@ -69,109 +84,9 @@ export default function Index() {
 					</View>
 				</ImageBackground>
 			</View>
-			<View style={styles.homeBottom}>
-				<View style={styles.textStyle}>
-					<Text
-						variant='titleLarge'
-						style={{
-							textAlign: 'left',
-							marginBottom: 5,
-							fontWeight: 'bold',
-						}}
-					>
-						Emergency
-					</Text>
-					<Text
-						variant='bodyMedium'
-						style={{
-							textAlign: 'left',
-							marginBottom: 5,
-							flexShrink: 1,
-							maxWidth: '80vw',
-						}}
-					>
-						Explore our emergency assistance
-						for when you have a severe
-						allergy reaction
-					</Text>
-				</View>
-				<HomePageCards
-					title=''
-					backgroundImage={require('@/assets/images/home/Home-emergency.jpg')}
-					width={350}
-					height={140}
-					borderRadius={10}
-					onPress={() =>
-						navigation.navigate('emergency')
-					}
-				/>
-				<View style={styles.textStyle}>
-					<Text
-						variant='titleLarge'
-						style={{
-							textAlign: 'left',
-							marginBottom: 5,
-							fontWeight: 'bold',
-						}}
-					>
-						Guides
-					</Text>
-					<Text
-						variant='bodyMedium'
-						style={{
-							textAlign: 'left',
-							marginBottom: 5,
-							flexShrink: 1,
-							maxWidth: '80vw',
-						}}
-					>
-						Helpful information for food
-						allergen problems when traveling
-					</Text>
-				</View>
-
-				<ScrollView
-					horizontal={true}
-					showsHorizontalScrollIndicator={false}
-					contentContainerStyle={styles.cardRow}
-				>
-					<HomePageCards
-						title='What is Anaphylaxis'
-						backgroundImage={require('@/assets/images/guides/whatIs.jpeg')}
-						width={300}
-						height={140}
-						borderRadius={10}
-						onPress={() =>
-							navigation.navigate(
-								'guides'
-							)
-						}
-					/>
-					<HomePageCards
-						title='Quick Travel Tips'
-						backgroundImage={require('@/assets/images/guides/lookInAdvanced.jpeg')}
-						width={300}
-						height={140}
-						borderRadius={10}
-						onPress={() =>
-							navigation.navigate(
-								'guides'
-							)
-						}
-					/>
-					<HomePageCards
-						title='How to Use an Epipen'
-						backgroundImage={require('@/assets/images/guides/prepare.jpeg')}
-						width={300}
-						height={140}
-						borderRadius={10}
-						onPress={() =>
-							navigation.navigate(
-								'guides'
-							)
-						}
-					/>
-				</ScrollView>
+			<View style={{ marginTop: 510, marginBottom: -200 }}>
+				<Carousel />
+				<EmergencyHome />
 			</View>
 		</ScrollView>
 	);
@@ -181,13 +96,8 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		alignItems: 'center',
-		gap: '10vh',
 	},
 	homeTop: {
-		flex: 1,
-		alignItems: 'center',
-	},
-	homeBottom: {
 		flex: 1,
 		alignItems: 'center',
 	},
@@ -195,15 +105,16 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignItems: 'center',
 		width: '100%',
-		height:290
+		height:290,
+		marginTop: -5,
 	},
 	homeTopTint: {
 		flex: 1,
 		backgroundColor: 'rgba(55,55,55, 0.65)',
 	},
 	homeTopImage: {
-		width: '100vw',
-		height: '60vh',
+		width: '100%',
+		height: 480,
 		borderBottomLeftRadius: 10,
 		borderBottomRightRadius: 10,
 		overflow: 'hidden',
@@ -221,10 +132,5 @@ const styles = StyleSheet.create({
 	},
 	userStyle: {
 		marginTop: 60,
-	},
-	textStyle: {
-		marginBottom: 10,
-		marginTop: 10,
-		marginLeft: 20,
 	},
 });

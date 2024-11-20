@@ -30,7 +30,7 @@ export default function Index() {
 	}, []);
 
 	return (
-		<ScrollView contentContainerStyle={styles.container}>
+		<ScrollView Style={styles.container}>
 			<View style={styles.homeTop}>
 				<ImageBackground
 					source={require('@/assets/images/home/Home-scanner.jpg')}
@@ -53,7 +53,7 @@ export default function Index() {
 								style={[
 									styles.gif,
 									{
-										width: screenWidth,
+										width: screenWidth ,
 									},
 								]}
 								resizeMode='contain'
@@ -105,6 +105,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignItems: 'center',
 		width: '100%',
+		height:290,
 		marginTop: -5,
 	},
 	homeTopTint: {

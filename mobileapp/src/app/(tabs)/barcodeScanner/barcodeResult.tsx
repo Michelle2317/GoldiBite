@@ -10,20 +10,45 @@ import { useRouter, useNavigation } from 'expo-router';
 export default function barcodeResult() {
     const { barcode } = useLocalSearchParams<{ barcode: string }>();
     const [item, setItem] = useState({ name: 'test', ingredient: 'test 2', image: '' });
-    console.log(barcode);
+    const [product, setProduct] = useState({title:'', images:[""], barcode_number:'', brand:'', description:'', ingredients:''});
     const [allergyList, setAllergyList] = useState([]);
     const router = useRouter();
 
     useEffect(() => {
-        const filtered = barcodeData.filter((item) => item.barcode == barcode);
-        if (filtered.length == 0)
-            router.push({ pathname: "productNotfound" })
-        else {
-            setItem(filtered[0])
-            GemineAPI(filtered[0]);
-        }
+        // const filtered = barcodeData.filter((item) => item.barcode == barcode);
+        // if (filtered.length == 0)
+        //     router.push({ pathname: "productNotfound" })
+        // else {
+        //     setItem(filtered[0])
+        //     GemineAPI(filtered[0]);
+        // }
+        //console.log(`line 26: ${barcode}`)
+        barcodelookupAPI(barcode);
     }, [])
 
+    const barcodelookupAPI = async (barcode) => {
+        const API_KEY = process.env.EXPO_PUBLIC_BARCODELOOKUP_API_KEY;
+        const URL = `${process.env.EXPO_PUBLIC_BARCODELOOKUP_URL}barcode=${barcode}&formatted=y&key=${API_KEY}`;
+
+        try {
+            console.log(URL)
+            //const response = await fetch(URL);
+            //console.log(response)
+            //           const json = 
+            //         console.log(json)
+            const productJson = { "products": [{ "age_group": "", "asin": "B08W5GT544", "barcode_formats": "UPC-A 060410047095, EAN-13 0060410047095", "barcode_number": "060410047095", "brand": "Lay's", "category": "Food, Beverages & Tobacco", "color": "", "contributors": [Array], "description": "220gm.", "energy_efficiency_class": "", "features": [Array], "format": "", "gender": "", "height": "", "images": ["https://images.barcodelookup.com/30713/307136367-1.jpg","https://images.barcodelookup.com/30713/307136367-2.jpg"], "ingredients": "Specially Selected Potatoes, Vegetable Oil, Seasoning (modified Milk Ingredients, Salt, Corn Maltodextrin, Cheddar Cheese Solids, Vegetable Oil, Potassium Chloride, Glucose Solids, Dextrose, Yeast Extract, Sour Cream Solids, Dehydrated Onion, Natural Flavour, Citric Acid, Lactic Acid, Dehydrated Garlic, Colour, Calcium Lactate). Contains Milk Ingredients. Gluten-free. Ingrédients: Pommes De Terre Spécialement Sélectionnées, Huile Végétale, Assaisonnement (ingrédients Laitiers Modifiés, Sel, Maltodextrine De Maïs, Matière Sèche Du Fromage Cheddar, Huile Vegetale, Chlorure De Potassium, Matière Sèche De De Creme Sure, Oignon Déshydraté, Arôme Naturel, Glucose, Dextrose, Extrait De Levure, Matière Sèche Acide Citrique, Acide Lactique, Ail Déshydrate, Colorant, Lactate De Calcium). Contient Des Ingrédients Du Lait. Sans Gluten. Guaranteed Fresh/fraîcheur Garantie Until Printed Date Or This Snack Is On Us. Jusqu'à La Date Imprimée Ou Argent Remis. Consumer Relations/relations Avec Les Consommateurs 1 800 376-2257 Weekdays 10:00 Am To 5:30 Pm Eastern Time En Semaine, De 10 H à 17 H 30, Heure Normale De L'est Made In Canada From Domestic Fahri", "last_update": "2024-10-09 02:01:53", "length": "", "manufacturer": "N/a", "material": "", "model": "", "mpn": "", "multipack": "", "nutrition_facts": "Energy 556 kcal, Fat 34 g, Saturated Fat 4 g, Carbohydrates 52 g, Sugars 2 g, Protein 6 g, Salt 1.7 g.", "pattern": "", "release_date": "", "reviews": [Array], "size": "", "stores": [Array], "title": "Lay's Wavy Cheddar & Sour Cream Potato Chips", "weight": "0.4875 lb", "width": "" }] };
+            //             JSON.parse(json) //await response.json();
+            console.log(productJson)
+            setProduct(productJson.products[0])
+
+
+            GemineAPI(productJson.products[0]);
+        } catch (e) {
+            console.error(e)
+        }
+
+
+    }
 
     const GemineAPI = async (item) => {
         // Make sure to include these imports:
@@ -41,7 +66,7 @@ export default function barcodeResult() {
 
 
         console.log(item)
-        const ingredient = item.ingredient;
+        const ingredient = item.ingredients;
         const prompt = "Analyze the ingredient I provide, and list the possible allery in the list (eggs, milk, mustard, peanuts, crustaceans and molluscs, fish, sesame seeds, soy, sulphites, tree nuts, wheat and triticale), and highlight all allergy for each category. The ingredient list: " + ingredient
 
 
@@ -51,104 +76,117 @@ export default function barcodeResult() {
         console.log(result.response.text());
         let allergies = [];
         console.log(typeof (res));
-        if (res['eggs'].length > 0) {
+        const allergyItem = res.allergens;
+        console.log(allergyItem)
+        if (allergyItem['eggs'].length > 0) {
             console.log("Eggs")
-            console.log(res['eggs'].length)
-            const obj = { allergy: "eggs", ingredient: res['eggs'] };
+            console.log(allergyItem['eggs'].length)
+            const obj = { allergy: "eggs", ingredient: allergyItem['eggs'] };
             allergies.push(obj)
         }
-        if (res['milk'].length > 0) {
-            console.log(res['milk'].length);
-            const obj = { allergy: "milk", ingredient: res['milk'] };
+        if (allergyItem['milk'].length > 0) {
+            console.log(allergyItem['milk'].length);
+            const obj = { allergy: "milk", ingredient: allergyItem['milk'] };
             allergies.push(obj)
         }
-        if (res['mustard'].length > 0) {
-            const obj = { allergy: "mustard", ingredient: res['mustard'] };
+        if (allergyItem['mustard'].length > 0) {
+            const obj = { allergy: "mustard", ingredient: allergyItem['mustard'] };
             allergies.push(obj)
         }
-        if (res['peanuts'].length > 0) {
-            const obj = { allergy: "peanuts", ingredient: res['peanuts'] };
+        if (allergyItem['peanuts'].length > 0) {
+            const obj = { allergy: "peanuts", ingredient: allergyItem['peanuts'] };
             allergies.push(obj)
         }
-        if (res['crustaceans and molluscs'].length > 0) {
-            const obj = { allergy: "crustaceans and molluscs", ingredient: res['crustaceans and molluscs'] };
+        if (allergyItem['crustaceans and molluscs'].length > 0) {
+            const obj = { allergy: "crustaceans and molluscs", ingredient: allergyItem['crustaceans and molluscs'] };
             allergies.push(obj)
         }
-        if (res['sesame seeds'].length > 0) {
-            const obj = { allergy: "sesame seeds", ingredient: res['sesame seeds'] };
+        if (allergyItem['sesame seeds'].length > 0) {
+            const obj = { allergy: "sesame seeds", ingredient: allergyItem['sesame seeds'] };
             allergies.push(obj)
         }
-        if (res['soy'].length > 0) {
+        if (allergyItem['soy'].length > 0) {
             console.log(res['soy'].length);
-            const obj = { allergy: "soy", ingredient: res['soy'] };
+            const obj = { allergy: "soy", ingredient: allergyItem['soy'] };
             allergies.push(obj)
         }
-        if (res['sulphites'].length > 0) {
+        if (allergyItem['sulphites'].length > 0) {
             console.log(res['sulphites'].length);
-            const obj = { allergy: "sulphites", ingredient: res['sulphites'] };
+            const obj = { allergy: "sulphites", ingredient: allergyItem['sulphites'] };
             allergies.push(obj)
         }
-        if (res['tree nuts'].length > 0) {
+        if (allergyItem['tree nuts'].length > 0) {
             console.log(res['tree nuts'].length);
-            const obj = { allergy: "tree nuts", ingredient: res['tree nuts'] };
+            const obj = { allergy: "tree nuts", ingredient: allergyItem['tree nuts'] };
             allergies.push(obj)
         }
-        if (res['wheat and triticale'].length > 0) {
+        if (allergyItem['wheat and triticale'].length > 0) {
             console.log(res['wheat and triticale'].length);
-            const obj = { allergy: "wheat and triticale", ingredient: res['wheat and triticale'] };
+            const obj = { allergy: "wheat and triticale", ingredient: allergyItem['wheat and triticale'] };
             allergies.push(obj)
         }
         setAllergyList(allergies);
-        // console.log(`Eggs: ${res['eggs']}`);
-        // console.log(`milk: ${res['milk']}`);
-        // console.log(`mustard: ${res['mustard']}`);
-        // console.log(`peanuts: ${res['peanuts']}`);
-        // console.log(`Crustaceans and molluscs: ${res['crustaceans and molluscs']}`);
-        // console.log(`sesame seeds: ${res['sesame seeds']}`);
-        // console.log(`soy: ${res['soy']}`);
-        // console.log(`sulphites: ${res['sulphites']}`);
-        // console.log(`tree nuts: ${res['tree nuts']}`);
-        // console.log(`wheat and triticale: ${res['wheat and triticale']}`);
+        console.log(allergies)
     }
 
 
     return (<>
         <View style={styles.container}>
-            <ScanButton />
-            <Text variant="displayMedium">{item['name']}</Text>
+        <ScanButton />
+            <Text variant="titleMedium">{product.title}</Text>
             <Image
                 source={{
-                    uri: item['image']
+                    uri: product.images[0]
                 }}
                 style={{ width: 200, height: 200 }}
             />
-
 
             <Card mode='contained' theme={{ colors: { surfaceVariant: '#FCE4B6' } }} >
                 <Card.Content style={{ gap: 10 }} >
                     <ScrollView>
                         <View>
-                            <Text variant="titleMedium" style={{ color: '#000' }}>Product Name</Text>
+                            <Text variant="labelMedium" style={{ color: '#000', fontWeight:'bold'  }}>Product Name</Text>
                             <Text variant="bodyMedium" style={{ color: '#000' }}>
-                                {item['name']}
+                                {/* {item['name']} */}
+                                {product.title}
+                            </Text>
+                        </View>
+                        
+                        
+                        <View>
+                            <Text variant="labelMedium" style={{ color: '#000', fontWeight:'bold'  }}>Barcode</Text>
+                            <Text variant="bodyMedium" style={{ color: '#000' }}>
+                                { product.barcode_number }
                             </Text>
                         </View>
                         <View>
-                            <Text variant="titleMedium" style={{ color: '#000' }}>May Contain Allergy</Text>
+                            <Text variant="labelMedium" style={{ color: '#000', fontWeight:'bold'  }}>Brand</Text>
+                            <Text variant="bodyMedium" style={{ color: '#000' }}>
+                                { product.brand }
+                            </Text>
+                        </View>
+                        <View>
+                            <Text variant="labelMedium" style={{ color: '#000', fontWeight:'bold'  }}>Description</Text>
+                            <Text variant="bodyMedium" style={{ color: '#000' }}>
+                                { product.description }
+                            </Text>
+                        </View>
+                        <View>
+                            <Text variant="labelMedium" style={{ color: '#000', fontWeight:'bold'  }}>May Contain Allergy</Text>
                             <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: '8', color: '#000' }}>
                                 {allergyList && allergyList.map((allergy, index) => {
-                                    return (<>
+                                    return (
                                         <Chip key={index} style={{ backgroundColor: '#FFC858', borderWidth: '1', borderColor: '#F3A405' }} onPress={() => console.log('Pressed')}>{allergy['allergy']}</Chip>
-                                    </>)
+                                    )
                                 })}
 
 
                             </View>
                         </View>
                         <View>
-                            <Text variant="titleMedium" style={{ color: '#000' }}>Ingredient List</Text>
+                            <Text variant="labelMedium" style={{ color: '#000', fontWeight:'bold' }}>Ingredient List</Text>
                             <Text variant="bodyMedium" style={{ color: '#000' }}>
-                                {item['ingredient']}
+                                { product.ingredients }
                             </Text>
                         </View>
                     </ScrollView>
@@ -161,9 +199,11 @@ export default function barcodeResult() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        margin: 16,
+        marginLeft: 16,
+        marginRight: 16,
         justifyContent: 'flex-start',
-        alignItems: 'center',
+        alignContent: 'flex-start',
+        alignItems:'center',
         gap: 20,
         paddingBottom: 320,
     },

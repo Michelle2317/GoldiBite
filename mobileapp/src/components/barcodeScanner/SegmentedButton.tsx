@@ -3,8 +3,8 @@ import { SafeAreaView, StyleSheet } from 'react-native';
 import { SegmentedButtons } from 'react-native-paper';
 import { useRouter } from 'expo-router';
 
-const SegmentedButton = () => {
-    const [value, setValue] = React.useState('');
+const SegmentedButton = ({name}) => {
+    const [value, setValue] = React.useState(name);
     const router = useRouter();
 
     const theme = {

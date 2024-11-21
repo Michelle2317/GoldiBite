@@ -42,7 +42,7 @@ export default function EmergencyHome() {
 					style={{ textAlign: 'left' }}
 				>
 					Explore our emergency assistance for
-					when you have a severe allergy reaction
+					severe allergic reactions
 				</Text>
 			</View>
 			<View style={styles.container}>

@@ -1,6 +1,10 @@
 import { ScrollView, View, Text, StyleSheet, Image } from 'react-native';
+import PrimaryButton from '../../../components/paperUiElement/PrimaryButton';
+import { useNavigation } from '@react-navigation/native';
 
 export default function ForAdults() {
+	const navigation = useNavigation();
+
 	return (
 		<ScrollView contentContainerStyle={styles.scrollContainer}>
 			<View style={styles.container}>
@@ -74,6 +78,10 @@ export default function ForAdults() {
 					</Text>
 				</View>
 			</View>
+			<PrimaryButton
+				buttonText='Back to Guides'
+				callback={() => navigation.navigate('index')}
+			/>
 		</ScrollView>
 	);
 }

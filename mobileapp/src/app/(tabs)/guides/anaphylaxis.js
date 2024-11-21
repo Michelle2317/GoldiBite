@@ -15,7 +15,7 @@ const steps = [
 		image: require('@/assets/images/guides/stage1.jpeg'),
 		heading: '1. Initial Reactions',
 		description:
-			"Symptoms are mild and may resemble a regular allergy, such as:\n\t• Itching\n\t• Hives\n\t• Runny nose\n\n If you're at risk for Anaphylaxis, keep \n\nan eye on these early signs.",
+			"Symptoms are mild and may resemble a regular allergy, such as:\n\t• Itching\n\t• Hives\n\t• Runny nose\n\n If you're at risk for Anaphylaxis, keep \nan eye on these early signs.",
 	},
 	{
 		title: 'Progressive Stage',
@@ -29,14 +29,14 @@ const steps = [
 		image: require('@/assets/images/guides/stage3.jpeg'),
 		heading: '3. Respiratory Distress',
 		description:
-			'Breathing becomes difficult, accompanied by:\n\t• Weak Pulse\n\t• Chest Pain\n\t• Dizziness\n\t• Or Fainting\n\nThis stage is often referred to as \n\nAnaphylactic shock.',
+			'Breathing becomes difficult, accompanied by:\n\t• Weak Pulse\n\t• Chest Pain\n\t• Dizziness\n\t• Or Fainting\n\nThis stage is often referred to as \nAnaphylactic shock.',
 	},
 	{
 		title: 'Critical Stage',
 		image: require('@/assets/images/guides/stage4.jpeg'),
 		heading: '4. Condition',
 		description:
-			'Symptoms reach a life-threatening level with:\n\t• Severe drops in blood pressure\n\t• Poor blood circulation\n\t• Swelling that blocks airways\n\nAt this stage, Anaphylaxis can lead to heart \n\nfailure.',
+			'Symptoms reach a life-threatening level with:\n\t• Severe drops in blood pressure\n\t• Poor blood circulation\n\t• Swelling that blocks airways\n\nAt this stage, Anaphylaxis can lead to heart \nfailure.',
 	},
 ];
 
@@ -48,7 +48,7 @@ export default function TravelTips() {
 		navigation.setOptions({
 			headerTitle: steps[step].title,
 		});
-	  }, [navigation, step]);
+	}, [navigation, step]);
 
 	const handleNextStep = () => {
 		if (step < steps.length - 1) {
@@ -60,6 +60,10 @@ export default function TravelTips() {
 		if (step > 0) {
 			setStep((prevStep) => prevStep - 1);
 		}
+	};
+
+	const handleBackToGuides = () => {
+		navigation.navigate('index');
 	};
 
 	return (
@@ -74,6 +78,11 @@ export default function TravelTips() {
 					showNextButton={step < steps.length - 1}
 					onBack={
 						step > 0 ? handleBackStep : null
+					}
+					onBackToGuides={
+						step === steps.length - 1
+							? handleBackToGuides
+							: null
 					}
 				/>
 			</View>

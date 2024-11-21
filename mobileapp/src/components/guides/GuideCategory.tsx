@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
 	categoryContainer: {
 		padding: 20,
 		marginVertical: 8,
-		backgroundColor: '#beeddd',
+		backgroundColor: '#FCE4B6',
 		borderRadius: 10,
 		width: 350,
 		height: 80,

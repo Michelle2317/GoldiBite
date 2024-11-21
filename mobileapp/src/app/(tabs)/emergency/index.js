@@ -29,7 +29,7 @@ export default function Emergency() {
 		<View style={styles.centerContainer}>
 			<View style={styles.container}>
 				<Text style={styles.heading}>
-					Having an emergency?
+					Having an Emergency?
 				</Text>
 				<TouchableOpacity
 					style={styles.callButtonContent}
@@ -48,14 +48,14 @@ export default function Emergency() {
 			</View>
 			<View style={styles.textContainer}>
 				<Text style={styles.title}>
-					Why do we have this option?
+					Why Do We Have This Option?
 				</Text>
 				<Text style={styles.info}>
-					Our call option provides immediate
-					assistance in emergency situations,
-					including sudden medical incidents like
-					strokes. When clicked, the button
-					connects users with emergency services,
+					Our call option offers immediate
+					assistance in emergencies, including
+					sudden medical incidents like strokes.
+					When clicked, the button connects
+					travellers to emergency services by
 					dialing the appropriate number based on
 					their location (e.g., 911 in the United
 					States).

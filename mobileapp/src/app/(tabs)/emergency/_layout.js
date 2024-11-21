@@ -1,26 +1,32 @@
 import { Tabs, Stack } from 'expo-router';
 import Header from '@/src/components/navigation/Header';
-import HeaderRightButton from '@/src/components/navigation/HeaderRightButton'
+import HeaderRightButton from '@/src/components/navigation/HeaderRightButton';
 
 const StackLayout = () => {
 	return (
-		<Stack  screenOptions={{
-			headerStyle: {
-				backgroundColor: '#F4EADA',
-			},
-			headerTintColor: '#000',
-			headerTitleStyle: {
-				fontWeight: 'bold',
-			},
-			headerShadowVisible:false
-		}}>
+		<Stack
+			screenOptions={{
+				headerStyle: {
+					backgroundColor: '#F4EADA',
+				},
+				headerTintColor: '#000',
+				headerTitleStyle: {
+					fontWeight: 'bold',
+				},
+				headerShadowVisible: false,
+			}}
+		>
 			<Stack.Screen
 				name='index'
 				options={{
-					headerShown: true,
-					title: 'Emargency',
-					headerTitle: props => <Header {...props} />,
-					HeaderRightButton: props => <HeaderRightButton {...props} />
+					headerShown: false,
+					title: 'Emergency',
+					headerTitle: (props) => (
+						<Header {...props} />
+					),
+					HeaderRightButton: (props) => (
+						<HeaderRightButton {...props} />
+					),
 				}}
 			/>
 		</Stack>

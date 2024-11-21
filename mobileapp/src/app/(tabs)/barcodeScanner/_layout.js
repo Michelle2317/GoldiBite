@@ -19,7 +19,7 @@ const StackLayout = () => {
             <Stack.Screen name="index" options={{
                 headerBackTitle: 'Back',
                 headerBackTitleStyle: { fontSize: 18 },
-                headerTitle: () => <SegmentedButton />,
+                headerTitle: () => <SegmentedButton name="Barcode" />,
                 headerShown: true,
                 headerStyle: {
                     backgroundColor: '#FFC858',
@@ -33,7 +33,7 @@ const StackLayout = () => {
             <Stack.Screen name="menuCamera" options={{
                 headerBackTitle: 'Back',
                 headerBackTitleStyle: { fontSize: 18 },
-                headerTitle: () => <SegmentedButton />,
+                headerTitle: () => <SegmentedButton  name="Menu"  />,
                 headerShown: true,
                 headerStyle: {
                     backgroundColor: '#FFC858',

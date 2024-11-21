@@ -14,7 +14,6 @@ const welcome = () => {
                 source={require('@/assets/images/elements/user_icon1.png')}
                 style={{ width: 188, height: 188, alignSelf: "center", marginBottom: 50 }}
             />
-            <Text variant="titleMedium" style={{ textAlign: "center", marginBottom: 30, fontWeight: 'bold' }}>You are all set!</Text>
             <PrimaryButton buttonText="Let's get started" callback={() => { router.replace('/(tabs)/'); }} />
         </View>
     </>)

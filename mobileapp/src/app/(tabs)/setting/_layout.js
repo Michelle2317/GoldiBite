@@ -16,6 +16,7 @@ const StackLayout = () => {
                 headerTintColor: '#000',
                 headerTitleStyle: {
                     fontWeight: 'bold',
+					fontSize: 24,
                 },
                 headerShadowVisible:false
             }}
@@ -23,27 +24,38 @@ const StackLayout = () => {
             <Stack.Screen name="profileView" options={{
                 headerShown: true,
                 title: 'Personal Information',
+                headerBackTitle:'Back',
                 headerTitle: "Profile"
             }}></Stack.Screen>
             <Stack.Screen name="emergency" options={{
                 headerShown: true,
+                headerBackTitle:'Back',
                 title: 'Emergency Contact'
             }}></Stack.Screen>
             <Stack.Screen name="allergy" options={{
                 headerShown: true,
+                headerBackTitle:'Back',
                 title: 'Allergy'
             }}></Stack.Screen>
             <Stack.Screen name="notification" options={{
                 headerShown: true,
+                headerBackTitle:'Back',
                 title: 'Notification'
             }}></Stack.Screen>
             <Stack.Screen name="appinfo" options={{
                 headerShown: true,
+                headerBackTitle:'Back',
                 title: 'App Info'
             }}></Stack.Screen>
             <Stack.Screen name="index" options={{
                 headerShown: true,
+                headerBackTitle:'Back',
                 title: 'Profile'
+            }}></Stack.Screen>
+            <Stack.Screen name="preference" options={{
+                headerShown: true,
+                headerBackTitle:'Back',
+                title: 'Preference'
             }}></Stack.Screen>
         </Stack>
     )

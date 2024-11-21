@@ -7,9 +7,8 @@ import {
 	TouchableOpacity,
 } from 'react-native';
 import { Text } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native';
 
-export default function Carousel() {
+export default function Carousel({ onNavigate }) {
 	const scrollViewRef = useRef(null);
 	const imageWidth = 292;
 	const images = [
@@ -33,7 +32,6 @@ export default function Carousel() {
 	const duplicatedImages = [...images, ...images];
 
 	const [scrollPosition, setScrollPosition] = useState(0);
-	const navigation = useNavigation();
 
 	useEffect(() => {
 		const interval = setInterval(() => {
@@ -63,10 +61,6 @@ export default function Carousel() {
 		return () => clearInterval(interval);
 	}, [scrollPosition]);
 
-	const handleImagePress = (route) => {
-		navigation.navigate(route);
-	};
-
 	return (
 		<View style={styles.centerContainer}>
 			<View>
@@ -80,8 +74,7 @@ export default function Carousel() {
 					variant='bodyMedium'
 					style={styles.bodyText}
 				>
-					Helpful information for food allergen
-					problems when traveling
+					Helpful information for managing food allergies while travelling
 				</Text>
 
 				<ScrollView
@@ -102,7 +95,7 @@ export default function Carousel() {
 									styles.imageContainer
 								}
 								onPress={() =>
-									handleImagePress(
+									onNavigate(
 										image.route
 									)
 								}

@@ -29,8 +29,15 @@ export default function Index() {
 		getUsername();
 	}, []);
 
+	const handleCarouselNavigate = (screen) => {
+		navigation.navigate('guides', { screen });
+	};
+
 	return (
-		<ScrollView Style={styles.container}>
+		<ScrollView
+			contentContainerStyle={styles.scrollContentContainer}
+			showsVerticalScrollIndicator={false}
+		>
 			<View style={styles.homeTop}>
 				<ImageBackground
 					source={require('@/assets/images/home/Home-scanner.jpg')}
@@ -53,7 +60,7 @@ export default function Index() {
 								style={[
 									styles.gif,
 									{
-										width: screenWidth ,
+										width: screenWidth,
 									},
 								]}
 								resizeMode='contain'
@@ -84,18 +91,19 @@ export default function Index() {
 					</View>
 				</ImageBackground>
 			</View>
-			<View style={{ marginTop: 510, marginBottom: -200 }}>
-				<Carousel />
-				<EmergencyHome />
+			<View style={styles.bottomContent}>
+				<Carousel onNavigate={handleCarouselNavigate} />
+				<View style={styles.emergencyContent}>
+					<EmergencyHome />
+				</View>
 			</View>
 		</ScrollView>
 	);
 }
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		alignItems: 'center',
+	scrollContentContainer: {
+		flexGrow: 1,
 	},
 	homeTop: {
 		flex: 1,
@@ -105,7 +113,6 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignItems: 'center',
 		width: '100%',
-		height:290,
 		marginTop: -5,
 	},
 	homeTopTint: {
@@ -124,11 +131,12 @@ const styles = StyleSheet.create({
 		height: 250,
 		marginBottom: -6,
 	},
-	cardRow: {
-		flexDirection: 'row',
-		gap: 15,
-		paddingHorizontal: 10,
-		paddingBottom: 15,
+	bottomContent: {
+		marginTop: 40,
+	},
+	emergencyContent: {
+		marginTop: 20,
+		marginBottom: 20,
 	},
 	userStyle: {
 		marginTop: 60,

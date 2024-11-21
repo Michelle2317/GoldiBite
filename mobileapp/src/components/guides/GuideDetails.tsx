@@ -10,6 +10,7 @@ export default function GuideDetails({
 	onNext,
 	showNextButton,
 	onBack,
+	onBackToGuides, 
 }) {
 	return (
 		<View style={styles.container}>
@@ -22,7 +23,11 @@ export default function GuideDetails({
 
 			<View style={styles.buttonContainer}>
 				<View>
-					{showNextButton && <PrimaryButton buttonText={"Next"} callback={onNext} />}
+					{showNextButton ? (
+						<PrimaryButton buttonText={"Next"} callback={onNext} />
+						) : onBackToGuides ? (
+						<PrimaryButton buttonText={"Back to Guides"} callback={onBackToGuides} />
+						) : null}				
 				</View>
 				<View>
 					{onBack && <PrimaryButton buttonText={"Back"} callback={onBack} type="secondary" />}

@@ -11,7 +11,7 @@ const StackLayout = () => {
 				headerTintColor: '#000',
 				headerTitleStyle: {
 					fontWeight: 'bold',
-					fontSize: 28,
+					fontSize: 24,
 				},
 				headerShadowVisible: false,
 				headerTitleAlign: 'center',

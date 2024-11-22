@@ -119,14 +119,14 @@ const BarcodeBottomSheet = () => {
                 enableDynamicSizing={false}
                 enableOverDrag={false}
                 snapPoints={snapPoints}
-                handleStyle={{ backgroundColor: "#FCE4B6", borderTopLeftRadius: 15, borderTopRightRadius: 15 }}
+                handleStyle={{ backgroundColor: "#FFCB62", borderTopLeftRadius: 15, borderTopRightRadius: 15 }}
                 handleIndicatorStyle={{ backgroundColor: "unset" }}>
 
                 <BottomSheetView style={styles.bottomSheetStyle}>
 
                     <BottomSheetTextInput
                         value={inputBarcode}
-                        style={{ alignSelf: "center", backgroundColor: '#FCE4B6', height: 40, width: '90%', padding: '10px', borderColor: '#747474', borderWidth: 1 }}
+                        style={{ alignSelf: "center", backgroundColor: '#FFCB62', height: 40, width: '90%', padding: '10px', borderColor: '#747474', borderWidth: 1 }}
                         placeholder='Please enter barcode manually'
                         onChangeText={setInputBarcode}
                         onBlur={handleOnBlur}
@@ -159,13 +159,13 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 0,
         flexDirection: "column",
-        backgroundColor: "#FAF1E4",
+        backgroundColor: "#FFCB62",
     },
     bottomSheetStyle: {
         flex: 1,
         padding: 0,
         flexDirection: 'column',
         alignContent: 'center',
-        backgroundColor: '#FCE4B6'
+        backgroundColor: '#FFCB62'
     },
 });

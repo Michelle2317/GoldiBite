@@ -17,7 +17,7 @@ const SettingBottomSheet = () => {
     }, [])
     const { colors } = useTheme();
     const containBackgroundColor =  colors.background;  
-const bottomSheetBackgroundColor =  colors.mode=="dark"? "#6A6A6A":"FCE4B6";  
+const bottomSheetBackgroundColor =  colors.mode=="dark"? "#6A6A6A":"#FCE4B6";  
     return (<>
         <GestureHandlerRootView style={{...styles.bottomSheetContainer, backgroundColor:containBackgroundColor}}>
             <BottomSheet

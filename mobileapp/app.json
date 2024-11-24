@@ -1,7 +1,9 @@
 {
   "expo": {
-    "name": "mobileapp",
+    "name": "GoldiBite",
     "slug": "goldibite",
+    "privacy": "public",
+    "description": "GoldiBite is an AI-powered app designed to assist travellers with food allergies and sensitivities by providing a comprehensive database to manage food safety concerns while traveling. It aims to eliminate the inconvenience and potential safety risks associated with varying ingredient information and regulations worldwide.",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -67,9 +69,15 @@
         "origin": false
       },
       "eas": {
-        "projectId": "33204f7c-b5fc-4299-8301-94fb841321f2"
+        "projectId": "c5436bd6-39a9-4a31-892e-398ecc3b8651"
       }
     },
-    "owner": "shelly23"
+    "owner": "shelly23",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/c5436bd6-39a9-4a31-892e-398ecc3b8651"
+    }
   }
 }

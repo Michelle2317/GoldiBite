@@ -22,3 +22,4 @@ expo-env.d.ts
 *test.js
 .env.*
 .env*
+.vercel

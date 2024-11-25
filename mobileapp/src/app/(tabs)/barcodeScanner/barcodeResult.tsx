@@ -9,12 +9,14 @@ import Loading from '../../../components/animation/Loading';
 import UserStoreDataUtils from '@/src/utils/UserStoreDataUtils';
 import CheckMark from '@/src/components/barcodeScanner/CheckMark';
 import GoogleGemine from '@/src/utils/GoogleGemine';
+import AllengyAnalysisUtils from "@/src/utils/AllengyAnalysisUtils";
 
 export default function barcodeResult() {
     const { barcode } = useLocalSearchParams<{ barcode: string }>();
     const [product, setProduct] = useState({ title: '', images: [""], barcode_number: '', brand: '', description: '', ingredients: '' });
     const [allergyList, setAllergyList] = useState([]);
     const router = useRouter();
+    const { checkAllergy } = AllengyAnalysisUtils();
 
     const [loadingStatus, setLoadingStatus] = useState('idle');
 
@@ -67,35 +69,17 @@ export default function barcodeResult() {
         }
     }
 
-    const checkAllergy = async (allergies) => {
-        try {
-            let profile = await getProfile();
-            allergies.map((item) => {
-
-                console.log(item);
-                console.log(profile.allergies
-                    .filter((allergyItem) => allergyItem.selected == true)
-                    .filter((allergiesItem) => (allergiesItem.name.toUpperCase() == item.allergen.toUpperCase())))
-
-                if (profile.allergies
-                    .filter((allergyItem) => allergyItem.selected == true)
-                    .filter((allergiesItem) => (allergiesItem.name.toUpperCase() == item.allergen.toUpperCase()))
-                    .length > 0) {
-                    setIsSafity(false);
-                    console.log("Not safity.")
-                }
-            })
-        } catch (error) {
-            console.log(error)
-        }
-    }
     const GemineAPI = async (item) => {
         try {
             setLoadingStatus('loading');
-            setIsSafity(true)
             const res = await productGemineAPI(item.ingredients)
             setAllergyList(res['allergens']);
-            checkAllergy(res['allergens']);
+            const profile = await getProfile();
+            const safity = checkAllergy(profile.allergies, res['allergens']);
+            console.log( checkAllergy(profile.allergies, res['allergens']))
+            console.log(safity)
+            setIsSafity(safity); 
+
             setLoadingStatus('idle');
         } catch (e) {
             setLoadingStatus('error');

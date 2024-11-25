@@ -92,7 +92,6 @@ export default function GoogleGemine() {
         const EXPO_PUBLIC_GOOGLE_GEMINE_API_KEY = process.env.EXPO_PUBLIC_GOOGLE_GEMINE_API_KEY;
         const genAI = new GoogleGenerativeAI(EXPO_PUBLIC_GOOGLE_GEMINE_API_KEY);
 
-        console.log(parts)
         const MODEL = genAI.getGenerativeModel(
             {
                 model: model, //"gemini-1.5-pro", // "gemini-1.5-flash", //
@@ -103,7 +102,6 @@ export default function GoogleGemine() {
         const result = await MODEL.generateContent({ contents: [{ role: "user", parts }], generationConfig });
         const resultJson = JSON.parse(result.response.text())
 
-        console.log(resultJson)
         return resultJson;
 
     }
@@ -114,13 +112,11 @@ export default function GoogleGemine() {
 
         const SCHEME = ProductAnalysisScheme;
 
-        console.log(`Line 117:${prompt}`);
         const parts = [
             { text: prompt },
             { text: "output:" }
         ];
 
-        console.log(`Line 117:${parts}`);
         const result = await GemineAPI(parts, SCHEME, model)
         return result;
     }

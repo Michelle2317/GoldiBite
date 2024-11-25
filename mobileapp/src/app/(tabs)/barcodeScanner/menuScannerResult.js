@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Image, View, StyleSheet, ScrollView, SafeAreaView, Text, FlatList } from 'react-native';
-import { Chip } from 'react-native-paper';
-import MenuItem from '../../../components/scanner/MenuItem';
 import { useLocalSearchParams } from 'expo-router';
 import menuAnalyistUtils from '@/src/utils/menuAnalyistUtils'
 import Loading from '../../../components/animation/Loading';
-const { GoogleGenerativeAI, SchemaType } = require("@google/generative-ai");
 import ItemList from '../../../components/scanner/ItemList';
+import GoogleGemine from "@/src/utils/GoogleGemine";
+import AllengyAnalysisUtils from '@/src/utils/AllengyAnalysisUtils';
+import UserStoreDataUtils from '@/src/utils/UserStoreDataUtils';
 
 const menuScannerResult = () => {
-    const name = useState("Kaylie");
-    
+
     const { image } = useLocalSearchParams(image);
     const [status, setStatue] = useState('idle');
 
@@ -21,100 +20,27 @@ const menuScannerResult = () => {
 
     const [dishes, setDishes] = useState([]);
     const [categories, setCategories] = useState([]);
+    const { menuGemineAPI } = GoogleGemine();
+    const { getProfile } = UserStoreDataUtils();
+    const { checkMenuAllergy } = AllengyAnalysisUtils();
 
-
+    const [profile, setProfile] = useState({});
     useEffect(() => {
 
+        const callGetProfile = async () => {
+            const user = await getProfile();
+            setProfile(user);
+        }
 
         const GemineAPI = async () => {
             // Make sure to include these imports:
             // import { GoogleGenerativeAI } from "@google/generative-ai";
             try {
                 setStatue('loading')
-                const generationConfig = {
-                    temperature: 1,
-                    topP: 0.95,
-                    topK: 40,
-                    maxOutputTokens: 8192,
-                    responseMimeType: "application/json",
-                    responseSchema: {
-                        type: "object",
-                        properties: {
-                            response: {
-                                type: "array",
-                                items: {
-                                    type: "string"
-                                }
-                            },
-                            dishes: {
-                                type: "array",
-                                items: {
-                                    type: "object",
-                                    properties: {
-                                        EnglishName: {
-                                            type: "string"
-                                        },
-                                        OriginalName: {
-                                            type: "string"
-                                        },
-                                        EnglishCategory: {
-                                            type: "string"
-                                        },
-                                        OriginalCategory: {
-                                            type: "string"
-                                        },
-                                        ingredients: {
-                                            type: "array",
-                                            items: {
-                                                type: "string"
-                                            }
-                                        },
-                                        allergens: {
-                                            type: "array",
-                                            items: {
-                                                type: "string"
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        required: [
-                            "response"
-                        ]
-                    },
-                };
-
-                const EXPO_PUBLIC_GOOGLE_GEMINE_API_KEY = process.env.EXPO_PUBLIC_GOOGLE_GEMINE_API_KEY;
-                const genAI = new GoogleGenerativeAI(EXPO_PUBLIC_GOOGLE_GEMINE_API_KEY);
-                const model = genAI.getGenerativeModel(
-                    {
-                        model: "gemini-1.5-pro", //"gemini-1.5-flash",
-                        generationConfig: {
-                            responseMimeType: "application/json",
-                        },
-                    },
-                );
 
                 let iData = await getImageBase64();
-                const parts = [
-                    {
-                        inlineData: {
-                            mimeType: "image/jpeg",
-                            data: iData
-                        }
-                    },
-                    //{ text: "list all dish in the image,analysis all dish that the image provided, list all ingredient, and possibile allergyen that include the dish original name, category. list the possible allery in the list (eggs,  milk,  mustard,  peanuts,  Crustaceans and molluscs,  fish,  sesame seeds,  soy,  sulphites,  tree nuts,  wheat and triticale), and list all ingredient in english, also translate the dish name and category to english. " },
-                    { text: "analysis all dish that the image provided, that include the dish original name, category, list the possible allery in the list (eggs,  milk,  mustard,  peanuts,  Crustaceans and molluscs,  fish,  sesame seeds,  soy,  sulphites,  tree nuts,  wheat and triticale)  , list all ingredient in english, also translate the dish name and category to english. also please provide the original name in dish name and category " },
 
-                    //{text: "analysis the images I provided."},
-
-                    { text: "output:" }
-                ];
-                console.log(parts)
-                const result = await model.generateContent({ contents: [{ role: "user", parts }], generationConfig });
-                const response = await result.response;
-                const res = JSON.parse(response.text())
+                const res = await menuGemineAPI(iData, "gemini-1.5-pro");
 
                 console.log(res)
                 res.dishes.forEach(dish => {
@@ -133,7 +59,7 @@ const menuScannerResult = () => {
                 console.error(e.message)
             }
         }
-
+        callGetProfile();
         GemineAPI()
     }, []);
 
@@ -153,13 +79,15 @@ const menuScannerResult = () => {
                             })}
                         </View> */}
 
-                        <ScrollView style={{flex: 1}}>
-                             {dishes.map((dish, index) => {
+                        <ScrollView style={{ flex: 1 }}>
+                            {dishes.map((dish, index) => {
                                 console.log(dish);
+                                let isSafity = checkMenuAllergy(profile.allergies, dish.allergens);
+                                dish.safity = isSafity;
                                 return (
-                                    <ItemList key={index} dish={dish} />
+                                    <ItemList key={index} dish={dish} safity={isSafity } />
                                 )
-                            })} 
+                            })}
 
                         </ScrollView>
                     </>
@@ -168,7 +96,6 @@ const menuScannerResult = () => {
         </View>
     </>)
 }
-
 
 
 const styles = StyleSheet.create({

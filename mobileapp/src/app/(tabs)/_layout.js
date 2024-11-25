@@ -16,7 +16,7 @@ export default function TabLayout() {
 	const tabBarInactiveTintColor =
 		colorScheme === 'light' ? '#1C1B1F' : '#FFC858';
 
-	const displayTabbar = segments[2] === 'menuCamera' || segments[2] === undefined ? 'none' : 'flex';
+	const displayTabbar = segments[2] === 'menuCamera' || segments[2] === undefined ? 'flex' : 'flex';
 	
 	return (
 		<Tabs

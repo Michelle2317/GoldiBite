@@ -14,6 +14,7 @@ import { useNavigation } from '@react-navigation/native';
 import UserStoreDataUtils from '../../utils/UserStoreDataUtils';
 import { Text } from 'react-native-paper';
 import PrimaryButton from '../../components/paperUiElement/PrimaryButton';
+import LottieView from 'lottie-react-native';
 
 export default function Index() {
 	const { getProfileName } = UserStoreDataUtils();
@@ -55,8 +56,10 @@ export default function Index() {
 								styles.homeTopScan
 							}
 						>
-							<Image
-								source={require('@/assets/images/home/Scan.gif')}
+							<LottieView
+								source={require('@/assets/images/home/animation.json')}
+								autoPlay
+								loop
 								style={[
 									styles.gif,
 									{
@@ -121,7 +124,7 @@ const styles = StyleSheet.create({
 	},
 	homeTopImage: {
 		width: '100%',
-		height: 480,
+		height: 500,
 		borderBottomLeftRadius: 10,
 		borderBottomRightRadius: 10,
 		overflow: 'hidden',

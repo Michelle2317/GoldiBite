@@ -108,6 +108,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
+        backgroundColor:"#FCE4B6"
     },
     barcodeContainer: {
         flex: 5,

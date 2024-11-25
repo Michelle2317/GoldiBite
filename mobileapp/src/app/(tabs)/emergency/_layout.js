@@ -1,6 +1,4 @@
 import { Tabs, Stack } from 'expo-router';
-import Header from '@/src/components/navigation/Header';
-import HeaderRightButton from '@/src/components/navigation/HeaderRightButton';
 
 const StackLayout = () => {
 	return (
@@ -20,14 +18,8 @@ const StackLayout = () => {
 			<Stack.Screen
 				name='index'
 				options={{
-					headerShown: false,
+					headerShown: true,
 					title: 'Emergency',
-					headerTitle: (props) => (
-						<Header {...props} />
-					),
-					HeaderRightButton: (props) => (
-						<HeaderRightButton {...props} />
-					),
 				}}
 			/>
 		</Stack>

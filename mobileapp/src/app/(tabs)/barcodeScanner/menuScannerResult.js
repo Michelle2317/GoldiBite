@@ -4,10 +4,12 @@ import { useLocalSearchParams } from 'expo-router';
 import menuAnalyistUtils from '@/src/utils/menuAnalyistUtils'
 import Loading from '../../../components/animation/Loading';
 import ItemList from '../../../components/scanner/ItemList';
-import  {menuGemineAPI} from "@/src/utils/GoogleGemine";
+import GoogleGemine from "@/src/utils/GoogleGemine";
+import AllengyAnalysisUtils from '@/src/utils/AllengyAnalysisUtils';
+import UserStoreDataUtils from '@/src/utils/UserStoreDataUtils';
 
 const menuScannerResult = () => {
-    
+
     const { image } = useLocalSearchParams(image);
     const [status, setStatue] = useState('idle');
 
@@ -18,9 +20,17 @@ const menuScannerResult = () => {
 
     const [dishes, setDishes] = useState([]);
     const [categories, setCategories] = useState([]);
+    const { menuGemineAPI } = GoogleGemine();
+    const { getProfile } = UserStoreDataUtils();
+    const { checkMenuAllergy } = AllengyAnalysisUtils();
 
+    const [profile, setProfile] = useState({});
     useEffect(() => {
 
+        const callGetProfile = async () => {
+            const user = await getProfile();
+            setProfile(user);
+        }
 
         const GemineAPI = async () => {
             // Make sure to include these imports:
@@ -49,7 +59,7 @@ const menuScannerResult = () => {
                 console.error(e.message)
             }
         }
-
+        callGetProfile();
         GemineAPI()
     }, []);
 
@@ -69,13 +79,15 @@ const menuScannerResult = () => {
                             })}
                         </View> */}
 
-                        <ScrollView style={{flex: 1}}>
-                             {dishes.map((dish, index) => {
+                        <ScrollView style={{ flex: 1 }}>
+                            {dishes.map((dish, index) => {
                                 console.log(dish);
+                                let isSafity = checkMenuAllergy(profile.allergies, dish.allergens);
+                                dish.safity = isSafity;
                                 return (
-                                    <ItemList key={index} dish={dish} />
+                                    <ItemList key={index} dish={dish} safity={isSafity } />
                                 )
-                            })} 
+                            })}
 
                         </ScrollView>
                     </>

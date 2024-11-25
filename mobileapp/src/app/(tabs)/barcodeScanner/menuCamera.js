@@ -86,7 +86,7 @@ export default function menuCamera() {
                 </View>
             </View>
             <View style={{
-                backgroundColor: '#FCE4B6', flex: 1,
+                backgroundColor: '#FFCB62', flex: 1,
                 padding: 0,
                 margin: 0,
                 alignContent: "center",

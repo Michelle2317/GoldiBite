@@ -2,9 +2,9 @@ import React from 'react';
 import { View, StyleSheet, FlatList, Text } from 'react-native';
 import { Card, IconButton } from 'react-native-paper';
 
-export default function ItemList({ dish, safity  }) {
+export default function ItemList({ dish, safity, alertAllergies }) {
 	//const [data, setData] = useState(demoData);
-	
+
 	const handleQuantity = () => {
 		console.log("On Press")
 	}
@@ -67,10 +67,23 @@ export default function ItemList({ dish, safity  }) {
 
 						<Text style={styles.allergenStatus}>
 							{
-								safity == true ? 'No Allergen Detected' : 'Allergen Detected'
+								dish.allergens.length == 0 || dish.allergens == undefined ? 'No Allergen Detected' : 'Allergen Detected :'
 
 							}
 						</Text>
+
+						{
+							dish.allergens.length > 0 && dish.allergens.map((item, index) => {
+								if(alertAllergies
+									.filter((allergyItem) => allergyItem.selected == true)
+									.filter((allergiesItem) => (allergiesItem.name.toUpperCase() == item.toUpperCase()))
+									.length > 0){
+										return (<Text key={index} style={{color:"red"}} >{item}</Text>)
+									}else{
+										return (<Text key={index} >{item}</Text>)
+									}
+							})
+						}
 
 						<View style={styles.quantityWrapper}>
 							<IconButton

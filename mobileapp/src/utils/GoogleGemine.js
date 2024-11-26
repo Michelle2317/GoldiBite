@@ -29,11 +29,16 @@ export default function GoogleGemine() {
                 items: {
                     type: "string"
                 }
-            }
+            },
+            required: [
+                "ingredients",
+                "allergens"
+            ]
+
         }
     };
 
-    const MenuAnalysisScheme =  {
+    const MenuAnalysisScheme = {
         type: "object",
         properties: {
             response: {
@@ -71,7 +76,15 @@ export default function GoogleGemine() {
                                 type: "string"
                             }
                         }
-                    }
+                    },
+                    required: [
+                        "EnglishName",
+                        "OriginalName",
+                        "EnglishCategory",
+                        "OriginalCategory",
+                        "ingredients",
+                        "allergens"
+                    ]
                 }
             }
         },
@@ -106,7 +119,7 @@ export default function GoogleGemine() {
 
     }
 
-    const productGemineAPI =  async (ingredientText, model = "gemini-1.5-flash") => {
+    const productGemineAPI = async (ingredientText, model = "gemini-1.5-flash") => {
         const prompt = "Analyze the ingredient I provide, and list the possible allery in the list (eggs, milk, mustard, peanuts, crustaceans and molluscs, fish, sesame seeds, soy, sulphites, tree nuts, wheat and triticale), " +
             " and highlight all allergy for each category. The ingredient list: " + ingredientText;
 
@@ -121,9 +134,9 @@ export default function GoogleGemine() {
         return result;
     }
 
-    const menuGemineAPI =  (image, model = "gemini-1.5-flash") => {
+    const menuGemineAPI = (image, model = "gemini-1.5-flash") => {
 
-        
+
         const SCHEME = MenuAnalysisScheme;
 
         const parts = [
@@ -136,8 +149,8 @@ export default function GoogleGemine() {
             { text: "analysis all dish that the image provided, that include the dish original name, category, list the possible allery in the list (eggs,  milk,  mustard,  peanuts,  Crustaceans and molluscs,  fish,  sesame seeds,  soy,  sulphites,  tree nuts,  wheat and triticale)  , list all ingredient in english, also translate the dish name and category to english. also please provide the original name in dish name and category " },
             { text: "output:" }
         ];
-        
-        const result =  GemineAPI(parts, SCHEME, model)
+
+        const result = GemineAPI(parts, SCHEME, model)
         return result;
     }
 

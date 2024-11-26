@@ -85,7 +85,7 @@ const menuScannerResult = () => {
                                 let isSafity = checkMenuAllergy(profile.allergies, dish.allergens);
                                 dish.safity = isSafity;
                                 return (
-                                    <ItemList key={index} dish={dish} safity={isSafity } />
+                                    <ItemList key={index} dish={dish} safity={isSafity} alertAllergies={profile.allergies} />
                                 )
                             })}
 

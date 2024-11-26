@@ -30,8 +30,8 @@ const bottomSheetBackgroundColor =  colors.mode=="dark"? "#6A6A6A":"#FCE4B6";
                 handleIndicatorStyle={{ backgroundColor: "unset" }} >
                 <BottomSheetView style={{...styles.bottomSheetStyle, backgroundColor:bottomSheetBackgroundColor}}>
                 <TouchableButton name="Edit Profile" target="profileView" />
-                <TouchableButton name="Edit allergiers" target="allergy" />
-                <TouchableButton name="Emergency contact" target="emergency" />
+                <TouchableButton name="Sensitive Ingredients" target="allergy" />
+                <TouchableButton name="Emergency Contact" target="emergency" />
                 <TouchableButton name="Preferences" target="preference" />
                 <ToggleTheme />
                 <TouchableButton name="App Info" target="appinfo" />

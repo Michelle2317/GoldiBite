@@ -35,7 +35,7 @@ const StackLayout = () => {
             <Stack.Screen name="allergy" options={{
                 headerShown: true,
                 headerBackTitle:'Back',
-                title: 'Allergy'
+                title: 'Sensitive Ingredients'
             }}></Stack.Screen>
             <Stack.Screen name="notification" options={{
                 headerShown: true,

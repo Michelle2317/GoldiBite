@@ -29,11 +29,7 @@ export default function GoogleGemine() {
                 items: {
                     type: "string"
                 }
-            },
-            required: [
-                "ingredients",
-                "allergens"
-            ]
+            }
 
         }
     };
@@ -82,6 +78,7 @@ export default function GoogleGemine() {
                         "OriginalName",
                         "EnglishCategory",
                         "OriginalCategory",
+                        "ingredients",
                         "ingredients",
                         "allergens"
                     ]

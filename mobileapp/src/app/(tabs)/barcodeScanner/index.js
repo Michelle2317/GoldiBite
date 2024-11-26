@@ -7,6 +7,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import BottomSheet, { BottomSheetView, BottomSheetTextInput } from '@gorhom/bottom-sheet';
 import { useRouter } from 'expo-router';
 import ProductUtils from '@/src/utils/ProductUtils';
+import { useTheme } from '@/src/hooks/useTheme';
 
 export default function Scanner(props) {
     const parent = props.navigation;
@@ -52,7 +53,7 @@ export default function Scanner(props) {
     }, [scanned])
 
     useEffect(() => {
-        if(barcode == "") return;
+        if (barcode == "") return;
         const product = getProduct(barcode);
         if (!product[0]) {
             router.push({ pathname: "barcodeScanner/productNotfound" })
@@ -111,22 +112,37 @@ const BarcodeBottomSheet = () => {
         router.push({ pathname: "barcodeScanner/barcodeResult", params: { barcode: inputBarcode } })
     }
 
+    const { colorScheme } = useTheme();
+    const backgroundColor = colorScheme === 'light' ? '#FFCB62' : '#000000';
+    const borderColor = colorScheme === 'light' ? '#747474' :  '#F3A405'
+    const inputColor = colorScheme === 'light' ? '#FFCB62' :  '#fff'
     return (<>
-        <GestureHandlerRootView style={styles.bottomSheetContainer}>
+        <GestureHandlerRootView style={{
+            flex: 1,
+            padding: 0,
+            flexDirection: "column",
+            backgroundColor: backgroundColor
+        }}>
             <BottomSheet
                 ref={bottomSheetRef}
                 onChange={handleSheetChanges}
                 enableDynamicSizing={false}
                 enableOverDrag={false}
                 snapPoints={snapPoints}
-                handleStyle={{ backgroundColor: "#FFCB62", borderTopLeftRadius: 15, borderTopRightRadius: 15 }}
+                handleStyle={{ backgroundColor: backgroundColor, borderTopLeftRadius: 15, borderTopRightRadius: 15 }}
                 handleIndicatorStyle={{ backgroundColor: "unset" }}>
 
-                <BottomSheetView style={styles.bottomSheetStyle}>
+                <BottomSheetView style={{
+                     flex: 1,
+                     padding: 0,
+                     flexDirection: 'column',
+                     alignContent: 'center',
+                     backgroundColor: backgroundColor
+                }}>
 
                     <BottomSheetTextInput
                         value={inputBarcode}
-                        style={{ alignSelf: "center", backgroundColor: '#FFCB62', height: 40, width: '90%', padding: '10px', borderColor: '#747474', borderWidth: 1 }}
+                        style={{ alignSelf: "center", backgroundColor: backgroundColor, height: 40, width: '90%', padding: '10px', borderColor: borderColor, borderWidth: 1, color:inputColor }}
                         placeholder='Please enter barcode manually'
                         onChangeText={setInputBarcode}
                         onBlur={handleOnBlur}
@@ -159,7 +175,7 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 0,
         flexDirection: "column",
-        backgroundColor: "#FFCB62",
+
     },
     bottomSheetStyle: {
         flex: 1,

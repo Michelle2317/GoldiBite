@@ -10,6 +10,8 @@ import UserStoreDataUtils from '@/src/utils/UserStoreDataUtils';
 import CheckMark from '@/src/components/barcodeScanner/CheckMark';
 import GoogleGemine from '@/src/utils/GoogleGemine';
 import AllengyAnalysisUtils from "@/src/utils/AllengyAnalysisUtils";
+import PaperUIChipStyle from "@/src/components/paperUiElement/PaperUIChipStyle"
+import { useTheme } from '@/src/hooks/useTheme';
 
 export default function barcodeResult() {
     const { barcode } = useLocalSearchParams<{ barcode: string }>();
@@ -29,7 +31,9 @@ export default function barcodeResult() {
     const { getProfile } = UserStoreDataUtils();
 
     const { productGemineAPI } = GoogleGemine();
-
+	const { colorScheme } = useTheme();
+    const backgroundColor = colorScheme === 'light'? '#F4EADA':'#343434';
+    
     useEffect(() => {
         // const filtered = barcodeData.filter((item) => item.barcode == barcode);
         // if (filtered.length == 0)
@@ -126,12 +130,12 @@ export default function barcodeResult() {
                                 />
                                 <CheckMark safity={isSafity} />
                             </View>
-                            <Card mode='contained' theme={{ colors: { surfaceVariant: '#FCE4B6' } }} >
+                            <Card mode='contained' theme={{ colors: { surfaceVariant: backgroundColor } }} >
                                 <Card.Content style={{ gap: 10 }} >
-                                    <ScrollView>
+                                    <ScrollView  style={{ gap: 10 }} >
                                         <View>
-                                            <Text variant="labelMedium" style={{ color: '#000', fontWeight: 'bold' }}>Product Name</Text>
-                                            <Text variant="bodyMedium" style={{ color: '#000' }}>
+                                            <Text variant="labelMedium" style={{ fontWeight: 'bold' }}>Product Name</Text>
+                                            <Text variant="bodyMedium" >
                                                 {/* {item['name']} */}
                                                 {product.title}
                                             </Text>
@@ -139,29 +143,29 @@ export default function barcodeResult() {
 
 
                                         <View>
-                                            <Text variant="labelMedium" style={{ color: '#000', fontWeight: 'bold' }}>Barcode</Text>
-                                            <Text variant="bodyMedium" style={{ color: '#000' }}>
+                                            <Text variant="labelMedium" style={{fontWeight: 'bold' }}>Barcode</Text>
+                                            <Text variant="bodyMedium" >
                                                 {product.barcode_number}
                                             </Text>
                                         </View>
                                         <View>
-                                            <Text variant="labelMedium" style={{ color: '#000', fontWeight: 'bold' }}>Brand</Text>
-                                            <Text variant="bodyMedium" style={{ color: '#000' }}>
+                                            <Text variant="labelMedium" style={{ fontWeight: 'bold' }}>Brand</Text>
+                                            <Text variant="bodyMedium" >
                                                 {product.brand}
                                             </Text>
                                         </View>
                                         <View>
-                                            <Text variant="labelMedium" style={{ color: '#000', fontWeight: 'bold' }}>Description</Text>
-                                            <Text variant="bodyMedium" style={{ color: '#000' }}>
+                                            <Text variant="labelMedium" style={{fontWeight: 'bold' }}>Description</Text>
+                                            <Text variant="bodyMedium" >
                                                 {product.description}
                                             </Text>
                                         </View>
                                         <View>
-                                            <Text variant="labelMedium" style={{ color: '#000', fontWeight: 'bold' }}>May Contain Allergy</Text>
-                                            <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: '8', color: '#000' }}>
+                                            <Text variant="labelMedium" style={{ fontWeight: 'bold' }}>May Contain Allergy</Text>
+                                            <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: '8' }}>
                                                 {allergyList && allergyList.map((allergy, index) => {
                                                     return (
-                                                        <Chip key={index} style={{ backgroundColor: '#FFC858', borderWidth: '1', borderColor: '#F3A405' }} onPress={() => console.log('Pressed')}>{allergy['allergen']}</Chip>
+                                                        <PaperUIChipStyle key={index} name={allergy['allergen']} isSelected={true} callback={console.log("on Press")} />
                                                     )
                                                 })}
 
@@ -169,8 +173,8 @@ export default function barcodeResult() {
                                             </View>
                                         </View>
                                         <View>
-                                            <Text variant="labelMedium" style={{ color: '#000', fontWeight: 'bold' }}>Ingredient List</Text>
-                                            <Text variant="bodyMedium" style={{ color: '#000' }}>
+                                            <Text variant="labelMedium" style={{fontWeight: 'bold' }}>Ingredient List</Text>
+                                            <Text variant="bodyMedium" >
                                                 {product.ingredients}
                                             </Text>
                                         </View>

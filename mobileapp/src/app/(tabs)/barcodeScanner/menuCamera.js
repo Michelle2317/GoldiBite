@@ -6,6 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import * as MediaLibrary from 'expo-media-library';
 import {  useRouter  } from 'expo-router';
 import menuAnalyistUtils from '@/src/utils/menuAnalyistUtils'
+import { useTheme } from '@/src/hooks/useTheme';
 
 
 export default function menuCamera() {
@@ -17,6 +18,8 @@ export default function menuCamera() {
     const [hasMediaLibraryPermissions, setMediaLibraryPermissions] = useState();
   
     const { getImageBase64, storeImageBase64 } = menuAnalyistUtils();
+    const { colorScheme } = useTheme();
+    const backgroundColor = colorScheme === 'light' ? '#FFCB62' : '#000000';
 
     
     const router = useRouter();
@@ -75,7 +78,8 @@ export default function menuCamera() {
 
     return (
 
-        <View style={styles.container}  >
+        <View style={{flex: 1,
+            justifyContent: 'center',backgroundColor:backgroundColor}}  >
             <View style={styles.barcodeContainer}>
                 <CameraView
                     style={StyleSheet.absoluteFillObject}
@@ -86,7 +90,7 @@ export default function menuCamera() {
                 </View>
             </View>
             <View style={{
-                backgroundColor: '#FFCB62', flex: 1,
+                backgroundColor: backgroundColor, flex: 1,
                 padding: 0,
                 margin: 0,
                 alignContent: "center",

@@ -18,8 +18,8 @@ export default function ScanButton() {
                     <Avatar.Icon size={64} icon="barcode-scan" color='#000000' style={{ backgroundColor: '#BFEDDD' }
 
                     } />
-                    <Text variant="labelMedium" style={{ color: '#000000' }}>Scan another </Text>
-                    <Text variant="labelMedium" style={{ color: '#000000' }}>product</Text>
+                    <Text variant="labelMedium">Scan another </Text>
+                    <Text variant="labelMedium">product</Text>
                 </TouchableOpacity>
             </View>
         </View>

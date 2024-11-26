@@ -1,14 +1,18 @@
 import { Stack } from 'expo-router';
 import HeaderRightButton from '@/src/components/navigation/HeaderRightButton';
+import { useTheme } from '@/src/hooks/useTheme';
 
 const StackLayout = () => {
+	const { colorScheme } = useTheme();
+    const backgroundColor = colorScheme === 'light'? '#F4EADA':'#343434';
+    const fontColor = colorScheme === 'light'? '#000000':'#ffffff';
 	return (
 		<Stack
 			screenOptions={{
 				headerStyle: {
-					backgroundColor: '#F4EADA',
+                    backgroundColor: backgroundColor,
 				},
-				headerTintColor: '#000',
+                headerTintColor: fontColor,
 				headerTitleStyle: {
 					fontWeight: 'bold',
 					fontSize: 24,

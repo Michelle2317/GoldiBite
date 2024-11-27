@@ -10,8 +10,8 @@ import {
 import { Avatar, Text } from 'react-native-paper';
 
 export default function SosButton({
-	height = 300,
-	width = 300,
+	height = 280,
+	width = 280,
 	buttonBackgroundColor = '#ff4342',
 	glowColor = '#ff7070',
 	icon = 'phone',

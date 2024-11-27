@@ -56,7 +56,7 @@ const AllergiesSection = ({ profile, callback }) => {
     }
 
     return (<>
-        <Text variant="headlineMedium" style={{ textAlign: "center", marginBottom: 30, fontWeight: 'bold' }}>Select Allergy</Text>
+        <Text variant="headlineMedium" style={{ textAlign: "center", marginBottom: 30, fontWeight: 'bold' }}>Select Sensitive Ingredients</Text>
         <View style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", gap: 10, width: 280 }}>
             {selectedAllergies && selectedAllergies.map((item, index) => {
                 return (<>

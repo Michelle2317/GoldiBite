@@ -4,7 +4,7 @@ import { Text } from "react-native-paper";
 import PrimaryButton from '@/src/components/paperUiElement/PrimaryButton';
 import { useRouter } from "expo-router";
 
-export default function productNotfound({}){
+export default function ProductNotfound({}){
     const router = useRouter();
 
     const onPressHandles = () => {

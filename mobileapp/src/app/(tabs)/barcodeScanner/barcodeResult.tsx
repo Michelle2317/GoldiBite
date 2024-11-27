@@ -12,6 +12,7 @@ import GoogleGemine from '@/src/utils/GoogleGemine';
 import AllengyAnalysisUtils from "@/src/utils/AllengyAnalysisUtils";
 import PaperUIChipStyle from "@/src/components/paperUiElement/PaperUIChipStyle"
 import { useTheme } from '@/src/hooks/useTheme';
+import ProductNotfound from './productNotfound';
 
 export default function barcodeResult() {
     const { barcode } = useLocalSearchParams<{ barcode: string }>();
@@ -24,6 +25,7 @@ export default function barcodeResult() {
 
     const isLoading = loadingStatus === 'loading';
     const isError = loadingStatus === 'error';
+    const productNotFound = loadingStatus === 'productNotFound';
     const [isSafity, setIsSafity] = useState(true);
 
     const [findProduct, isFindProduct] = useState(false);
@@ -35,6 +37,40 @@ export default function barcodeResult() {
     const backgroundColor = colorScheme === 'light'? '#F4EADA':'#343434';
     
     useEffect(() => {
+
+
+    const barcodelookupAPI = async (barcode) => {
+        const API_KEY = process.env.EXPO_PUBLIC_BARCODELOOKUP_API_KEY;
+        const URL = `${process.env.EXPO_PUBLIC_BARCODELOOKUP_URL}barcode=${barcode}&formatted=y&key=${API_KEY}`;
+
+        try {
+            console.log(URL)
+            const response = await fetch(URL);
+            //const response = `{"products":[{"age_group":"","asin":"B08W5GT544","barcode_formats":"UPC-A 060410047095, EAN-13 0060410047095","barcode_number":"060410047095","brand":"Lay's","category":"Food, Beverages & Tobacco","color":"","description":"220gm.","energy_efficiency_class":"","format":"","gender":"","height":"","images":["https://images.barcodelookup.com/30713/307136367-1.jpg","https://images.barcodelookup.com/30713/307136367-2.jpg"],"ingredients":"Specially Selected Potatoes, Vegetable Oil, Seasoning (modified Milk Ingredients, Salt, Corn Maltodextrin, Cheddar Cheese Solids, Vegetable Oil, Potassium Chloride, Glucose Solids, Dextrose, Yeast Extract, Sour Cream Solids, Dehydrated Onion, Natural Flavour, Citric Acid, Lactic Acid, Dehydrated Garlic, Colour, Calcium Lactate). Contains Milk Ingredients. Gluten-free. Ingrédients: Pommes De Terre Spécialement Sélectionnées, Huile Végétale, Assaisonnement (ingrédients Laitiers Modifiés, Sel, Maltodextrine De Maïs, Matière Sèche Du Fromage Cheddar, Huile Vegetale, Chlorure De Potassium, Matière Sèche De De Creme Sure, Oignon Déshydraté, Arôme Naturel, Glucose, Dextrose, Extrait De Levure, Matière Sèche Acide Citrique, Acide Lactique, Ail Déshydrate, Colorant, Lactate De Calcium). Contient Des Ingrédients Du Lait. Sans Gluten. Guaranteed Fresh/fraîcheur Garantie Until Printed Date Or This Snack Is On Us. Jusqu'à La Date Imprimée Ou Argent Remis. Consumer Relations/relations Avec Les Consommateurs 1 800 376-2257 Weekdays 10:00 Am To 5:30 Pm Eastern Time En Semaine, De 10 H à 17 H 30, Heure Normale De L'est Made In Canada From Domestic Fahri","last_update":"2024-10-09 02:01:53","length":"","manufacturer":"N/a","material":"","model":"","mpn":"","multipack":"","nutrition_facts":"Energy 556 kcal, Fat 34 g, Saturated Fat 4 g, Carbohydrates 52 g, Sugars 2 g, Protein 6 g, Salt 1.7 g.","pattern":"","release_date":"","size":"","title":"Lay's Wavy Cheddar & Sour Cream Potato Chips","weight":"0.4875 lb","width":""}]}`;
+            console.log(response)
+            if(response.status != 200){ 
+                setLoadingStatus('productNotFound')
+                return}
+            const productJson = await response.json()
+            //const productJson = JSON.parse(response);
+            //console.log(json)
+            //const productJson = { "products": [{ "age_group": "", "asin": "B08W5GT544", "barcode_formats": "UPC-A 060410047095, EAN-13 0060410047095", "barcode_number": "060410047095", "brand": "Lay's", "category": "Food, Beverages & Tobacco", "color": "", "contributors": [Array], "description": "220gm.", "energy_efficiency_class": "", "features": [Array], "format": "", "gender": "", "height": "", "images": ["https://images.barcodelookup.com/30713/307136367-1.jpg","https://images.barcodelookup.com/30713/307136367-2.jpg"], "ingredients": "Specially Selected Potatoes, Vegetable Oil, Seasoning (modified Milk Ingredients, Salt, Corn Maltodextrin, Cheddar Cheese Solids, Vegetable Oil, Potassium Chloride, Glucose Solids, Dextrose, Yeast Extract, Sour Cream Solids, Dehydrated Onion, Natural Flavour, Citric Acid, Lactic Acid, Dehydrated Garlic, Colour, Calcium Lactate). Contains Milk Ingredients. Gluten-free. Ingrédients: Pommes De Terre Spécialement Sélectionnées, Huile Végétale, Assaisonnement (ingrédients Laitiers Modifiés, Sel, Maltodextrine De Maïs, Matière Sèche Du Fromage Cheddar, Huile Vegetale, Chlorure De Potassium, Matière Sèche De De Creme Sure, Oignon Déshydraté, Arôme Naturel, Glucose, Dextrose, Extrait De Levure, Matière Sèche Acide Citrique, Acide Lactique, Ail Déshydrate, Colorant, Lactate De Calcium). Contient Des Ingrédients Du Lait. Sans Gluten. Guaranteed Fresh/fraîcheur Garantie Until Printed Date Or This Snack Is On Us. Jusqu'à La Date Imprimée Ou Argent Remis. Consumer Relations/relations Avec Les Consommateurs 1 800 376-2257 Weekdays 10:00 Am To 5:30 Pm Eastern Time En Semaine, De 10 H à 17 H 30, Heure Normale De L'est Made In Canada From Domestic Fahri", "last_update": "2024-10-09 02:01:53", "length": "", "manufacturer": "N/a", "material": "", "model": "", "mpn": "", "multipack": "", "nutrition_facts": "Energy 556 kcal, Fat 34 g, Saturated Fat 4 g, Carbohydrates 52 g, Sugars 2 g, Protein 6 g, Salt 1.7 g.", "pattern": "", "release_date": "", "reviews": [Array], "size": "", "stores": [Array], "title": "Lay's Wavy Cheddar & Sour Cream Potato Chips", "weight": "0.4875 lb", "width": "" }] };
+            //const   productJson =  JSON.parse(await response.json()) //await response.json();
+            console.log(productJson)
+            if(productJson.products.length == 0 ){
+
+                return;
+            }
+            setProduct(productJson.products[0])
+            GemineAPI(productJson.products[0]);
+
+            isFindProduct(true)
+        } catch (e) {
+            setLoadingStatus('error');
+            console.error(e)
+        }
+    }
+
         // const filtered = barcodeData.filter((item) => item.barcode == barcode);
         // if (filtered.length == 0)
         //     router.push({ pathname: "productNotfound" })
@@ -45,33 +81,6 @@ export default function barcodeResult() {
         //console.log(`line 26: ${barcode}`)
         barcodelookupAPI(barcode);
     }, [])
-
-    const barcodelookupAPI = async (barcode) => {
-        const API_KEY = process.env.EXPO_PUBLIC_BARCODELOOKUP_API_KEY;
-        const URL = `${process.env.EXPO_PUBLIC_BARCODELOOKUP_URL}barcode=${barcode}&formatted=y&key=${API_KEY}`;
-
-        try {
-            //console.log(URL)
-            //const response = await fetch(URL);
-            const response = `{"products":[{"age_group":"","asin":"B08W5GT544","barcode_formats":"UPC-A 060410047095, EAN-13 0060410047095","barcode_number":"060410047095","brand":"Lay's","category":"Food, Beverages & Tobacco","color":"","description":"220gm.","energy_efficiency_class":"","format":"","gender":"","height":"","images":["https://images.barcodelookup.com/30713/307136367-1.jpg","https://images.barcodelookup.com/30713/307136367-2.jpg"],"ingredients":"Specially Selected Potatoes, Vegetable Oil, Seasoning (modified Milk Ingredients, Salt, Corn Maltodextrin, Cheddar Cheese Solids, Vegetable Oil, Potassium Chloride, Glucose Solids, Dextrose, Yeast Extract, Sour Cream Solids, Dehydrated Onion, Natural Flavour, Citric Acid, Lactic Acid, Dehydrated Garlic, Colour, Calcium Lactate). Contains Milk Ingredients. Gluten-free. Ingrédients: Pommes De Terre Spécialement Sélectionnées, Huile Végétale, Assaisonnement (ingrédients Laitiers Modifiés, Sel, Maltodextrine De Maïs, Matière Sèche Du Fromage Cheddar, Huile Vegetale, Chlorure De Potassium, Matière Sèche De De Creme Sure, Oignon Déshydraté, Arôme Naturel, Glucose, Dextrose, Extrait De Levure, Matière Sèche Acide Citrique, Acide Lactique, Ail Déshydrate, Colorant, Lactate De Calcium). Contient Des Ingrédients Du Lait. Sans Gluten. Guaranteed Fresh/fraîcheur Garantie Until Printed Date Or This Snack Is On Us. Jusqu'à La Date Imprimée Ou Argent Remis. Consumer Relations/relations Avec Les Consommateurs 1 800 376-2257 Weekdays 10:00 Am To 5:30 Pm Eastern Time En Semaine, De 10 H à 17 H 30, Heure Normale De L'est Made In Canada From Domestic Fahri","last_update":"2024-10-09 02:01:53","length":"","manufacturer":"N/a","material":"","model":"","mpn":"","multipack":"","nutrition_facts":"Energy 556 kcal, Fat 34 g, Saturated Fat 4 g, Carbohydrates 52 g, Sugars 2 g, Protein 6 g, Salt 1.7 g.","pattern":"","release_date":"","size":"","title":"Lay's Wavy Cheddar & Sour Cream Potato Chips","weight":"0.4875 lb","width":""}]}`;
-            console.log(response)
-            // const productJson = await response.json()
-            const productJson = JSON.parse(response);
-            //console.log(json)
-            //const productJson = { "products": [{ "age_group": "", "asin": "B08W5GT544", "barcode_formats": "UPC-A 060410047095, EAN-13 0060410047095", "barcode_number": "060410047095", "brand": "Lay's", "category": "Food, Beverages & Tobacco", "color": "", "contributors": [Array], "description": "220gm.", "energy_efficiency_class": "", "features": [Array], "format": "", "gender": "", "height": "", "images": ["https://images.barcodelookup.com/30713/307136367-1.jpg","https://images.barcodelookup.com/30713/307136367-2.jpg"], "ingredients": "Specially Selected Potatoes, Vegetable Oil, Seasoning (modified Milk Ingredients, Salt, Corn Maltodextrin, Cheddar Cheese Solids, Vegetable Oil, Potassium Chloride, Glucose Solids, Dextrose, Yeast Extract, Sour Cream Solids, Dehydrated Onion, Natural Flavour, Citric Acid, Lactic Acid, Dehydrated Garlic, Colour, Calcium Lactate). Contains Milk Ingredients. Gluten-free. Ingrédients: Pommes De Terre Spécialement Sélectionnées, Huile Végétale, Assaisonnement (ingrédients Laitiers Modifiés, Sel, Maltodextrine De Maïs, Matière Sèche Du Fromage Cheddar, Huile Vegetale, Chlorure De Potassium, Matière Sèche De De Creme Sure, Oignon Déshydraté, Arôme Naturel, Glucose, Dextrose, Extrait De Levure, Matière Sèche Acide Citrique, Acide Lactique, Ail Déshydrate, Colorant, Lactate De Calcium). Contient Des Ingrédients Du Lait. Sans Gluten. Guaranteed Fresh/fraîcheur Garantie Until Printed Date Or This Snack Is On Us. Jusqu'à La Date Imprimée Ou Argent Remis. Consumer Relations/relations Avec Les Consommateurs 1 800 376-2257 Weekdays 10:00 Am To 5:30 Pm Eastern Time En Semaine, De 10 H à 17 H 30, Heure Normale De L'est Made In Canada From Domestic Fahri", "last_update": "2024-10-09 02:01:53", "length": "", "manufacturer": "N/a", "material": "", "model": "", "mpn": "", "multipack": "", "nutrition_facts": "Energy 556 kcal, Fat 34 g, Saturated Fat 4 g, Carbohydrates 52 g, Sugars 2 g, Protein 6 g, Salt 1.7 g.", "pattern": "", "release_date": "", "reviews": [Array], "size": "", "stores": [Array], "title": "Lay's Wavy Cheddar & Sour Cream Potato Chips", "weight": "0.4875 lb", "width": "" }] };
-            //const   productJson =  JSON.parse(await response.json()) //await response.json();
-            console.log(productJson)
-            setProduct(productJson.products[0])
-
-
-            GemineAPI(productJson.products[0]);
-
-            isFindProduct(true)
-        } catch (e) {
-            setLoadingStatus('error');
-            console.error(e)
-        }
-    }
 
     const GemineAPI = async (item) => {
         try {
@@ -118,6 +127,7 @@ export default function barcodeResult() {
 
                 {isLoading ? <Loading />
                     : isError ? <Text>Error while loading data</Text>
+                    :productNotFound ? <ProductNotfound />
                         : (<>
                             <ScanButton />
                             <Text variant="titleMedium">{product.title}</Text>

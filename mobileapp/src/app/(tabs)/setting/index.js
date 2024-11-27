@@ -49,7 +49,7 @@ const App = () => {
 
                 <TouchableButton name="Edit Profile" target="profileView" />
                 <TouchableButton name="Edit allergiers" target="allergy" />
-                <TouchableButton name="Emergency contact" target="emergency" />
+                {/* <TouchableButton name="Emergency contact" target="emergency" /> */}
                 <TouchableButton name="Preferences" target="preference" />
                 <ToggleTheme />
                 <TouchableButton name="App Info" target="appinfo" />

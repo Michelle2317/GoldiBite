@@ -34,7 +34,7 @@ const SetupAccount = () => {
         setProcess((step - 1) / totalStep);
     }
     const handleNextBtn = () => {
-        if (step == 4) router.replace('/(setup)/welcome');; // router to anther path
+        if (step == 3) router.replace('/(setup)/welcome');; // router to anther path
         setStep(step + 1);
         setProcess((step + 1) / totalStep);
     }

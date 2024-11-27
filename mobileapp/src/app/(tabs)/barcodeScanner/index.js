@@ -17,13 +17,13 @@ export default function Scanner(props) {
     const handleBarCodeScanned = ({ type, data }) => {
         if (data !== null || data !== "") {
             setScanned(false);
-            const product = getProduct(data);
-            if (!product[0]) {
+            //const product = getProduct(data);
+            //if (!product[0]) {
                 //router.push({ pathname: "barcodeScanner/productNotfound" })
+            //    router.push({ pathname: "barcodeScanner/barcodeResult", params: { barcode: data } })
+            //} else {
                 router.push({ pathname: "barcodeScanner/barcodeResult", params: { barcode: data } })
-            } else {
-                router.push({ pathname: "barcodeScanner/barcodeResult", params: { barcode: data } })
-            }
+            //}
         }
     };
 
@@ -54,12 +54,12 @@ export default function Scanner(props) {
 
     useEffect(() => {
         if (barcode == "") return;
-        const product = getProduct(barcode);
-        if (!product[0]) {
-            router.push({ pathname: "barcodeScanner/productNotfound" })
-        } else {
+        //const product = getProduct(barcode);
+       // if (!product[0]) {
+         //   router.push({ pathname: "barcodeScanner/productNotfound" })
+       // } else {
             router.push({ pathname: "barcodeScanner/barcodeResult", params: { barcode: barcode } })
-        }
+        //}
 
     }, [barcode])
 

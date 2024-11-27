@@ -1,55 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, StyleSheet, FlatList, Text } from 'react-native';
 import { Card, IconButton } from 'react-native-paper';
 
-const demoData = [
-	{
-		id: '1',
-		languageTitle: '意大利宽面鸡肉',
-		title: 'Fettuccini Chicken',
-		allergenStatus: 'No Allergen Detected',
-		allergens: ['fish', 'egg', 'bread-slice'],
-		quantity: 0,
-		status: 'safe',
-	},
-	{
-		id: '2',
-		languageTitle: '意大利宽面鸡肉',
-		title: 'Fettuccini Chicken',
-		allergenStatus: 'Allergen Detected',
-		allergens: ['fish', 'egg', 'bread-slice'],
-		quantity: 0,
-		status: 'danger',
-	},
-];
-
-export default function ItemList({ dish }) {
+export default function ItemList({ dish, safity, alertAllergies }) {
 	//const [data, setData] = useState(demoData);
-	const safity = dish.allergens == undefined;
 
 	const handleQuantity = () => {
 		console.log("On Press")
 	}
-	// const handleQuantity = (id, action) => {
-	// 	const updatedData = data.map((item) =>
-	// 		dish.EnglishName === id
-	// 			? {
-	// 					...item,
-	// 					quantity:
-	// 						action === 'increment'
-	// 							? item.quantity +
-	// 							  1
-	// 							: item.quantity >
-	// 							  0
-	// 							? item.quantity -
-	// 							  1
-	// 							: item.quantity,
-	// 			  }
-	// 			: item
-	// 	);
-	// 	setData(updatedData);
-	// };
-	//eggs,  milk,  mustard,  peanuts,  Crustaceans and molluscs,  fish,  sesame seeds,  soy,  sulphites,  tree nuts,  wheat and triticale
+
 	const allergyIcon = {
 		'egg': 'egg',
 		'milk': 'milk',
@@ -63,36 +22,6 @@ export default function ItemList({ dish }) {
 		'tree nuts': 'circle',
 		'wheat and triticale': 'circle'
 	}
-
-	// const allergenIconUI = dish.allergens.map((allergen, index) => {
-	// 	return (
-	// 		<View
-	// 			key={
-	// 				index
-	// 			}
-	// 			style={[
-	// 				styles.allergenCircle,
-	// 				{
-	// 					backgroundColor: '#D5CB44',
-	// 				},
-	// 			]}
-	// 		>
-	// 			<IconButton
-	// 				icon={
-	// 					allergenIconUI[allergen]
-	// 				}
-	// 				size={
-	// 					15
-	// 				}
-	// 				iconColor='#000'
-	// 				style={
-	// 					styles.allergenIcon
-	// 				}
-	// 			/>
-	// 		</View>
-	// 	);
-	// })
-
 
 	return (
 		<>
@@ -138,10 +67,23 @@ export default function ItemList({ dish }) {
 
 						<Text style={styles.allergenStatus}>
 							{
-								safity == true ? 'No Allergen Detected' : 'Allergen Detected'
+								dish.allergens.length == 0 || dish.allergens == undefined ? 'No Allergen Detected' : 'Allergen Detected :'
 
 							}
 						</Text>
+
+						{
+							dish.allergens.length > 0 && dish.allergens.map((item, index) => {
+								if(alertAllergies
+									.filter((allergyItem) => allergyItem.selected == true)
+									.filter((allergiesItem) => (allergiesItem.name.toUpperCase() == item.toUpperCase()))
+									.length > 0){
+										return (<Text key={index} style={{color:"red"}} >{item}</Text>)
+									}else{
+										return (<Text key={index} >{item}</Text>)
+									}
+							})
+						}
 
 						<View style={styles.quantityWrapper}>
 							<IconButton
@@ -185,14 +127,6 @@ export default function ItemList({ dish }) {
 			</Card>
 		</>
 	);
-
-	// return (
-	// 	<FlatList
-	// 		data={data}
-	// 		renderItem={renderItem}
-	// 		keyExtractor={(item) => item.id}
-	// 	/>
-	// );
 }
 
 const styles = StyleSheet.create({

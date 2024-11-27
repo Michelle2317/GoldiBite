@@ -1,5 +1,6 @@
 import { Tabs, Stack } from 'expo-router'
 import { IconButton } from 'react-native-paper';
+import { useTheme } from '@/src/hooks/useTheme';
 
 
 export const unstable_settings = {
@@ -7,13 +8,16 @@ export const unstable_settings = {
     initialRouteName: 'index',
   };
 const StackLayout = () => {
+	const { colorScheme } = useTheme();
+    const backgroundColor = colorScheme === 'light'? '#F4EADA':'#343434';
+    const fontColor = colorScheme === 'light'? '#000000':'#ffffff';
     return (
         <Stack initial="index"
             screenOptions={{
                 headerStyle: {
-                    backgroundColor: '#F4EADA',
+                    backgroundColor: backgroundColor,
                 },
-                headerTintColor: '#000',
+                headerTintColor: fontColor,
                 headerTitleStyle: {
                     fontWeight: 'bold',
 					fontSize: 24,

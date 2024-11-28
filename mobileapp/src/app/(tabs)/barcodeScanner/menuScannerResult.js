@@ -65,7 +65,7 @@ const menuScannerResult = () => {
 
     return (<>
         <View style={styles.container}>
-
+        <Text>Error while loading data</Text>
             {isLoading ? <Loading />
                 : isError ? <Text>Error while loading data</Text>
                     : (<>

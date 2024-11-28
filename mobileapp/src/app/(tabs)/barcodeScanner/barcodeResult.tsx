@@ -120,11 +120,11 @@ export default function barcodeResult() {
     }
 
     if (!findProduct) {
-        return <ProductNotfound />
+        return  <ProductNotfound />
     } else {
         return (<>
             <View style={styles.container}>
-
+            <Text>Error while loading data</Text>
                 {isLoading ? <Loading />
                     : isError ? <Text>Error while loading data</Text>
                     :productNotFound ? <ProductNotfound />
@@ -212,7 +212,7 @@ const styles = StyleSheet.create({
     productNotFoundContainer: {
         flex: 1,
         flexDirection: 'column',
-        justifyContent: 'space-around',
+        justifyContent: 'flex-start',
         padding: 20,
         gap: 10,
     },

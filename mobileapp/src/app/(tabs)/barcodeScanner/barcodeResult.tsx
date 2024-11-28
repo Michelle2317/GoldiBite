@@ -129,7 +129,6 @@ export default function barcodeResult() {
     } else {
         return (<>
             <View style={styles.container}>
-                <Text>Error while loading data</Text>
                 {isLoading ? <Loading />
                     : isError ? <Text>Error while loading data</Text>
                         : productNotFound ? <ProductNotfound />

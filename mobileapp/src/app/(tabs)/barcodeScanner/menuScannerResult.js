@@ -48,11 +48,11 @@ const menuScannerResult = () => {
 
                 let iData = await getImageBase64();
                 setImage(iData);
-                //const res = await menuGemineAPI(iData, "gemini-1.5-pro");
+                const res = await menuGemineAPI(iData, "gemini-1.5-pro");
 
              
-                const res = sampleData;
-                console.log(typeof(res))
+                //const res = sampleData;
+                //console.log(typeof(res))
 
                 const cate = [];
                 res.dishes.forEach(dish => {

@@ -139,16 +139,6 @@ const menuScannerResultTim = () => {
             {isLoading ? <Loading />
                 : isError ? <Text>Error while loading data</Text>
                     : (<>
-                        <Image style={styles.photoPreview} source={{ uri: image }} />
-                        {/* <View style={styles.categoryContainer}>
-                            <Chip theme={{ colors: { secondaryContainer: '#FFC858' } }} mode='flat' onPress={() => console.log('Pressed')} selected={true}> All </Chip>
-                            {categories.map((item, index) => {
-                                return (
-                                    <Chip key={index} theme={{ colors: { secondaryContainer: '#FFC858' } }} mode='flat' onPress={() => console.log('Pressed')} selected={true}> {item} </Chip>
-                                )
-                            })}
-                        </View> */}
-
                         <ScrollView style={{flex: 1}}>
                              {dishes.map((dish, index) => {
                                 console.log(dish);

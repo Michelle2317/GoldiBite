@@ -7,10 +7,11 @@ import ItemList from '../../../components/scanner/ItemList';
 import GoogleGemine from "@/src/utils/GoogleGemine";
 import AllengyAnalysisUtils from '@/src/utils/AllengyAnalysisUtils';
 import UserStoreDataUtils from '@/src/utils/UserStoreDataUtils';
-
+import { Chip } from 'react-native-paper';
+import sampleData from '@/src/data/sampleData'
 const menuScannerResult = () => {
 
-    const { image } = useLocalSearchParams(image);
+    const [image, setImage] =useState();
     const [status, setStatue] = useState('idle');
 
     const isLoading = status === 'loading';
@@ -23,14 +24,21 @@ const menuScannerResult = () => {
     const { menuGemineAPI } = GoogleGemine();
     const { getProfile } = UserStoreDataUtils();
     const { checkMenuAllergy } = AllengyAnalysisUtils();
-
     const [profile, setProfile] = useState({});
+    const [ menuFilter, setMenuFilter] = useState("All");
+
+    
+    const menuFilterFunction = (item)=> {
+        return menuFilter=="All" || menuFilter == item.EnglishCategory
+    }
+
     useEffect(() => {
 
         const callGetProfile = async () => {
             const user = await getProfile();
             setProfile(user);
         }
+
 
         const GemineAPI = async () => {
             // Make sure to include these imports:
@@ -39,14 +47,23 @@ const menuScannerResult = () => {
                 setStatue('loading')
 
                 let iData = await getImageBase64();
+                setImage(iData);
+                //const res = await menuGemineAPI(iData, "gemini-1.5-pro");
 
-                const res = await menuGemineAPI(iData, "gemini-1.5-pro");
+             
+                const res = sampleData;
+                console.log(typeof(res))
 
-                console.log(res)
+                const cate = [];
                 res.dishes.forEach(dish => {
                     setDishes(data => [...data, dish]);
-                    if (categories.indexOf(dish.EnglishCategory) == -1) setCategories(data => [...data, dish.EnglishCategory])
+                    if(dish.EnglishCategory == ""){
+                        if(cate.indexOf("None") < 0)  cate.push("None");
+                    }else{ 
+                        if(cate.indexOf(dish.EnglishCategory) < 0) cate.push ( dish.EnglishCategory);
+                    }
                 });
+                setCategories(cate);
 
                 console.log(dishes)
                 console.log(categories)
@@ -65,22 +82,22 @@ const menuScannerResult = () => {
 
     return (<>
         <View style={styles.container}>
-        <Text>Error while loading data</Text>
             {isLoading ? <Loading />
                 : isError ? <Text>Error while loading data</Text>
                     : (<>
-                        <Image style={styles.photoPreview} source={{ uri: image }} />
-                        {/* <View style={styles.categoryContainer}>
-                            <Chip theme={{ colors: { secondaryContainer: '#FFC858' } }} mode='flat' onPress={() => console.log('Pressed')} selected={true}> All </Chip>
+                    <View style={styles.imageContainer} >
+                        <Image style={styles.photoPreview} source={{ uri: "data:image/jpg;base64," +image   }} />
+                        </View>
+                        <View style={styles.categoryContainer}>
+                            <Chip theme={{ colors: { secondaryContainer: '#FFC858' } }} mode='flat' onPress={()=>setMenuFilter('All')} selected={true}> All </Chip>
                             {categories.map((item, index) => {
                                 return (
-                                    <Chip key={index} theme={{ colors: { secondaryContainer: '#FFC858' } }} mode='flat' onPress={() => console.log('Pressed')} selected={true}> {item} </Chip>
+                                    <Chip key={index} theme={{ colors: { secondaryContainer: '#FFC858' } }} mode='flat'  onPress={()=>setMenuFilter(item)} selected={true}> {item} </Chip>
                                 )
                             })}
-                        </View> */}
-
+                        </View>
                         <ScrollView style={{ flex: 1 }}>
-                            {dishes.map((dish, index) => {
+                            {dishes.filter(menuFilterFunction).map((dish, index) => {
                                 console.log(dish);
                                 let isSafity = checkMenuAllergy(profile.allergies, dish.allergens);
                                 dish.safity = isSafity;
@@ -88,7 +105,6 @@ const menuScannerResult = () => {
                                     <ItemList key={index} dish={dish} safity={isSafity} alertAllergies={profile.allergies} />
                                 )
                             })}
-
                         </ScrollView>
                     </>
                     )
@@ -101,21 +117,23 @@ const menuScannerResult = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        margin: 16,
+        margin: 0,
         alignItems: 'flex-start',
         flexDirection: 'column',
         justifyContent: 'flex-start',
-        alignItems: 'center',
+        alignItems: "center"
     },
     categoryContainer: {
-        flex: 1,
-        margin: 16,
+        flex: 0,
+        margin: 32,
+        display:"flex",
         alignItems: 'flex-start',
         flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
+        justifyContent: 'left',
+        alignItems: 'left',
+        flexWrap: "wrap",
         gap: 10,
-        marginBottom: 50
+        marginTop:10
     },
     cardRow: {
         flexDirection: 'row',
@@ -123,6 +141,19 @@ const styles = StyleSheet.create({
         gap: 20,
         marginTop: 22,
     },
+    photoPreview: {
+      alignSelf: 'center',
+      flex: 1,
+      width: 350,
+      height: 20,
+    },
+    imageContainer:{
+        flex: 0,
+        margin: 32,
+        marginBottom:5,
+        height:125, 
+        width:200 
+    }
 });
 
 

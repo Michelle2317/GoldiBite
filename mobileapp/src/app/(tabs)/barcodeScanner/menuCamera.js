@@ -4,7 +4,7 @@ import { Image, StyleSheet, Text, TouchableOpacity, View, Button } from 'react-n
 import { IconButton } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import * as MediaLibrary from 'expo-media-library';
-import {  useRouter  } from 'expo-router';
+import { useRouter } from 'expo-router';
 import menuAnalyistUtils from '@/src/utils/menuAnalyistUtils'
 import { useTheme } from '@/src/hooks/useTheme';
 
@@ -16,12 +16,12 @@ export default function menuCamera() {
     // @ts-ignore
     const [photo, setPhoto] = useState();
     const [hasMediaLibraryPermissions, setMediaLibraryPermissions] = useState();
-  
+
     const { getImageBase64, storeImageBase64 } = menuAnalyistUtils();
     const { colorScheme } = useTheme();
     const backgroundColor = colorScheme === 'light' ? '#FFCB62' : '#000000';
 
-    
+
     const router = useRouter();
     useEffect(() => {
         async function getMediaPermissions() {
@@ -50,7 +50,7 @@ export default function menuCamera() {
     const takePicture = async () => {
         try {
             const options = { quality: 0.5, base64: true };
-            const data = await  cameraRef.current.takePictureAsync(options);
+            const data = await cameraRef.current.takePictureAsync(options);
             setPhoto(data);
         } catch (error) {
             console.log(error, "ERROR <<<<<<<<<<<<<")
@@ -59,27 +59,33 @@ export default function menuCamera() {
     // Assume we have a photo
     if (photo) {
         const handleOnPress = () => {
-           // router.push({ pathname: "barcodeScanner/menuScannerResult", params: { image: photo.uri }  })
-           storeImageBase64(photo.base64)
-           router.push({ pathname: "barcodeScanner/menuScannerResult", params: { image: photo.uri }  })
-           // console.log(photo);
-           setPhoto(undefined);
+            // router.push({ pathname: "barcodeScanner/menuScannerResult", params: { image: photo.uri }  })
+            storeImageBase64(photo.base64)
+            router.push({ pathname: "barcodeScanner/menuScannerResult", params: { image: photo.uri } })
+            // console.log(photo);
+            setPhoto(undefined);
         }
-     
+
         return (
-            <SafeAreaView style={styles.container}>
+            <View style={styles.resultContainer}>
                 {/* <Image style={styles.photoPreview} source={{ uri: "data:image/jpg;base64," + photo.base64 }} /> */}
-                <Image style={styles.photoPreview} source={{ uri: photo.uri }} />
-                {hasMediaLibraryPermissions ? <Button title="Use It" onPress={handleOnPress} /> : undefined}
-                <Button title="Retake" onPress={() => setPhoto(undefined)} />
-            </SafeAreaView>
+                <View style={styles.photoContainer}>
+                    <Image style={styles.photoPreview} source={{ uri: photo.uri }} />
+                </View>
+                <View style={styles.buttonContainer2}>
+                    <Button title="Use It" onPress={handleOnPress} />
+                    <Button title="Retake" onPress={() => setPhoto(undefined)} />
+                </View>
+            </View>
         )
     }
 
     return (
 
-        <View style={{flex: 1,
-            justifyContent: 'center',backgroundColor:backgroundColor}}  >
+        <View style={{
+            flex: 1,
+            justifyContent: 'center', backgroundColor: backgroundColor
+        }}  >
             <View style={styles.barcodeContainer}>
                 <CameraView
                     style={StyleSheet.absoluteFillObject}
@@ -112,7 +118,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        backgroundColor:"#FCE4B6"
+        backgroundColor: "#FCE4B6",
     },
     barcodeContainer: {
         flex: 5,
@@ -145,8 +151,30 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: 'white',
     },
+    resultContainer: {
+        flex: 1,
+        display: "flex",
+        alignContent: "space-evenly",
+        justifyContent: "space-evenly",
+        margin: 0,
+        padding: 0,
+    },
+    photoContainer: {
+        flex: 6,
+        padding: 0,
+        margin: 0,
+        padding: 0,
+    },
+    buttonContainer2: {
+        flex: 1,
+        display: "flex",
+        flexDirection: 'column',
+        backgroundColor: 'transparent',
+        margin: 0,
+        padding: 0,
+    },
     photoPreview: {
-      alignSelf: 'stretch',
-      flex: 1
+        alignSelf: 'stretch',
+        flex: 1
     }
 });

@@ -13,7 +13,7 @@ export const onboardingList = [
       "icon": "phone-plus",
       "eng": {
         "title": "Emergency",
-        "description": "Immediately notify local medical services and emergency contacts",
+        "description": "Immediately alert local emergency services in your current location to get help right away",
         
       }
     },

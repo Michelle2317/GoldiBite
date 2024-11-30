@@ -5,6 +5,7 @@ import PrimaryInputText from '@/src/components/paperUiElement/PrimaryInputText';
 import PrimaryButton from '@/src/components/paperUiElement/PrimaryButton';
 import { useRouter } from "expo-router";
 import UserStoreDataUtils from "@/src/utils/UserStoreDataUtils";
+import { HelperText } from 'react-native-paper'
 import PaperUIDropdown from '@/src/components/paperUiElement/PaperUIDropdown'
 
 const profileView = () => {
@@ -54,6 +55,11 @@ const profileView = () => {
     const handleGenderOnChange = (e) => {
         setProfile({ ...profile, 'gender': e });
     }
+
+    const ageChecking = () => {
+        return profile == undefined || isNaN(profile.age)
+    }
+
     return (<>
         <View style={styles.container}>
 
@@ -63,12 +69,19 @@ const profileView = () => {
                     style={{ width: 130, height: 130, alignSelf: "center" }}
                 />
                 <PrimaryInputText label="Nickname" value={profile.username} onChangeText={handleUsernameOnChange} />
-                <PaperUIDropdown label="Age" placeholder="Select age" option={AGE_OPTIONS} value={profile.age} callback={handleAgeOnChange} />
                 <PaperUIDropdown label="Gender" placeholder="Select gender" option={OPTIONS} value={profile.gender} callback={handleGenderOnChange} />
-
+                <PrimaryInputText label="Age" value={profile.age} onChangeText={handleAgeOnChange} />
+                <HelperText type="error" visible={ageChecking()}>
+                    Age must have a number!
+                </HelperText>
             </View>
             <View style={styles.buttonContainer}>
-                <PrimaryButton buttonText="Save" callback={handleBackBtn} />
+                {
+                    ageChecking() ?
+                    (<PrimaryButton buttonText="Save 1" callback={handleBackBtn} disabled={true} />):
+                    (<PrimaryButton buttonText="Save 2" callback={handleBackBtn} disabled={false} />)
+                }
+                
             </View>
         </View>
     </>)

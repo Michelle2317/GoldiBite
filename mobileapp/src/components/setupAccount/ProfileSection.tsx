@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { View, StyleSheet } from "react-native";
-import { Text } from 'react-native-paper';
+import { Text, HelperText } from 'react-native-paper';
 import PrimaryInputText from "@/src/components/paperUiElement/PrimaryInputText"
 import PaperUIDropdown from '@/src/components/paperUiElement/PaperUIDropdown'
+import TextInputMask from 'react-native-text-input-mask'
 
 const ProfileSection = ({ profile, callback }) => {
 
@@ -30,21 +31,25 @@ const ProfileSection = ({ profile, callback }) => {
     }
 
     const handleAgeOnChange = (e) => {
-        console.log(e)
         setProfileInformation({ ...profileInformation, 'age': e });
     }
     const handleGenderOnChange = (e) => {
         setProfileInformation({ ...profileInformation, 'gender': e });
+    }
+
+    const ageChecking = () => {
+        return profile == undefined || isNaN(profile.age)
     }
     return (<>
 
         <Text variant="headlineMedium" style={{ textAlign: "center", marginBottom: 30, fontWeight: 'bold' }}>Create a Profile</Text>
         <View style={styles.questionContainer}>
             <PrimaryInputText label="Username" value={profileInformation.username} onChangeText={handleUsernameOnChange} />
-            <PaperUIDropdown label="Age" placeholder="Select age" option={AGE_OPTIONS} value={profileInformation.age} callback={handleAgeOnChange} />
             <PaperUIDropdown label="Gender" placeholder="Select gender" option={OPTIONS} value={profileInformation.gender} callback={handleGenderOnChange} />
-
-
+            <PrimaryInputText label="Age" value={profileInformation.age} onChangeText={handleAgeOnChange} />
+            <HelperText type="error" visible={ageChecking}>
+                Age must have a number!
+            </HelperText>
         </View>
     </>)
 }

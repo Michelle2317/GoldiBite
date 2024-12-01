@@ -101,7 +101,8 @@ export const Colors = {
     "background": "#343434",
     "onBackground": "rgb(234, 225, 217)",
     "surface": "rgb(31, 27, 22)",
-    "onSurface": "rgb(234, 225, 217)",
+    //"onSurface": "rgb(234, 225, 217)",
+    "onSurface": "rgb(255, 255, 255)",
     //"surfaceVariant": "rgb(79, 69, 57)",
     "surfaceVariant": "#000000",
     "onSurfaceVariant": "rgb(211, 196, 180)",
@@ -116,7 +117,7 @@ export const Colors = {
       "level0": "transparent",
       "level1": "rgb(42, 35, 25)",
       "level2": "rgb(49, 40, 27)",
-      "level3": "rgb(56, 44, 28)",
+      "level3": "#343434",
       "level4": "rgb(58, 46, 29)",
       "level5": "rgb(62, 49, 30)"
     },

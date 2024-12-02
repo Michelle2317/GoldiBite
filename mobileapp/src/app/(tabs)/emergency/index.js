@@ -10,11 +10,7 @@ export default function Emergency() {
     const hideDialog = () => setVisible(false);
 
     const popupTitle = "Why Do We Have This Option?";
-    const popupBody = `Our Call option provides immediate assistance in emergency situations, 
-    including sudden medical incidents like strokes. When clicked, the button connects users 
-    with emergency services, dialing the appropriate number based on their location (e.g., 
-    911 in the United States). Additionally, an emergency notification is sent to emergency 
-    contacts, ensuring they are alerted in real time.`;
+    const popupBody = `Our Call option provides immediate assistance in emergency situations, including sudden medical incidents like strokes. When clicked, the button connects users with emergency services, dialing the appropriate number based on their location (e.g., 911 in the United States). Additionally, an emergency notification is sent to emergency contacts, ensuring they are alerted in real time.`;
 
     return (
         <View style={styles.centerContainer}>

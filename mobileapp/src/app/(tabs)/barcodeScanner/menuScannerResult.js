@@ -26,8 +26,8 @@ const menuScannerResult = () => {
     const { getProfile } = UserStoreDataUtils();
     const { checkMenuAllergy } = AllengyAnalysisUtils();
 
-    const popupTitle = "Scanner";
-    const popupBody = "scanner disclaimer info";
+    const popupTitle = "Notice";
+    const popupBody = "scanner disclaimer info will be here";
 
     const showDialog = () => setVisible(true);
     const hideDialog = () => setVisible(false);

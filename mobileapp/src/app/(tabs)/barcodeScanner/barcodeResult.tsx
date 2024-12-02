@@ -13,17 +13,11 @@ import AllengyAnalysisUtils from '@/src/utils/AllengyAnalysisUtils';
 import PaperUIChipStyle from '@/src/components/paperUiElement/PaperUIChipStyle';
 import { useTheme } from '@/src/hooks/useTheme';
 import ProductNotfound from './productNotfound';
+import EmergencyPopup from '@/src/components/EmergencyPopup'; // Importing EmergencyPopup
 
 export default function barcodeResult() {
     const { barcode } = useLocalSearchParams<{ barcode: string }>();
-    const [product, setProduct] = useState({
-        title: '',
-        images: [''],
-        barcode_number: '',
-        brand: '',
-        description: '',
-        ingredients: '',
-    });
+    const [product, setProduct] = useState({ title: '', images: [''], barcode_number: '', brand: '', description: '', ingredients: '' });
     const [allergyList, setAllergyList] = useState([]);
     const router = useRouter();
     const { checkAllergy } = AllengyAnalysisUtils();
@@ -35,32 +29,26 @@ export default function barcodeResult() {
     const { colorScheme } = useTheme();
     const backgroundColor = colorScheme === 'light' ? '#F4EADA' : '#343434';
 
-    const isLoading = loadingStatus === 'loading';
-    const isError = loadingStatus === 'error';
-    const productNotFound = loadingStatus === 'productNotFound';
+    const popupTitle = 'Notice';
+    const popupBody = 'Scanner disclaimer info will be here.';
+    const [isPopupVisible, setIsPopupVisible] = useState(false);
 
     useEffect(() => {
         const barcodelookupAPI = async (barcode: string) => {
             const API_KEY = process.env.EXPO_PUBLIC_BARCODELOOKUP_API_KEY;
             const URL = `${process.env.EXPO_PUBLIC_BARCODELOOKUP_URL}barcode=${barcode}&formatted=y&key=${API_KEY}`;
-
             try {
                 const response = await fetch(URL);
                 if (response.status !== 200) {
                     setLoadingStatus('productNotFound');
                     return;
                 }
-
                 const productJson = await response.json();
-                if (productJson.products.length === 0) {
-                    return;
-                } else {
-                    const productData = productJson.products[0];
-                    if (!productData.ingredients) return;
-                    setProduct(productData);
-                    GemineAPI(productData);
-                    isFindProduct(true);
-                }
+                if (productJson.products.length === 0) return;
+                if (!productJson.products[0].ingredients) return;
+                setProduct(productJson.products[0]);
+                GemineAPI(productJson.products[0]);
+                isFindProduct(true);
             } catch (e) {
                 setLoadingStatus('error');
                 console.error(e);
@@ -85,53 +73,29 @@ export default function barcodeResult() {
         }
     };
 
-    const ProductNotfound = () => {
-        const onPressHandles = () => {
-            router.back();
-        };
-
-        return (
-            <View style={styles.productNotFoundContainer}>
-                <Text variant="headlineMedium" style={{ textAlign: 'center', marginBottom: 30, fontWeight: 'bold' }}>
-                    Product Not Found
-                </Text>
-                <Image
-                    source={require('@/assets/images/elements/product_not_found.png')}
-                    style={{ width: 190, height: 190, alignSelf: 'center', objectFit: 'contain' }}
-                />
-                <Text variant="titleMedium" style={{ textAlign: 'center', marginBottom: 30, fontWeight: 'bold', marginHorizontal: 50 }}>
-                    We couldn't find any matching products
-                </Text>
-                <Text variant="labelMedium">{barcode}</Text>
-                <PrimaryButton buttonText="Back to Scanner" callback={onPressHandles} />
-            </View>
-        );
-    };
-
-    if (!findProduct) {
-        return <ProductNotfound />;
-    }
+    if (!findProduct) return <ProductNotfound />;
 
     return (
         <View style={styles.container}>
             <IconButton
-                icon="close"
+                icon="information"
                 size={24}
-                onPress={() => router.back()}
-                style={{
-                    position: 'absolute',
-                    top: 16,
-                    right: 16,
-                    backgroundColor: colorScheme === 'light' ? '#F4EADA' : '#343434',
-                    borderRadius: 50,
-                    zIndex: 1,
-                }}
+                onPress={() => setIsPopupVisible(true)}
+                style={styles.iconButton}
+                mode="contained"
             />
-            {isLoading ? (
+            {isPopupVisible && (
+                <EmergencyPopup
+                    title={popupTitle}
+                    body={popupBody}
+                    onClose={() => setIsPopupVisible(false)}
+                />
+            )}
+            {loadingStatus === 'loading' ? (
                 <Loading />
-            ) : isError ? (
+            ) : loadingStatus === 'error' ? (
                 <Text>Error while loading data</Text>
-            ) : productNotFound ? (
+            ) : loadingStatus === 'productNotFound' ? (
                 <ProductNotfound />
             ) : (
                 <>
@@ -195,11 +159,10 @@ const styles = StyleSheet.create({
         gap: 20,
         paddingBottom: 320,
     },
-    productNotFoundContainer: {
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'flex-start',
-        padding: 20,
-        gap: 10,
+    iconButton: {
+        position: 'absolute',
+        top: 10,
+        right: 10,
+        backgroundColor: '#e0e0e0',
     },
 });

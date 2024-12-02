@@ -61,14 +61,10 @@ const allergy = () => {
                 </Text>
                 <View style={styles.allergyContainer}>
                     {selectedAllergies && selectedAllergies.map((item, index) => {
-                        return (<>
-                            {
-                                item.selected ? <PaperUIChip key={index} name={item.name} isSelected={true} callback={handleAllergyOnPress} />
-                                    :
-                                    <PaperUIChipStyle key={index} name={item.name} isSelected={false} callback={handleAllergyOnPress} />
-                            }
-                        </>
-                        )
+                        return item.selected ?
+                            (<PaperUIChip key={index} name={item.name} isSelected={true} callback={handleAllergyOnPress} />)
+                            :
+                            (<PaperUIChipStyle key={index} name={item.name} isSelected={false} callback={handleAllergyOnPress} />)
                     })
                     }
                 </View>

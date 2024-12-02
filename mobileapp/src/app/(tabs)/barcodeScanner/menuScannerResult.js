@@ -91,15 +91,12 @@ const menuScannerResult = () => {
             {isLoading ? <Loading />
                 : isError ? <Text>Error while loading data</Text>
                     : (<>
-                    <View style={styles.imageContainer} >
-                        <Image style={styles.photoPreview} source={{ uri: "data:image/jpg;base64," +image   }} />
-                        </View>
                         <View style={styles.categoryContainer}>
                                 <Chips text="All" isActive={menuFilter === 'All'} onPress={() => setMenuFilter('All')} />
                                 <Chips text="No Allergen" isActive={menuFilter === 'No Allergen'} onPress={() => setMenuFilter('No Allergen')} />
                                 <Chips text="May Contain Allergens" isActive={menuFilter === 'May Contain Allergens'} onPress={() => setMenuFilter('May Contain Allergens')} />
                             </View>
-                        <ScrollView style={{ flex: 1 }}>
+                            <ScrollView style={{padding:5, width:350}} showsHorizontalScrollIndicator={false} >
                             {dishes.filter(menuFilterFunction).map((dish, index) => {
                                 console.log(dish);
                                 let isSafity = checkMenuAllergy(profile.allergies, dish.allergens);

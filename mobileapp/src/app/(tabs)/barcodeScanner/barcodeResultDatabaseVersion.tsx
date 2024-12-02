@@ -26,6 +26,7 @@ export default function barcodeResult() {
     const isLoading = loadingStatus === 'loading';
     const isError = loadingStatus === 'error';
     const productNotFound = loadingStatus === 'productNotFound';
+    const [profile, setProfile] = useState({});
     const [isSafity, setIsSafity] = useState(true);
 
     const [findProduct, isFindProduct] = useState(false);
@@ -111,6 +112,8 @@ export default function barcodeResult() {
             console.log(res);
             setAllergyList(res['allergens']);
             const profile = await getProfile();
+            setProfile(profile);
+            console.log(profile)
             const safity = checkAllergy(profile.allergies, res['allergens']);
             console.log(checkAllergy(profile.allergies, res['allergens']))
             console.log(safity)
@@ -196,9 +199,12 @@ export default function barcodeResult() {
                                                 <View>
                                                     <Text variant="labelMedium" style={{ fontWeight: 'bold' }}>May Contain Allergy</Text>
                                                     <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: '8' }}>
-                                                        {allergyList && allergyList.map((allergy, index) => {
+
+                                                   
+                                                        
+                                                        {allergyList &&  profile.allergies.filter((item) => item.selected == true).map(item => item.name).filter((item) => allergyList.map((item2) => item2['allergen'].toUpperCase()).includes(item.toUpperCase())).map((allergy, index) => {
                                                             return (
-                                                                <PaperUIChipStyle key={index} name={allergy['allergen']} isSelected={true} callback={console.log("on Press")} />
+                                                                <PaperUIChipStyle key={index} name={allergy} isSelected={true} callback={console.log("on Press")} />
                                                             )
                                                         })}
 

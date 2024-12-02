@@ -1,127 +1,47 @@
 import React from 'react';
-import { View, StyleSheet, FlatList, Text } from 'react-native';
-import { Card, IconButton } from 'react-native-paper';
+import { View, StyleSheet, FlatList } from 'react-native';
+import { Card, IconButton, Text } from 'react-native-paper';
 
 export default function ItemList({ dish, safity, alertAllergies }) {
 	//const [data, setData] = useState(demoData);
 
-	const handleQuantity = () => {
-		console.log("On Press")
-	}
-
-	const allergyIcon = {
-		'egg': 'egg',
-		'milk': 'milk',
-		'mustard': 'bread-slice',
-		'peanuts': 'circle',
-		'Crustaceans and molluscs': 'circle',
-		'fish': 'fish',
-		'sesame seeds': ' circle',
-		'soy': 'circle',
-		'sulphites': 'circle',
-		'tree nuts': 'circle',
-		'wheat and triticale': 'circle'
-	}
 
 	return (
 		<>
-			<Card style={styles.card}>
-				<View style={styles.rowWrapper}>
-					<View style={styles.statusWrapper}>
-						<IconButton
-							icon={
-								safity === true
-									? 'check-circle'
-									: 'close-circle'
-							}
-							size={28}
-							iconColor={
-								safity === true
-									? '#3D852F'
-									: '#FF4342'
-							}
-						/>
-					</View>
-
-					<View style={styles.mainContentWrapper}>
-						<View style={styles.languageTitleRow}>
-							<Text
-								style={
-									styles.languageTitle
-								}
-							>
-								{dish.OriginalName}
-							</Text>
-							<View
-								style={
-									styles.allergensWrapper
-								}
-							>
-
+			<Card style={styles2.cardContainer}>
+				<View style={styles2.analystContainer}>
+					{
+						safity ? (
+							<View style={styles2.safeCheckmark}>
+								<IconButton
+									icon='check'
+									size={28}
+									iconColor='#ffffff'
+								/>
+								<Text variant='labelMedium' style={{ color: "#fff" }}>Safe!</Text>
 							</View>
-						</View>
-
-						<View>
-							<Text>{dish.EnglishName}</Text>
-						</View>
-
-						<Text style={styles.allergenStatus}>
+						) : (
+							<View style={styles2.cautionCheckmark}>
+								<IconButton
+									icon='close'
+									size={28}
+									iconColor='#ffffff'
+								/>
+								<Text variant='labelMedium' style={{ color: "#fff" }}>Caution!</Text>
+							</View>
+						)
+					}
+					<View style={styles2.menuContentContainer}>
+						<Text variant='titleMedium' style={styles2.text}>{dish.EnglishName}</Text>
+						<Text variant='titleMedium' style={styles2.text}>{dish.OriginalName}</Text>
+						<Text variant='labelMedium' >
+							{safity ? 'No Allergen Detected' : 'Allergen Detected:'}
+						</Text>
+						<Text variant='labelMedium' >
 							{
-								dish.allergens.length == 0 || dish.allergens == undefined ? 'No Allergen Detected' : 'Allergen Detected :'
-
+								alertAllergies.filter((item) => item.selected == true).map(item => item.name).filter((item) => dish.allergens.map((item) => item.toUpperCase()).includes(item.toUpperCase())).join(", ")
 							}
 						</Text>
-
-						{
-							dish.allergens.length > 0 && dish.allergens.map((item, index) => {
-								if(alertAllergies
-									.filter((allergyItem) => allergyItem.selected == true)
-									.filter((allergiesItem) => (allergiesItem.name.toUpperCase() == item.toUpperCase()))
-									.length > 0){
-										return (<Text key={index} style={{color:"red"}} >{item}</Text>)
-									}else{
-										return (<Text key={index} >{item}</Text>)
-									}
-							})
-						}
-
-						<View style={styles.quantityWrapper}>
-							<IconButton
-								icon='minus'
-								size={24}
-								onPress={() =>
-									handleQuantity(
-										dish.EnglishName,
-										'decrement'
-									)
-								}
-							/>
-							<Text
-								style={{
-									fontWeight: 'bold',
-								}}
-							> 0
-							</Text>
-							<IconButton
-								icon='plus'
-								size={24}
-								onPress={() =>
-									handleQuantity(
-										dish.EnglishName,
-										'increment'
-									)
-								}
-							/>
-						</View>
-					</View>
-
-					<View style={styles.chevronWrapper}>
-						<IconButton
-							icon='chevron-right'
-							size={35}
-							iconColor='#000'
-							style={styles.chevronIcon}
-						/>
 					</View>
 				</View>
 			</Card>
@@ -129,71 +49,60 @@ export default function ItemList({ dish, safity, alertAllergies }) {
 	);
 }
 
-const styles = StyleSheet.create({
-	card: {
-		width: 330,
+const styles2 = StyleSheet.create({
+	cardContainer: {
+		flex: 1,
 		borderRadius: 10,
 		backgroundColor: '#fce4b6',
 		elevation: 2,
 		marginBottom: 10,
 		marginLeft: 10,
-		marginRight: 10
+		marginRight: 10,
 	},
-	rowWrapper: {
-		flexDirection: 'row',
-		alignItems: 'center',
+	analystContainer: {
+		borderTopLeftRadius: 10,
+		borderBottomLeftRadius: 10,
+		display: "flex",
+		flexDirection: "row",
+		flexWrap: "nowrap",
+		justifyContent: "flex-start",
 	},
-	statusWrapper: {
-		justifyContent: 'center',
-		alignItems: 'center',
-		marginBottom: 10,
+	cautionCheckmark: {
+		flex: 0,
+		backgroundColor: "#FF4342",
+		borderTopLeftRadius: 10,
+		borderBottomLeftRadius: 10,
+		padding: 10,
+		display: "flex",
+		flexDirection: "column",
+		justifyContent: "center",
+		alignItems: "center"
 	},
-	mainContentWrapper: {
-		flex: 1,
+	safeCheckmark: {
+		flex: 0,
+		backgroundColor: "#3D852F",
+		borderTopLeftRadius: 10,
+		borderBottomLeftRadius: 10,
+		padding: 10,
+		display: "flex",
+		flexDirection: "column",
+		justifyContent: "center",
+		alignItems: "center"
 	},
-	languageTitle: {
-		fontWeight: 'bold',
+	menuContentContainer: {
+		flex: 0,
+		flexGrow: 0,
+		borderTopEndRadius: 10,
+		padding: 10,
 	},
-	languageTitleRow: {
-		flexDirection: 'row',
-		alignItems: 'center',
-		justifyContent: 'space-between',
-		fontWeight: 'bold',
-		marginTop: 10,
+	bg1: {
+		backgroundColor: "#3D852F"
 	},
-	allergenStatus: {
-		fontWeight: 'bold',
+	bg2: {
+		backgroundColor: "#FF4342"
 	},
-	allergensWrapper: {
-		flexDirection: 'row',
-	},
-
-	allergenCircle: {
-		width: 20,
-		height: 20,
-		borderRadius: 10,
-		justifyContent: 'center',
-		alignItems: 'center',
-		marginHorizontal: 2,
-	},
-	allergenIcon: {
-		margin: 0,
-		padding: 0,
-	},
-	quantityWrapper: {
-		flexDirection: 'row',
-		alignItems: 'center',
-		marginTop: -15,
-		marginLeft: -18,
-	},
-
-	chevronWrapper: {
-		justifyContent: 'center',
-		alignItems: 'center',
-		marginLeft: 8,
-		marginBottom: 10,
-	},
-	chevronIcon: {
-		margin: 0,
-	},
-});
+	text: {
+		width: 200,
+		flexWrap: 'wrap',
+	}
+})

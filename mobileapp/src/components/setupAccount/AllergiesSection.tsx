@@ -59,14 +59,10 @@ const AllergiesSection = ({ profile, callback }) => {
         <Text variant="headlineMedium" style={{ textAlign: "center", marginBottom: 30, fontWeight: 'bold' }}>Select Sensitive Ingredients</Text>
         <View style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", gap: 10, width: 280 }}>
             {selectedAllergies && selectedAllergies.map((item, index) => {
-                return (<>
-                    {
-                        item.selected? <PaperUIChip key={index} name={item.name} isSelected={true} callback={handleAllergyOnPress} />
+                return item.selected?    
+                         (<PaperUIChip key={index} name={item.name} isSelected={true} callback={handleAllergyOnPress} />)
                         : 
-                        <PaperUIChipStyle key={index} name={item.name} isSelected={false} callback={handleAllergyOnPress} />
-                }
-                   </>
-                )
+                        (<PaperUIChipStyle key={index} name={item.name} isSelected={false} callback={handleAllergyOnPress} />)
             })
             }
         </View>

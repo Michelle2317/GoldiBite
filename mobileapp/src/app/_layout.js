@@ -1,12 +1,45 @@
 import { Stack, useRouter, useSegments } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
+import {
+  useFonts,
+  Montserrat_100Thin,
+  Montserrat_200ExtraLight,
+  Montserrat_300Light,
+  Montserrat_400Regular,
+  Montserrat_500Medium,
+  Montserrat_600SemiBold,
+  Montserrat_700Bold,
+  Montserrat_800ExtraBold,
+  Montserrat_900Black,
+  Montserrat_100Thin_Italic,
+  Montserrat_200ExtraLight_Italic,
+  Montserrat_300Light_Italic,
+  Montserrat_400Regular_Italic,
+  Montserrat_500Medium_Italic,
+  Montserrat_600SemiBold_Italic,
+  Montserrat_700Bold_Italic,
+  Montserrat_800ExtraBold_Italic,
+  Montserrat_900Black_Italic,
+} from '@expo-google-fonts/montserrat';
 
+import {
+  useFonts as useAnekTamilFonts,
+  AnekTamil_100Thin,
+  AnekTamil_200ExtraLight,
+  AnekTamil_300Light,
+  AnekTamil_400Regular,
+  AnekTamil_500Medium,
+  AnekTamil_600SemiBold,
+  AnekTamil_700Bold,
+  AnekTamil_800ExtraBold,
+} from '@expo-google-fonts/anek-tamil';
 import {
   MD3DarkTheme,
   MD3LightTheme,
   PaperProvider,
   adaptNavigationTheme,
+  configureFonts,
 } from "react-native-paper";
 import {
   DarkTheme as NavigationDarkTheme,
@@ -42,6 +75,38 @@ export function RootLayout() {
 
   const [initializing, setInitializing] = useState(true);
   const router = useRouter();
+  
+  let [fontsLoaded] = useFonts({
+    Montserrat_100Thin,
+    Montserrat_200ExtraLight,
+    Montserrat_300Light,
+    Montserrat_400Regular,
+    Montserrat_500Medium,
+    Montserrat_600SemiBold,
+    Montserrat_700Bold,
+    Montserrat_800ExtraBold,
+    Montserrat_900Black,
+    Montserrat_100Thin_Italic,
+    Montserrat_200ExtraLight_Italic,
+    Montserrat_300Light_Italic,
+    Montserrat_400Regular_Italic,
+    Montserrat_500Medium_Italic,
+    Montserrat_600SemiBold_Italic,
+    Montserrat_700Bold_Italic,
+    Montserrat_800ExtraBold_Italic,
+    Montserrat_900Black_Italic,
+  });
+
+  let [fontsLoaded2] = useAnekTamilFonts({
+    AnekTamil_100Thin,
+    AnekTamil_200ExtraLight,
+    AnekTamil_300Light,
+    AnekTamil_400Regular,
+    AnekTamil_500Medium,
+    AnekTamil_600SemiBold,
+    AnekTamil_700Bold,
+    AnekTamil_800ExtraBold,
+  });
 
   useEffect(() => {
 
@@ -75,9 +140,36 @@ export function RootLayout() {
   const paperTheme =
     colorScheme === "dark" ? CombinedDarkTheme : CombinedDefaultTheme;
 
+  //Customer fontsheadlineMedium
+  const fontConfig = {
+    default: {
+      fontFamily: "Montserrat_400Regular",
+    },
+    "displayMedium": {
+      fontFamily: "Montserrat_600SemiBold",
+    },
+    "headlineMedium": {
+      fontFamily: "Montserrat_600SemiBold",
+    },
+    "titleMedium":{
+      fontFamily: "AnekTamil_400Regular",
+    },
+    "labelMedium":{
+      fontFamily: "AnekTamil_600SemiBold",
+    },
+    "bodyMedium":{
+      fontFamily: "AnekTamil_400Regular",
+    }
+  }
+
+  const theme = {
+    ...paperTheme,
+    fonts: configureFonts({ config: fontConfig }),
+  }
+
   return (
-    <PaperProvider theme={paperTheme}>
-      <ThemeProvider value={paperTheme}>
+    <PaperProvider theme={theme}>
+      <ThemeProvider value={theme}>
         <Stack>
           <Stack.Screen name="(nonauth)" options={{ headerShown: false, }} />
           <Stack.Screen name="(onBoarding)" options={{ headerShown: false }} />

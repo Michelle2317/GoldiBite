@@ -52,6 +52,15 @@
       "placeOfProduction":"United States",
       "ingredients": "WHOLE WHEAT, BARLEY MALT EXTRACT, CANE SUGAR, SALT, IRON, NIACIN, THIAMINE HYDROCHLORIDE. CONTAINS: WHEAT AND BARLEY.",
       "image": "https://product-images.metro.ca/images/hea/h0c/13162988208158.jpg"
+    },
+    {
+      "id": 7,
+      "barcode":"4902201175753",
+      "title": "Kit Kat Choco Banana Bites",
+      "brand":"Kit Kat",
+      "placeOfProduction":"Japan",
+      "ingredients": "Chocolate: Sugar (domestic and foreign), whole milk powder, lactose, wheat flour, vegetable oil and fat, cocoa mass, cocoa butter, cocoa powder, yeast, emulsifier (soy lecithin), gum arabic, glazing agent, flavoring, sodium bicarbonate, yeast food.",
+      "image": "https://cdn11.bigcommerce.com/s-a2b76g/images/stencil/1280x1280/products/17571/18684/KIT_KAT_CHOCO_BANANA_BITES_JAPAN_clipped_rev_2__02447.1653430823.png?c=2?imbypass=on"
     }
   ]
  

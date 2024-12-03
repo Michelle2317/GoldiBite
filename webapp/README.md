@@ -28,7 +28,7 @@ git clone https://github.com/Michelle2317/GoldiBite.git
 1. Navigate to folder
 
 ```
-cd mobileapp
+cd webapp
 ```
 
 3. Install dependencies
@@ -40,14 +40,8 @@ npm install @supabase/supabase-js
 
 3. Start application
 
--   Mobile App
+-   Web App
 
 ```
-npx expo start
-```
-
--   For Tunneling
-
-```
-npm start
+npm run dev
 ```

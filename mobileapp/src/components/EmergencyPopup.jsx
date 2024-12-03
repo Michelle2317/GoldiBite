@@ -1,21 +1,29 @@
-import { StyleSheet } from "react-native";
-import { Button, Text, Dialog, Portal } from "react-native-paper";
-import PrimaryButton from './paperUiElement/PrimaryButton';
+import { StyleSheet, View } from "react-native";
+import { Text, Dialog, Portal, IconButton } from "react-native-paper";
 
 export default function EmergencyPopup({ visible, hideDialog, title, body }) {
     return (
         <>
             <Portal>
-                <Dialog visible={visible} onDismiss={hideDialog}>
-                    <Dialog.Title>
-                        <Text variant="titleMedium" style={styles.title}>{title}</Text>
-                    </Dialog.Title>
+                <Dialog
+                    visible={visible}
+                    onDismiss={hideDialog}
+                    style={[styles.dialog, visible && styles.dialogVisible]}
+                >
+                    <View style={styles.titleContainer}>
+                        <Dialog.Title>
+                            <Text variant="titleMedium" style={styles.title}>{title}</Text>
+                        </Dialog.Title>
+                        <IconButton
+                            icon="close"
+                            size={20}
+                            onPress={hideDialog}
+                            style={styles.closeButton}
+                        />
+                    </View>
                     <Dialog.Content>
                         <Text variant="bodyMedium">{body}</Text>
                     </Dialog.Content>
-                    <Dialog.Actions>
-                        <PrimaryButton buttonText="close" callback={hideDialog} />
-                    </Dialog.Actions>
                 </Dialog>
             </Portal>
         </>
@@ -23,13 +31,38 @@ export default function EmergencyPopup({ visible, hideDialog, title, body }) {
 }
 
 const styles = StyleSheet.create({
+    dialog: {
+        position: "relative",
+        borderRadius: 8,
+    },
+    dialogVisible: {
+        shadowColor: "orange",
+        shadowOffset: { width: 0, height: 5 },
+        shadowOpacity: 0.35,
+        shadowRadius: 5,
+    },
+    titleContainer: {
+        position: "relative",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+    },
     title: {
         fontSize: 18,
-        fontWeight: 'bold',
-        textAlign: 'center',
-        marginLeft: 50,
-        marginTop: 10,
-        marginBottom: 10,
-        width: '60%',
+        fontWeight: "bold",
+        textAlign: "center",
+        flex: 1,
+    },
+    closeButton: {
+        position: "absolute",
+        top: -20, 
+        right: 1, 
+        borderRadius: 25, 
+        borderWidth: 1,
+        borderColor: "black",
+        width: 30, 
+        height: 30, 
+        justifyContent: "center",
+        alignItems: "center",
     },
 });

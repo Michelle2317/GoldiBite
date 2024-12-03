@@ -1,13 +1,14 @@
 import { useState } from "react";
-import { Text } from "react-native-paper";
+import { Text, Button } from "react-native-paper";
 import { useRouter } from "expo-router";
 import { View } from "react-native";
 import InTextButton from "../paperUiElement/InTextButton";
 import PrimaryButton from "../paperUiElement/PrimaryButton";
 import PrivacyPolicyDialog from "./PrivacyPolicyDialog";
 import PrimaryInputText from "../paperUiElement/PrimaryInputText"
+import { useAuth } from "@/src/context/AuthContext";
 
-const SignUp = ({ callback }) => {
+const SignUp = ({callback}) => {
 
     const router = useRouter();
     const [email, setEmail] = useState('');
@@ -22,6 +23,13 @@ const SignUp = ({ callback }) => {
     const showDialog = () => setVisible(true);
 
     const hideDialog = () => setVisible(false);
+
+    
+    const { onSigup } = useAuth();
+
+    const onSignUpPress = async () => {
+        await onSigup!(email, password);
+    };
     return (<>
 
 
@@ -31,7 +39,10 @@ const SignUp = ({ callback }) => {
         <View style={{ height: 28 }}>
 
         </View>
-        <PrimaryButton buttonText="Sign Up" callback={handleOnSubmit} />
+        
+        <Button mode="contained" onPress={onSignUpPress} theme={{ colors: { onPrimary: '#000000', primary: 'rgba(213,203,68, 0.7)' } }} >
+        Sign Up
+        </Button>
 
         <Text variant="labelMedium" style={{ alignSelf: 'center', marginBottom: 50 }}>
             Have an account?

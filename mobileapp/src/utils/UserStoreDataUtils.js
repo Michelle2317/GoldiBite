@@ -5,8 +5,8 @@ export default function UserStoreDataUtils() {
     const { authState } = useAuth();
 
     const getProfileId = () => {
-        if (authState.username != null) {
-            const key = `profile_${authState.username}`
+        if (authState.id != null) {
+            const key = `profile_${authState.id}`
             //console.log(`key: ${key}`)
             return key;
         } else {

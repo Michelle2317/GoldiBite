@@ -1,10 +1,13 @@
-import { View, StyleSheet, Image } from "react-native";
+import { View, StyleSheet, Image, Dimensions } from "react-native";
 import React, { useEffect } from "react";
 import { useRouter } from "expo-router";
+import LottieView from 'lottie-react-native';
 
 
 export default function App() {
 
+	const screenWidth = Dimensions.get('window').width;
+    const screenHight = Dimensions.get('window').height;
     
     const router = useRouter();
 useEffect(()=>{
@@ -20,9 +23,18 @@ useEffect(()=>{
 
     return (<>
         <View style={styles.container}>
-            <Image
-                source={require('@/assets/images/elements/goldibiteLogo.webp')}
-                style={{ width: 280, height: 280 }}
+            
+        <LottieView
+                source={require('@/assets/images/elements/overall-animation.json')}
+                autoPlay
+                loop
+                style={[
+                    {
+                        width: screenWidth,
+                        height: screenHight,
+                    },
+                ]}
+                resizeMode='contain'
             />
         </View>
     </>)

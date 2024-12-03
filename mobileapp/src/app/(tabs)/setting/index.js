@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 
 import { View, StyleSheet, Image } from "react-native";
 import { Text } from 'react-native-paper';
@@ -26,6 +27,18 @@ const App = () => {
         }
         getProfileData();
     }, []);
+
+
+    useFocusEffect(
+        React.useCallback(() => {
+            const getProfileData = async () => {
+                let storeData = await getProfile();
+                setProfile(storeData);
+            }
+            getProfileData();            
+        }, [])
+    );
+
     return (<>
         <View style={styles.container}>
             <View style={styles.profileContainer}>

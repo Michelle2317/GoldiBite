@@ -2,37 +2,65 @@
     {
       "id": 1,
       "barcode":"4710126021013",
-      "name": "I MEI - Strawberry Puff",
-      "ingredient": "Vegetable oil (palm oil, rapeseed oil, emulsifier (fatty acid glycerol, fatty acid malonyl ester), antioxidant (mixed concentrated tocopherol)), eggs, sucrose, flour, whey powder, milk powder, lactose, strawberry powder, Soy Lecithin, Flavor, Citric Acid, Antioxidant (Vitamin C)",
+      "title": "Strawberry Puff",
+      "brand": "I MEI",
+      "placeOfProduction": "Taiwan",
+      "ingredients": "Vegetable oil (palm oil, rapeseed oil, emulsifier (fatty acid glycerol, fatty acid malonyl ester), antioxidant (mixed concentrated tocopherol)), eggs, sucrose, flour, whey powder, milk powder, lactose, strawberry powder, Soy Lecithin, Flavor, Citric Acid, Antioxidant (Vitamin C)",
       "image": "https://images.barcodelookup.com/4188/41888677-1.jpg"
     },
     {
       "id": 2,
-      "barcode":"0064042003498",
-      "name": "Celebration Mint Truffle Dark Chocolate 45% Cocoa Butter Cookies",
-      "ingredient": "Dark Chocolate (sugar, Chocolate Liquor, Cocoa Butter, Milk Ingredients, Soya Lecithin, Vanillin), Enriched Wheat Flour, Mint Creme Flavoured Filling (glucose, Sugar, Coconut Oil, Water, Modified Milk Ingredients, Monoglycerides, Titanium Dioxide, Salt, Soya Lecithin, Natural Flavour), Sugar, Butter (milk), Sodium Bicarbonate, Salt, Soya Lecithin, Artificial Flavour. May Contain Peanuts And Tree Nuts.",
-      "image": "@/assets/images/products/064042003498.jpg"
+      "barcode":"064042003498",
+      "title": "Celebration Mint Truffle Dark Chocolate 45% Cocoa Butter Cookies",
+      "brand":"Celebration ",
+      "placeOfProduction":"Canada",
+      "ingredients": "Dark Chocolate (sugar, Chocolate Liquor, Cocoa Butter, Milk Ingredients, Soya Lecithin, Vanillin), Enriched Wheat Flour, Mint Creme Flavoured Filling (glucose, Sugar, Coconut Oil, Water, Modified Milk Ingredients, Monoglycerides, Titanium Dioxide, Salt, Soya Lecithin, Natural Flavour), Sugar, Butter (milk), Sodium Bicarbonate, Salt, Soya Lecithin, Artificial Flavour. May Contain Peanuts And Tree Nuts.",
+      "image": "https://images.barcodelookup.com/52529/525297729-1.jpg"
     },
     {
       "id": 3,
-      "barcode":"1",
-      "name": "Mentos Pure Fresh Gum",
-      "ingredient": "Xylitol, Chewing Gum Base , Sorbitol, Mannitol, Glycerol, Maltitol Ayrup, Natural And Artifical Flavors; Contains Less Than 2 Percent Of: Gum Arabic, Color (Titanium Dioxide), Gelatine, Soya Lecithin, Aspartame, Acesulfame K, Green Tea Extract, Carnuba Wax, Sucralose, Sodium Carbosymethylcellose, Bht To Maintain Freshness, Sucrose Esters Of Fatty Acids, Blue 1",
-      "image": "https://images.barcodelookup.com/81657/816570551-1.jpg"
+      "barcode":"081900000086",
+      "title": "Ckie Choc Koala March",
+      "brand":"Koalas March",
+      "placeOfProduction":"United States",
+      "ingredients": "Chocolate Compound [(contains One Or More Of The Following: Fully Hydrogenated Palm Kernel Oil, Palm Kernel Oil, Palm Oil, Fully Hydrogenated Rapeseed Oil), Sugar, Lactose, Cocoa Liquor, Cocoa Powder (processed With Alkali), Skim Milk Powder, Soy Lecithin, Artificial Vanilla Flavor], Wheat Flour, Modified Food Starch, Palm Oil, Sugar, Eggs, Invert Sugar, Leavening (ammonium Bicarbonate & Sodium Bicarbonate), Salt, Caramel Color (dextrin, Propylene Glycol,caramel Color (e150d)),artificial Cacao Flavor.",
+      "image": "https://images.barcodelookup.com/1419/14197113-1.jpg"
     },
     {
       "id": 4,
-      "barcode":"07339001127",
-      "name": "Mentos Pure Fresh Gum",
-      "ingredient": "Xylitol, Chewing Gum Base , Sorbitol, Mannitol, Glycerol, Maltitol Ayrup, Natural And Artifical Flavors; Contains Less Than 2 Percent Of: Gum Arabic, Color (Titanium Dioxide), Gelatine, Soya Lecithin, Aspartame, Acesulfame K, Green Tea Extract, Carnuba Wax, Sucralose, Sodium Carbosymethylcellose, Bht To Maintain Freshness, Sucrose Esters Of Fatty Acids, Blue 1",
-      "image": "https://images.barcodelookup.com/81657/816570551-1.jpg"
+      "barcode":"4892616020659",
+      "title": "Four Seas Crispy Prawn Cracker",
+      "brand":"Four Seas",
+      "placeOfProduction":"Hong Kong",
+      "ingredients": "Starch, Shrimp Powder(Shrimp(Crustacean), Flavour Enhancers(E621,E635), Salt, Maltodextrin, Spices, Anticaking Agent(E551, E500(ii), Hydrolyzed Vegetable Protein, Chili Poowder, Sweetener(E955)), Shrimp Paste(Shrimp, Water, Maltodextrin, Salt, Thickener(E1422), Colour(E160C)), Shortening(Contains Soybeans), Soy Sauce(Contains Soybeans)",
+      "image": "https://lingsik.com/cdn/shop/products/4892616020659.jpg?v=1662094700"
     },
     {
       "id": 5,
-      "barcode":"073390011277",
-      "name": "Mentos Pure Fresh Gum",
-      "ingredient": "Xylitol, Chewing Gum Base , Sorbitol, Mannitol, Glycerol, Maltitol Ayrup, Natural And Artifical Flavors; Contains Less Than 2 Percent Of: Gum Arabic, Color (Titanium Dioxide), Gelatine, Soya Lecithin, Aspartame, Acesulfame K, Green Tea Extract, Carnuba Wax, Sucralose, Sodium Carbosymethylcellose, Bht To Maintain Freshness, Sucrose Esters Of Fatty Acids, Blue 1",
-      "image": "https://images.barcodelookup.com/81657/816570551-1.jpg"
+      "barcode":"074323095524",
+      "title": "Marinela Canelitas Cinnamon Cookies",
+      "brand":"Marinela",
+      "placeOfProduction":"Mexico",
+      "ingredients": "WHEAT FLOUR, SUGAR, VEGETABLE SHORTENING [CANOLA AND PALM OIL], WATER, CORN SYRUP, LEAVENING [BAKING SODA, CALCIUM SULFATE, ALUMINUM SODIUM SULFATE, MONOCALCIUM PHOSPHATE, CALCIUM CARBONATE, AMMONIUM BICARBONATE], SALT, SODIUM STEAROYL LACTYLATE, CINNAMON, SOY LECITHIN, NATURAL AND ARTIFICIAL FLAVOR, ENRICHMENT (THIAMIN MONONITRATE, RIBOFLAVIN, NIACIN, FOLIC ACID, REDUCED IRON, ZINC OXIDE).",
+      "image": "https://umamishop.ca/cdn/shop/products/product_d8f7d197-f885-4fa9-9cd9-31b8979c59d5.jpg?v=1622923365"
+    },
+    {
+      "id": 6,
+      "barcode":"055712100142",
+      "title": "Weetabix Whole Wheat Cereals",
+      "brand":"Thomas Large & Singer Inc",
+      "placeOfProduction":"United States",
+      "ingredients": "WHOLE WHEAT, BARLEY MALT EXTRACT, CANE SUGAR, SALT, IRON, NIACIN, THIAMINE HYDROCHLORIDE. CONTAINS: WHEAT AND BARLEY.",
+      "image": "https://product-images.metro.ca/images/hea/h0c/13162988208158.jpg"
+    },
+    {
+      "id": 7,
+      "barcode":"4902201175753",
+      "title": "Kit Kat Choco Banana Bites",
+      "brand":"Kit Kat",
+      "placeOfProduction":"Japan",
+      "ingredients": "Chocolate: Sugar (domestic and foreign), whole milk powder, lactose, wheat flour, vegetable oil and fat, cocoa mass, cocoa butter, cocoa powder, yeast, emulsifier (soy lecithin), gum arabic, glazing agent, flavoring, sodium bicarbonate, yeast food.",
+      "image": "https://cdn11.bigcommerce.com/s-a2b76g/images/stencil/1280x1280/products/17571/18684/KIT_KAT_CHOCO_BANANA_BITES_JAPAN_clipped_rev_2__02447.1653430823.png?c=2?imbypass=on"
     }
   ]
  

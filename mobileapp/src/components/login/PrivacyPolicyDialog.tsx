@@ -17,7 +17,7 @@ export default function PrivacyPolicyDialog({visible, hideDialog}){
                             This privacy notice for GoldiBite (doing business as GoldiBite) (“Company,” “we,” “us,” or “our“), describes how and why we might collect, store, use, and/or share (“process“) your information when you use our services (“Services“), such as when you:
                         </Text>
                         <Text variant="bodyMedium">
-                            Visit our website at Goldibite, or any website of ours that links to this privacy notice </Text>
+                            Visit our website at Goldibite, or any website of ours that links to this privacy notice. </Text>
                         <Text variant="bodyMedium">
                             [Download and use our application(s), such as our mobile application — GoldiBite, or any other application of ours that links to this privacy notice]
                         </Text>

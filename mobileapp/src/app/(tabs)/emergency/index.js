@@ -5,25 +5,27 @@ import { IconButton } from 'react-native-paper';
 import EmergencyPopup from '@/src/components/EmergencyPopup';
 
 export default function Emergency() {
-	const [isModalVisible, setIsModalVisible] = useState(false);
+	// const [isModalVisible, setIsModalVisible] = useState(false);
 
-	const toggleModal = () => {
-		setIsModalVisible(!isModalVisible);
-	};
+	// const toggleModal = () => {
+	// 	setIsModalVisible(!isModalVisible);
+	// };
+    const [visible, setVisible] = useState(false);
+    const showDialog = () => setVisible(true);
+    const hideDialog = () => setVisible(false);
 
 	return (
 		<View style={styles.centerContainer}>
 			<IconButton
 				icon='information-outline'
 				size={35}
-				onPress={toggleModal}
+				onPress={showDialog}
 				color='black'
 				style={styles.informationButton}
 			/>
-			{isModalVisible && (
-				<EmergencyPopup onClose={toggleModal} />
-			)}
 			<SosButton />
+
+			<EmergencyPopup visible={visible} hideDialog={hideDialog} />
 		</View>
 	);
 }

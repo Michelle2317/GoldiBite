@@ -18,7 +18,7 @@ export default function Scanner(props) {
 
     const handleBarCodeScanned = ({ type, data }) => {
         if (data !== null || data !== "") {
-            router.push({ pathname: "barcodeScanner/barcodeResult", params: { barcode: data } })
+            router.push({ pathname: "barcodeScanner/barcodeResultDatabaseVersion", params: { barcode: data } })
         }
     };
 
@@ -58,7 +58,7 @@ export default function Scanner(props) {
         // if (!product[0]) {
         //   router.push({ pathname: "barcodeScanner/productNotfound" })
         // } else {
-        router.push({ pathname: "barcodeScanner/barcodeResult", params: { barcode: barcode } })
+        router.push({ pathname: "barcodeScanner/barcodeResultDatabaseVersion", params: { barcode: barcode } })
         //}
 
     }, [barcode])
@@ -109,7 +109,7 @@ const BarcodeBottomSheet = () => {
         console.log('handleSheetChanges', index);
     }, [])
     const handleOnBlur = () => {
-        router.push({ pathname: "barcodeScanner/barcodeResult", params: { barcode: inputBarcode } })
+        router.push({ pathname: "barcodeScanner/barcodeResultDatabaseVersion", params: { barcode: inputBarcode } })
     }
 
     const { colorScheme } = useTheme();

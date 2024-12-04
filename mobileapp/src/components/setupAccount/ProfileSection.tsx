@@ -12,7 +12,7 @@ const ProfileSection = ({ profile, callback }) => {
     const OPTIONS = [
         { label: 'Male', value: 'male' },
         { label: 'Female', value: 'female' },
-        { label: 'Other', value: 'other' },
+        { label: 'Prefer not to say', value: 'other' },
     ];
 
     let age_range = []

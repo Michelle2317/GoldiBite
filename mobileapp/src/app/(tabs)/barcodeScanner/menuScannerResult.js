@@ -5,12 +5,15 @@ import menuAnalyistUtils from '@/src/utils/menuAnalyistUtils';
 import GoogleGemine from "@/src/utils/GoogleGemine";
 import AllengyAnalysisUtils from '@/src/utils/AllengyAnalysisUtils';
 import UserStoreDataUtils from '@/src/utils/UserStoreDataUtils';
+<<<<<<< Updated upstream
 import Chips from '../../../components/barcodeScanner/Chips'; 
 import sampleData from '@/src/data/sampleData'
 import supabase from '@/src/utils/supabaseClient';  
+=======
 import Loading from '../../../components/animation/Loading';
 import ItemList from '../../../components/scanner/ItemList';
 import EmergencyPopup from '@/src/components/EmergencyPopup';
+>>>>>>> Stashed changes
 
 const menuScannerResult = () => {
     const [image, setImage] = useState();
@@ -55,6 +58,7 @@ const menuScannerResult = () => {
         const callGetProfile = async () => {
             const user = await getProfile();
             setProfile(user);
+<<<<<<< Updated upstream
         }
 
     
@@ -62,11 +66,19 @@ const menuScannerResult = () => {
             try {
                 setStatue('loading')
     
+=======
+        };
+
+        const GemineAPI = async () => {
+            try {
+                setStatue('loading');
+>>>>>>> Stashed changes
                 let iData = await getImageBase64();
                 setImage(iData);
                 const res = await menuGemineAPI(iData, "gemini-1.5-pro");
     
 
+<<<<<<< Updated upstream
                 //const res = sampleData;
                 //console.log(typeof(res))
 
@@ -75,6 +87,11 @@ const menuScannerResult = () => {
     
                 res.dishes.forEach((dish) => {
                     setDishes((data) => [...data, dish]);
+=======
+                const cate = [];
+                res.dishes.forEach(dish => {
+                    setDishes(data => [...data, dish]);
+>>>>>>> Stashed changes
                     if (dish.EnglishCategory === "") {
                         if (cate.indexOf("None") < 0) cate.push("None");
                     } else {
@@ -91,6 +108,7 @@ const menuScannerResult = () => {
                 });
     
                 setCategories(cate);
+<<<<<<< Updated upstream
     
                 console.log(dishes)
                 console.log(categories)
@@ -101,6 +119,9 @@ const menuScannerResult = () => {
                 // Upload dishes to Supabase
                 await uploadDishesToSupabase(dishData);
 
+=======
+                setStatue('idle');
+>>>>>>> Stashed changes
             } catch (e) {
                 setStatue('error');
                 console.error(e.message);

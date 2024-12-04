@@ -4,7 +4,7 @@ export const Button = ({ label, onClick, isActive, type }) => {
 			case 'All':
 				return isActive
 					? 'bg-[#ffcb63] text-black'
-					: 'bg-[#fce4b6] text-black';
+					: 'bg-[#fce4b6] text-gray-500';
 			case 'NoAllergen':
 				return isActive
 					? 'bg-[#3d852f] text-white'
@@ -15,8 +15,8 @@ export const Button = ({ label, onClick, isActive, type }) => {
 					: 'bg-[#fea0a0] text-white';
 			case 'SpecificAllergens':
 				return isActive
-					? 'bg-[#00C9A2] text-blwck'
-					: 'bg-[#BFEDDD] text-black';
+					? 'bg-[#00C9A2] text-black'
+					: 'bg-[#BFEDDD] text-gray-500';
 			default:
 				return isActive
 					? 'bg-amber-400 text-black'

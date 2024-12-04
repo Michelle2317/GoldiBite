@@ -1,42 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { Image, View, StyleSheet, ScrollView, Text } from 'react-native';
-import { Chip, IconButton } from 'react-native-paper';
-import menuAnalyistUtils from '@/src/utils/menuAnalyistUtils';
+import { Image, View, StyleSheet, ScrollView, SafeAreaView, Text, FlatList } from 'react-native';
+import { useLocalSearchParams } from 'expo-router';
+import menuAnalyistUtils from '@/src/utils/menuAnalyistUtils'
+import Loading from '../../../components/animation/Loading';
+import ItemList from '../../../components/scanner/ItemList';
 import GoogleGemine from "@/src/utils/GoogleGemine";
 import AllengyAnalysisUtils from '@/src/utils/AllengyAnalysisUtils';
 import UserStoreDataUtils from '@/src/utils/UserStoreDataUtils';
-<<<<<<< Updated upstream
 import Chips from '../../../components/barcodeScanner/Chips'; 
 import sampleData from '@/src/data/sampleData'
 import supabase from '@/src/utils/supabaseClient';  
-=======
-import Loading from '../../../components/animation/Loading';
-import ItemList from '../../../components/scanner/ItemList';
-import EmergencyPopup from '@/src/components/EmergencyPopup';
->>>>>>> Stashed changes
 
 const menuScannerResult = () => {
-    const [image, setImage] = useState();
+    const [image, setImage] =useState();
     const [status, setStatue] = useState('idle');
-    const [dishes, setDishes] = useState([]);
-    const [categories, setCategories] = useState([]);
-    const [profile, setProfile] = useState({});
-    const [menuFilter, setMenuFilter] = useState("All");
-    const [visible, setVisible] = useState(false);
 
     const isLoading = status === 'loading';
-    const isError = status === 'error';
 
-    const { getImageBase64 } = menuAnalyistUtils();
+    const isError = status === 'error';
+    const { getImageBase64, storeImageBase64 } = menuAnalyistUtils();
+
+    const [dishes, setDishes] = useState([]);
+    const [categories, setCategories] = useState([]);
     const { menuGemineAPI } = GoogleGemine();
     const { getProfile } = UserStoreDataUtils();
     const { checkMenuAllergy } = AllengyAnalysisUtils();
-
-    const popupTitle = "Notice";
-    const popupBody = "The information provided by the barcode scanner and menu scanner is gathered with the assistance of AI and machine learning and it can make mistakes. Check suspicious information.";
-
-    const showDialog = () => setVisible(true);
-    const hideDialog = () => setVisible(false);
+    const [profile, setProfile] = useState({});
+    const [ menuFilter, setMenuFilter] = useState("All");
 
     const uploadDishesToSupabase = async (dishes) => {
         const { data, error } = await supabase
@@ -51,14 +41,23 @@ const menuScannerResult = () => {
     };
     
     const menuFilterFunction = (item) => {
-        return menuFilter === "All" || menuFilter === item.EnglishCategory;
+        if (menuFilter === "All") {
+            return true;
+        }
+        if (menuFilter === "No Allergen" && item.allergens.length === 0) {
+            return true;
+        }
+        if (menuFilter === "May Contain Allergens" && item.allergens.length > 0) {
+            return true; 
+        }
+        return false;
     };
 
     useEffect(() => {
+
         const callGetProfile = async () => {
             const user = await getProfile();
             setProfile(user);
-<<<<<<< Updated upstream
         }
 
     
@@ -66,19 +65,11 @@ const menuScannerResult = () => {
             try {
                 setStatue('loading')
     
-=======
-        };
-
-        const GemineAPI = async () => {
-            try {
-                setStatue('loading');
->>>>>>> Stashed changes
                 let iData = await getImageBase64();
                 setImage(iData);
                 const res = await menuGemineAPI(iData, "gemini-1.5-pro");
     
 
-<<<<<<< Updated upstream
                 //const res = sampleData;
                 //console.log(typeof(res))
 
@@ -87,11 +78,6 @@ const menuScannerResult = () => {
     
                 res.dishes.forEach((dish) => {
                     setDishes((data) => [...data, dish]);
-=======
-                const cate = [];
-                res.dishes.forEach(dish => {
-                    setDishes(data => [...data, dish]);
->>>>>>> Stashed changes
                     if (dish.EnglishCategory === "") {
                         if (cate.indexOf("None") < 0) cate.push("None");
                     } else {
@@ -108,7 +94,6 @@ const menuScannerResult = () => {
                 });
     
                 setCategories(cate);
-<<<<<<< Updated upstream
     
                 console.log(dishes)
                 console.log(categories)
@@ -119,75 +104,42 @@ const menuScannerResult = () => {
                 // Upload dishes to Supabase
                 await uploadDishesToSupabase(dishData);
 
-=======
-                setStatue('idle');
->>>>>>> Stashed changes
             } catch (e) {
-                setStatue('error');
-                console.error(e.message);
+                setStatue('error')
+                console.error(e.message)
             }
-        };
+        }
         callGetProfile();
-        GemineAPI();
+        GemineAPI()
     }, []);
 
-    return (
-        <>
-            <View style={styles.container}>
-                <IconButton
-                    icon="information-outline"
-                    size={35}
-                    onPress={showDialog}
-                    color="black"
-                    style={styles.informationButton}
-                />
-                <EmergencyPopup
-                    visible={visible}
-                    hideDialog={hideDialog}
-                    title={popupTitle}
-                    body={popupBody}
-                />
-                {isLoading ? <Loading />
-                    : isError ? <Text>Error while loading data</Text>
-                        : (
-                            <>
-                                <View style={styles.imageContainer}>
-                                    <Image style={styles.photoPreview} source={{ uri: "data:image/jpg;base64," + image }} />
-                                </View>
-                                <View style={styles.categoryContainer}>
-                                    <Chip theme={{ colors: { secondaryContainer: '#FFC858' } }} mode="flat" onPress={() => setMenuFilter('All')} selected={true}> All </Chip>
-                                    {categories.map((item, index) => (
-                                        <Chip 
-                                            key={index} 
-                                            theme={{ colors: { secondaryContainer: '#FFC858' } }} 
-                                            mode="flat" 
-                                            onPress={() => setMenuFilter(item)} 
-                                            selected={true}
-                                        >
-                                            {item}
-                                        </Chip>
-                                    ))}
-                                </View>
-                                <ScrollView style={{ flex: 1 }}>
-                                    {dishes.filter(menuFilterFunction).map((dish, index) => {
-                                        let isSafity = checkMenuAllergy(profile.allergies, dish.allergens);
-                                        dish.safity = isSafity;
-                                        return (
-                                            <ItemList 
-                                                key={index} 
-                                                dish={dish} 
-                                                safity={isSafity} 
-                                                alertAllergies={profile.allergies} 
-                                            />
-                                        );
-                                    })}
-                                </ScrollView>
-                            </>
-                        )}
-            </View>
-        </>
-    );
-};
+    return (<>
+        <View style={styles.container}>
+            {isLoading ? <Loading />
+                : isError ? <Text>Error while loading data</Text>
+                    : (<>
+                        <View style={styles.categoryContainer}>
+                                <Chips text="All" isActive={menuFilter === 'All'} onPress={() => setMenuFilter('All')} />
+                                <Chips text="No Allergen" isActive={menuFilter === 'No Allergen'} onPress={() => setMenuFilter('No Allergen')} />
+                                <Chips text="May Contain Allergens" isActive={menuFilter === 'May Contain Allergens'} onPress={() => setMenuFilter('May Contain Allergens')} />
+                            </View>
+                            <ScrollView style={{padding:5, width:350}} showsHorizontalScrollIndicator={false} >
+                            {dishes.filter(menuFilterFunction).map((dish, index) => {
+                                console.log(dish);
+                                let isSafity = checkMenuAllergy(profile.allergies, dish.allergens);
+                                dish.safity = isSafity;
+                                return (
+                                    <ItemList key={index} dish={dish} safity={isSafity} alertAllergies={profile.allergies} />
+                                )
+                            })}
+                        </ScrollView>
+                    </>
+                    )
+            }
+        </View>
+    </>)
+}
+
 
 const styles = StyleSheet.create({
     container: {
@@ -222,18 +174,14 @@ const styles = StyleSheet.create({
         width: 350,
         height: 20,
     },
-    imageContainer: {
+    imageContainer:{
         flex: 0,
         margin: 32,
-        marginBottom: 5,
-        height: 125,
-        width: 200
-    },
-    informationButton: {
-        position: 'absolute',
-        top: -15,
-        right: 15,
-    },
+        marginBottom:5,
+        height:125, 
+        width:200 
+    }
 });
+
 
 export default menuScannerResult;

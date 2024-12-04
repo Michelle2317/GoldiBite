@@ -9,6 +9,7 @@ import AllengyAnalysisUtils from '@/src/utils/AllengyAnalysisUtils';
 import UserStoreDataUtils from '@/src/utils/UserStoreDataUtils';
 import Chips from '../../../components/barcodeScanner/Chips'; 
 import sampleData from '@/src/data/sampleData'
+import supabase from '@/src/utils/supabaseClient';  
 
 const menuScannerResult = () => {
     const [image, setImage] =useState();
@@ -27,6 +28,18 @@ const menuScannerResult = () => {
     const [profile, setProfile] = useState({});
     const [ menuFilter, setMenuFilter] = useState("All");
 
+    const uploadDishesToSupabase = async (dishes) => {
+        const { data, error } = await supabase
+            .from('dishes')
+            .insert(dishes);
+    
+        if (error) {
+            console.error("Error uploading dishes:", error.message);
+        } else {
+            console.log("Dishes uploaded successfully:", data);
+        }
+    };
+    
     const menuFilterFunction = (item) => {
         if (menuFilter === "All") {
             return true;
@@ -47,35 +60,49 @@ const menuScannerResult = () => {
             setProfile(user);
         }
 
-
+    
         const GemineAPI = async () => {
             try {
                 setStatue('loading')
-
+    
                 let iData = await getImageBase64();
                 setImage(iData);
                 const res = await menuGemineAPI(iData, "gemini-1.5-pro");
+    
 
-             
                 //const res = sampleData;
                 //console.log(typeof(res))
 
                 const cate = [];
-                res.dishes.forEach(dish => {
-                    setDishes(data => [...data, dish]);
-                    if(dish.EnglishCategory == ""){
-                        if(cate.indexOf("None") < 0)  cate.push("None");
-                    }else{ 
-                        if(cate.indexOf(dish.EnglishCategory) < 0) cate.push ( dish.EnglishCategory);
+                const dishData = [];
+    
+                res.dishes.forEach((dish) => {
+                    setDishes((data) => [...data, dish]);
+                    if (dish.EnglishCategory === "") {
+                        if (cate.indexOf("None") < 0) cate.push("None");
+                    } else {
+                        if (cate.indexOf(dish.EnglishCategory) < 0) cate.push(dish.EnglishCategory);
                     }
+    
+                    dishData.push({
+                        name: dish.EnglishName,
+                        originalName: dish.OriginalName,
+                        allergens: dish.allergens,
+                        description: dish.ingredients,
+                        created_at: new Date().toISOString()
+                    });
                 });
+    
                 setCategories(cate);
-
+    
                 console.log(dishes)
                 console.log(categories)
-
+    
                 console.log('end')
                 setStatue('idle')
+
+                // Upload dishes to Supabase
+                await uploadDishesToSupabase(dishData);
 
             } catch (e) {
                 setStatue('error')
@@ -142,10 +169,10 @@ const styles = StyleSheet.create({
         marginTop: 22,
     },
     photoPreview: {
-      alignSelf: 'center',
-      flex: 1,
-      width: 350,
-      height: 20,
+        alignSelf: 'center',
+        flex: 1,
+        width: 350,
+        height: 20,
     },
     imageContainer:{
         flex: 0,

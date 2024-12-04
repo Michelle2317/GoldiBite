@@ -9,7 +9,7 @@ import AllengyAnalysisUtils from '@/src/utils/AllengyAnalysisUtils';
 import UserStoreDataUtils from '@/src/utils/UserStoreDataUtils';
 import Chips from '../../../components/barcodeScanner/Chips'; 
 import sampleData from '@/src/data/sampleData'
-import supabase from '@/src/utils/supabaseClient';  // Make sure the path is correct
+import supabase from '@/src/utils/supabaseClient';  
 
 const menuScannerResult = () => {
     const [image, setImage] =useState();
@@ -89,6 +89,7 @@ const menuScannerResult = () => {
                         originalName: dish.OriginalName,
                         allergens: dish.allergens,
                         description: dish.ingredients,
+                        created_at: new Date().toISOString()
                     });
                 });
     

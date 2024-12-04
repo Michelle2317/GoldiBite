@@ -61,6 +61,15 @@
       "placeOfProduction":"Japan",
       "ingredients": "Chocolate: Sugar (domestic and foreign), whole milk powder, lactose, wheat flour, vegetable oil and fat, cocoa mass, cocoa butter, cocoa powder, yeast, emulsifier (soy lecithin), gum arabic, glazing agent, flavoring, sodium bicarbonate, yeast food.",
       "image": "https://cdn11.bigcommerce.com/s-a2b76g/images/stencil/1280x1280/products/17571/18684/KIT_KAT_CHOCO_BANANA_BITES_JAPAN_clipped_rev_2__02447.1653430823.png?c=2?imbypass=on"
+    },
+    {
+      "id": 8,
+      "barcode":"022245456152",
+      "title": "Peanut Rice Ball",
+      "brand":"Laurel's",
+      "placeOfProduction":"Taipei",
+      "ingredients": "Glutinous Rice, Water, Shortening (Palm Oil, Soybean Oil), Sugar, Peanut Powder",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAUgHLsIxXR8v_fVJfSXI_7NLalvGw9Q1A-w&s"
     }
   ]
  

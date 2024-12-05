@@ -39,18 +39,19 @@ const menuScannerResult = () => {
             console.log("Dishes uploaded successfully:", data);
         }
     };
-    
-    const menuFilterFunction = (item) => {
+    //alertAllergies.filter((item) => item.selected == true).map(item => item.name).filter((item) => dish.allergens.map((item) => item.toUpperCase()).includes(item.toUpperCase()))
+//    alertAllergies.filter((item) => item.selected == true).map(item => item.name).filter((item) => dish.allergens.map((item) => item.toUpperCase()).includes(item.toUpperCase()))
+	//alertAllergies.filter((item) => item.selected == true).map(item => item.name).filter((item) => dish.allergens.map((item) => item.toUpperCase()).includes(item.toUpperCase())).join(", ")
+
+    const menuFilterFunction = (dishItem) => {
         if (menuFilter === "All") {
             return true;
         }
-        if (menuFilter === "No Allergen" && item.allergens.length === 0) {
-            return true;
-        }
-        if (menuFilter === "May Contain Allergens" && item.allergens.length > 0) {
-            return true; 
-        }
-        return false;
+        let isSafity = checkMenuAllergy(profile.allergies, dishItem.allergens);
+        if (menuFilter === "No Allergen")
+            return isSafity
+        else
+              return !isSafity
     };
 
     useEffect(() => {

@@ -1,7 +1,7 @@
 import { Modal, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Text, IconButton } from 'react-native-paper';
 
-export default function EmergencyPopup({ onClose }) {
+export default function DisclaimerPopup({ onClose }) {
 	return (
 		<Modal
 			transparent={true}
@@ -26,22 +26,18 @@ export default function EmergencyPopup({ onClose }) {
 						variant='titleMedium'
 						style={styles.title}
 					>
-						Why Do We Have This Option?
+						Notice
 					</Text>
 					<Text
 						variant='bodyMedium'
 						style={styles.description}
 					>
-						Our call option offers immediate
-						assistance in emergencies,
-						including sudden medical
-						incidents like strokes. When
-						clicked, the button connects
-						travellers to emergency services
-						by dialing the appropriate
-						number based on their location
-						(e.g., 911 in the United
-						States).
+						The information provided by the
+						barcode scanner and menu scanner
+						is gathered with the assistance
+						of AI and machine learning and
+						it can make mistakes. Check
+						suspicious information
 					</Text>
 				</View>
 			</View>
@@ -57,7 +53,7 @@ const styles = StyleSheet.create({
 	},
 	popup: {
 		width: 345,
-		height: 270,
+		height: 200,
 		backgroundColor: 'white',
 		borderColor: '#ff4342',
 		borderWidth: 2,

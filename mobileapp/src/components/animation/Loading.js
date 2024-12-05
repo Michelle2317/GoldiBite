@@ -21,7 +21,7 @@ export default function Loading() {
                 resizeMode='contain'
             />
 
-            <Text variant='labelMedium'>Analysing ...</Text>
+            <Text variant='labelMedium'>Analyzing ...</Text>
 
         </View>
     </>);

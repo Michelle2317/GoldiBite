@@ -43,6 +43,7 @@ export default function barcodeResult() {
             console.log(barcode)
             const product = barcodeDataSet.filter(item => item.barcode == barcode)
             if (product.length == 0) {
+                console.log(`not found barcode : ${barcode}`)
                 setLoadingStatus('productNotFound')
                 return
             }
@@ -145,7 +146,7 @@ export default function barcodeResult() {
         </>)
     }
 
-    if (!findProduct) {
+    if (productNotFound) {
         return <ProductNotfound />
     } else {
         return (<>

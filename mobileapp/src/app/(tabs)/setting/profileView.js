@@ -78,10 +78,9 @@ const profileView = () => {
             <View style={styles.buttonContainer}>
                 {
                     ageChecking() ?
-                    (<PrimaryButton buttonText="Save 1" callback={handleBackBtn} disabled={true} />):
-                    (<PrimaryButton buttonText="Save 2" callback={handleBackBtn} disabled={false} />)
+                    (<PrimaryButton buttonText="Save" callback={handleBackBtn} disabled={true} />):
+                    (<PrimaryButton buttonText="Save" callback={handleBackBtn} disabled={false} />)
                 }
-                
             </View>
         </View>
     </>)

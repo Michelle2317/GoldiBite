@@ -47,7 +47,7 @@ const ProfileSection = ({ profile, callback }) => {
             <PrimaryInputText label="Username" value={profileInformation.username} onChangeText={handleUsernameOnChange} />
             <PaperUIDropdown label="Gender" placeholder="Select gender" option={OPTIONS} value={profileInformation.gender} callback={handleGenderOnChange} />
             <PrimaryInputText label="Age" value={profileInformation.age} onChangeText={handleAgeOnChange} />
-            <HelperText type="error" visible={ageChecking}>
+            <HelperText type="error" visible={ageChecking()}>
                 Age must have a number!
             </HelperText>
         </View>

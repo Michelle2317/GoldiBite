@@ -15,7 +15,7 @@ useEffect(()=>{
     const timer = setTimeout(()=>{
         console.log('timeout')
         router.replace('/(onBoarding)/language');
-    }, 2000)
+    }, 5000)
 
     return ()=>clearTimeout(timer);
 
@@ -25,9 +25,9 @@ useEffect(()=>{
         <View style={styles.container}>
             
         <LottieView
-                source={require('@/assets/images/elements/overall-animation.json')}
-                autoPlay
-                loop
+                source={require('@/assets/images/elements/opening-animation.json')}
+                autoPlay={true}
+                loop={false}
                 style={[
                     {
                         width: screenWidth,

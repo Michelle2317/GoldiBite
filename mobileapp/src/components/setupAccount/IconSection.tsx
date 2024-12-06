@@ -11,7 +11,7 @@ const IconSection = ({ profile, callback }) => {
             {
                 name: 'icon',
                 value: 'user_icon1.png',
-                selected: false,
+                selected: true,
                 source: require('@/assets/images/elements/user_icon1.png'),
             },
             {
@@ -44,19 +44,25 @@ const IconSection = ({ profile, callback }) => {
 
     useEffect(() => {
         const selectedIcon = profileInformation.icon;
+        console.log(selectedIcon)
         let iconList = [];
-        icons.map(icon => {
-            if (selectedIcon == undefined) {
-                iconList.push({ name: icon.name, value: icon.value, selected: false, source: icon.source })
-            } else if (icon.name == selectedIcon.name && icon.value == selectedIcon.value) {
-                iconList.push({ name: icon.name, value: icon.value, selected: true, source: icon.source })
-                setIsCallCallback(true)
-                setIsCallCallback(true)
-            } else {
-                iconList.push({ name: icon.name, value: icon.value, selected: false, source: icon.source })
-            }
-        })
-        setIcons(iconList);
+        if(selectedIcon != undefined){
+
+            icons.map(icon => {
+                if (selectedIcon == undefined) {
+                    iconList.push({ name: icon.name, value: icon.value, selected: false, source: icon.source })
+                } else if (icon.name == selectedIcon.name && icon.value == selectedIcon.value) {
+                    iconList.push({ name: icon.name, value: icon.value, selected: true, source: icon.source })
+                    setIsCallCallback(true)
+                    setIsCallCallback(true)
+                } else {
+                    iconList.push({ name: icon.name, value: icon.value, selected: false, source: icon.source })
+                }
+            })
+            setIcons(iconList);
+        }else{
+
+        }
     }, []);
 
     useEffect(() => {

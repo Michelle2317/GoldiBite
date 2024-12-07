@@ -223,6 +223,7 @@ export default function barcodeResult() {
                                                     {product.ingredients}
                                                 </Text>
                                             </View>
+                                            <PrimaryButton buttonText={"Report information"} callback={onPressHandles} />
                                         </ScrollView>
                                     </Card.Content>
                                 </Card>

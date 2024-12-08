@@ -127,6 +127,11 @@ export default function barcodeResult() {
         }
     }
 
+
+    const reportError = () =>{
+        router.push({ pathname: "barcodeScanner/report", params: { barcode: barcode } })
+    }
+
     const ProductNotfound = () => {
         const onPressHandles = () => {
             router.back();
@@ -223,7 +228,7 @@ export default function barcodeResult() {
                                                     {product.ingredients}
                                                 </Text>
                                             </View>
-                                            <PrimaryButton buttonText={"Report information"} callback={onPressHandles} />
+                                            <PrimaryButton buttonText={"Report information"} callback={reportError} />
                                         </ScrollView>
                                     </Card.Content>
                                 </Card>
